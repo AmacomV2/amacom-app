@@ -1,0 +1,2 @@
+export 'package:amacom_app/src/presentation/views/petRegistration/per_registration_screen.dart';
+export 'package:amacom_app/src/presentation/views/petRegistration/pet_registration_complete_screen.dart';

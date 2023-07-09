@@ -24,6 +24,12 @@
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>$(PRODUCT_COPYRIGHT)</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Upload images for user pets</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Upload image from camera for user pets</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>To take pictures for user pets</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
