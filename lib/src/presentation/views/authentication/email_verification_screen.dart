@@ -26,7 +26,7 @@ class EmailVerificationScreen extends ConsumerWidget {
       body: ScrollColumnExpandable(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          FurHeader(
+          AuthHeader(
             onBack: () {
               if (context.canPop) {
                 Navigation.goBack();

@@ -105,17 +105,17 @@ ThemeData globalTheme() {
   /// Take defined colors from design.
   ColorScheme colorSchemeTheme(ColorScheme themeColor) {
     return themeColor.copyWith(
-      primary: const Color(0xff3377FF),
-      inversePrimary: const Color(0xffEBF1FF),
-      primaryContainer: const Color(0xff1C418C),
-      outline: const Color(0xff3377FF),
+      primary: const Color(0xff145a32),
+      inversePrimary: const Color(0xff145a32),
+      primaryContainer: const Color(0xff229954),
+      outline: const Color(0xff145a32),
       secondary: const Color(0xff323231),
       onSecondary: const Color(0xffFBFBFB),
       onPrimary: const Color(0xffEBF1FF),
       tertiary: const Color(0xff323231),
       onTertiaryContainer: const Color(0xffD9DBD8),
-      onPrimaryContainer: const Color(0xff95BCFF),
-      background: const Color(0xffEDEDF4),
+      onPrimaryContainer: const Color(0xffa9dfbf),
+      background:  Colors.white,
       error: FigmaColors.danger_700,
       onError: Colors.white,
     );
@@ -123,7 +123,7 @@ ThemeData globalTheme() {
 
   ButtonThemeData buttonThemeData(ButtonThemeData themeButtonTheme) {
     return themeButtonTheme.copyWith(
-      buttonColor: const Color(0xff3377FF),
+      buttonColor: const Color(0xff145a32),
       disabledColor: const Color(0xff989898),
     );
   }
@@ -142,7 +142,7 @@ ThemeData globalTheme() {
           RoundedRectangleBorder(
             side: const BorderSide(
               width: 1,
-              color: Color(0xff3377FF),
+              color: Color(0xff145a32),
             ),
             borderRadius: BorderRadius.circular(
               AppSizes.genericBorderRadius,
@@ -152,7 +152,7 @@ ThemeData globalTheme() {
         side: const MaterialStatePropertyAll<BorderSide>(
           BorderSide(
             width: 1,
-            color: Color(0xff3377FF),
+            color: Color(0xff145a32),
           ),
         ),
       ),
@@ -171,14 +171,14 @@ ThemeData globalTheme() {
     final border = OutlineInputBorder(
       borderRadius: BorderRadius.circular(20),
       borderSide: const BorderSide(
-        color: Color(0xff3377FF),
+        color: Color(0xff145a32),
         width: 0.5,
       ),
     );
     final focusedBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(20),
       borderSide: const BorderSide(
-        color: Color(0xff3377FF),
+        color: Color(0xff145a32),
         width: 1,
       ),
     );
@@ -260,7 +260,7 @@ ThemeData globalTheme() {
   ListTileThemeData listTileThemeData(
     ListTileThemeData listTileThemeData,
   ) {
-    return listTileThemeData.copyWith(iconColor: const Color(0xff3377FF));
+    return listTileThemeData.copyWith(iconColor: const Color(0xff145a32));
   }
 
   final ThemeData theme = ThemeData.light();
@@ -270,7 +270,7 @@ ThemeData globalTheme() {
     shadowColor: Colors.grey,
     colorScheme: colorSchemeTheme(theme.colorScheme),
     sliderTheme: sliderThemeData(theme.sliderTheme),
-    scaffoldBackgroundColor: const Color(0xffEFEFEF),
+    scaffoldBackgroundColor: FigmaColors.background,
     textTheme: globalTextTheme(theme.textTheme),
     dropdownMenuTheme: dropDownMenuThemeData(theme.dropdownMenuTheme),
     buttonTheme: buttonThemeData(theme.buttonTheme),

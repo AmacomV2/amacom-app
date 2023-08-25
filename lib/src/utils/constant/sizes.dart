@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// Class to store constant elements size
 class AppSizes {
   /// Generic border radius used on buttons and more
-  static double genericBorderRadius = 50;
+  static double genericBorderRadius = 16;
 
   /// Generic border radius used on buttons and more
   static double genericBorderRadius2 = 25;
@@ -35,5 +35,5 @@ class AppSizes {
 
   /// Generic border radius used on buttons and more
   static EdgeInsets get genericButtonPadding =>
-      const EdgeInsets.symmetric(horizontal: 16, vertical: 13.5);
+      const EdgeInsets.symmetric(horizontal: 16, vertical: 10);
 }

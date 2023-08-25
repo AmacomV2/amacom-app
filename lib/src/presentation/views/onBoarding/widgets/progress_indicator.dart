@@ -29,24 +29,34 @@ class OnBoardingProgressIndicator extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: responsive.width(18)),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
           totalPages,
           (index) {
-            return Flexible(
-              flex: 1,
-              child: AnimatedContainer(
-                duration: AppDurations.animation,
-                margin: EdgeInsets.only(
-                  right: (index < totalPages - 1) ? 12 : 0,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: index <= currentPage
-                      ? colors.primary
-                      : colors.onPrimaryContainer,
-                ),
-                height: 8,
+            return AnimatedContainer(
+              duration: AppDurations.animation,
+              margin: EdgeInsets.only(
+                right: (index < totalPages - 1) ? 12 : 0,
               ),
+              padding: EdgeInsets.all(responsive.maxHeightValue(4)),
+              width: responsive.maxHeightValue(index == currentPage ? 18 : 12),
+              height: responsive.maxHeightValue(index == currentPage ? 18 : 12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: index <= currentPage
+                    ? colors.primaryContainer
+                    : colors.onPrimaryContainer,
+              ),
+              child: (index == currentPage)
+                  ? Container(
+                      width: responsive.maxHeightValue(9),
+                      height: responsive.maxHeightValue(9),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.white,
+                      ),
+                    )
+                  : null,
             );
           },
         ),

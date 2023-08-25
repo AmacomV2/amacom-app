@@ -18,13 +18,14 @@ class _LoginScreenState extends State<LoginScreen> {
     return const Scaffold(
       body: ColumnWithPadding(
         children: [
-          FurHeader(
+          Spacer(
+            flex: 1,
+          ),
+          AuthHeader(
             title: 'Iniciar sesión',
           ),
-          SafeSpacer(
-            height: 18,
-          ),
-          Expanded(child: LoginForm()),
+          SafeSpacer(),
+          Expanded(flex: 8, child: LoginForm()),
           GoToRegistration(),
           SafeBottomSpacer(),
         ],

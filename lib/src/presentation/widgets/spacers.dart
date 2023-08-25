@@ -6,13 +6,14 @@ import 'package:amacom_app/src/utils/utils/utils.dart';
 /// Creates an empty box
 class BottomSpacer extends StatelessWidget {
   /// Constructor
-  const BottomSpacer({super.key});
-
+  const BottomSpacer({super.key, this.height = 30});
+  ///
+  final double height;
   @override
   Widget build(BuildContext context) {
     final responsive = ResponsiveDesign(context);
     return SizedBox(
-      height: responsive.maxHeightValue(30),
+      height: responsive.safeBottomHeight(height),
     );
   }
 }

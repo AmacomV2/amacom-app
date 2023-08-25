@@ -36,7 +36,7 @@ class CustomBody extends StatelessWidget {
     return Container(
       padding: padding,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: backgroundColor,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(AppSizes.bodyContainersRadius),
           topRight: Radius.circular(AppSizes.bodyContainersRadius),

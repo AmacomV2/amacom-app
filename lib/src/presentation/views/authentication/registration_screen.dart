@@ -14,7 +14,7 @@ class RegistrationScreen extends StatelessWidget {
     return  const Scaffold(
       body: ColumnWithPadding(
         children: [
-          FurHeader(),
+          AuthHeader(),
           Expanded(
             child: RegistrationForm(),
           ),

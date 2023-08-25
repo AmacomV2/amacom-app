@@ -1,5 +1,6 @@
+import 'package:amacom_app/src/presentation/widgets/column_with_padding.dart';
+import 'package:amacom_app/src/utils/constant/app_messages.dart';
 import 'package:flutter/material.dart';
-import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/presentation/widgets/scroll_column_expandable.dart';
 import 'package:amacom_app/src/presentation/widgets/spacers.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
@@ -11,60 +12,51 @@ class OnBoardingPage2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
     final responsive = ResponsiveDesign(context);
     return ScrollColumnExpandable(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
-      padding: EdgeInsets.zero,
+      padding: responsive.horizontalPadding(40),
       children: [
         const SafeSpacer(
-          height: 60,
+          height: 50,
         ),
-        Padding(
-          padding: responsive.appHorizontalPadding,
-          child: RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: 'En Fur plus te ayudamos ',
-                  style: textTheme.headlineMedium?.copyWith(
-                    color: FigmaColors.primary_200,
-                    fontSize: 31,
-                  ),
-                ),
-                TextSpan(
-                  text: 'a gestionar ',
-                  style: textTheme.headlineMedium?.copyWith(
-                    color: FigmaColors.primary_300,
-                    fontSize: 31,
-                  ),
-                ),
-                TextSpan(
-                  text: 'lo más importante para ti y ',
-                  style: textTheme.headlineMedium?.copyWith(
-                    color: FigmaColors.primary_200,
-                    fontSize: 31,
-                  ),
-                ),
-                TextSpan(
-                  text: 'tu mascota',
-                  style: textTheme.headlineMedium?.copyWith(
-                    color: FigmaColors.primary_300,
-                    fontSize: 31,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        SizedBox(
+          height: responsive.maxHeightValue(320),
+          width: double.infinity,
+          child: Image.asset('assets/images/health.png'),
         ),
         const SafeSpacer(
-          height: 8,
+          height: 40,
         ),
-        Image.asset(
-          'assets/images/onboarding_phone.png',
-          height: responsive.maxHeightValue(515),
+        Text(
+          'Search for care information',
+          style: textTheme.headlineMedium?.copyWith(
+            fontWeight: FontWeight.w800,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SafeSpacer(
+          height: 16,
+        ),
+        ColumnWithPadding(
+          padding: responsive.horizontalPadding(10),
+          children: [
+            const SafeSpacer(
+              height: 16,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                AppMessages.loremIpsum,
+                style: textTheme.bodyLarge,
+                textAlign: TextAlign.justify,
+                maxLines: 4,
+              ),
+            ),
+          ],
         ),
       ],
     );

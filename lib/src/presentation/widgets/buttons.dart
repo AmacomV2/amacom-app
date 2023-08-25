@@ -57,7 +57,7 @@ class GenericRoundedButton extends StatelessWidget {
           alignment: Alignment.center,
           width: width,
           decoration: BoxDecoration(
-            color: color ?? FigmaColors.primary_50,
+            color: color ?? FigmaColors.background,
             borderRadius: BorderRadius.circular(AppSizes.genericBorderRadius),
             border: border
                 ? Border.all(

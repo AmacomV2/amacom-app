@@ -45,7 +45,7 @@ class _PetRegistrationScreenState extends ConsumerState<PetRegistrationScreen> {
     return Scaffold(
       body: ColumnWithPadding(
         children: [
-          FurHeader(
+          AuthHeader(
             title: _title(ref.watch(_pageIndexController)),
           ),
           const SafeSpacer(

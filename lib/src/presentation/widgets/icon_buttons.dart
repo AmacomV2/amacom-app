@@ -32,7 +32,10 @@ class BackArrowButton extends StatelessWidget {
         alignment: Alignment.center,
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: FigmaColors.primary_100,
+          // color: FigmaColors.primary_50,
+          border: Border.all(
+            color: FigmaColors.primary_200,
+          ),
           borderRadius: BorderRadius.circular(100),
         ),
         child: Icon(
@@ -75,7 +78,9 @@ class NextArrowButton extends StatelessWidget {
         alignment: Alignment.center,
         padding: const EdgeInsets.only(left: 2),
         decoration: BoxDecoration(
-          color: FigmaColors.primary_50,
+          border: Border.all(
+            color: FigmaColors.primary_200,
+          ),
           borderRadius: BorderRadius.circular(100),
         ),
         child: Icon(
@@ -119,7 +124,9 @@ class CloseIconButton extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: backgroundColor,
+          border: Border.all(
+            color: FigmaColors.primary_200,
+          ),
           borderRadius: BorderRadius.circular(100),
         ),
         child: Icon(

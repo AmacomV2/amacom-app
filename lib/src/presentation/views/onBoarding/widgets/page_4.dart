@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 
@@ -23,9 +22,7 @@ class OnBoardingPage4 extends StatelessWidget {
         ),
         Text(
           '¿Empezamos?',
-          style: textTheme.headlineMedium?.copyWith(
-            color: FigmaColors.primary_300,
-          ),
+          style: textTheme.headlineMedium?.copyWith(),
           textAlign: TextAlign.center,
         ),
         const SafeSpacer(
@@ -40,7 +37,7 @@ class OnBoardingPage4 extends StatelessWidget {
           height: 55,
         ),
         Image.asset(
-          'assets/images/onboarding_final.png',
+          'assets/images/pregnancy.png',
           height: responsive.maxHeightValue(418),
         ),
         const SafeSpacer(

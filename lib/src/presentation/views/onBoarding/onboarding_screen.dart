@@ -1,3 +1,4 @@
+import 'package:amacom_app/src/presentation/widgets/custom_body.dart';
 import 'package:flutter/material.dart';
 import 'package:amacom_app/src/presentation/views/onBoarding/widgets/onboarding_widgets.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
@@ -35,8 +36,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       const OnBoardingPage4(),
     ];
     final responsive = GlobalLocator.responsiveDesign;
-
+    final colors = Theme.of(context).colorScheme;
     return CustomScaffold(
+      backgroundColor: colors.onPrimaryContainer,
       body: Column(
         children: [
           const HeaderSpacer(
@@ -52,7 +54,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   builder: (BuildContext context, int value, Widget? child) {
                     if (value >= pages.length - 1) {
                       return const SizedBox(
-                        height: 44,
+                        height: 42,
                       );
                     }
                     return GenericRoundedButton(
@@ -70,60 +72,63 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ],
             ),
           ),
+          const SafeSpacer(),
           Expanded(
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                PageView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  controller: _pageController,
-                  itemCount: pages.length,
-                  itemBuilder: (context, index) => pages[index],
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ValueListenableBuilder(
-                      valueListenable: _currentPage,
-                      builder:
-                          (BuildContext context, int value, Widget? child) {
-                        return OnBoardingProgressIndicator(
-                          key: UniqueKey(),
-                          pageController: _pageController,
-                          totalPages: pages.length,
-                          currentPage: value,
+            child: CustomBody(
+              child: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  PageView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    controller: _pageController,
+                    itemCount: pages.length,
+                    itemBuilder: (context, index) => pages[index],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ValueListenableBuilder(
+                        valueListenable: _currentPage,
+                        builder:
+                            (BuildContext context, int value, Widget? child) {
+                          return OnBoardingProgressIndicator(
+                            key: UniqueKey(),
+                            pageController: _pageController,
+                            totalPages: pages.length,
+                            currentPage: value,
+                          );
+                        },
+                      ),
+                      const SafeBottomSpacer(),
+                    ],
+                  ),
+                  InstagramLikeButtons(
+                    onBack: () {
+                      if (_currentPage.value > 0) {
+                        _pageController.animateToPage(
+                          _currentPage.value + -1,
+                          duration: AppDurations.midAnimation,
+                          curve: Curves.easeIn,
                         );
-                      },
-                    ),
-                    const SafeBottomSpacer(),
-                  ],
-                ),
-                InstagramLikeButtons(
-                  onBack: () {
-                    if (_currentPage.value > 0) {
-                      _pageController.animateToPage(
-                        _currentPage.value + -1,
-                        duration: AppDurations.midAnimation,
-                        curve: Curves.easeIn,
-                      );
-                    }
-                  },
-                  next: () {
-                    if (_currentPage.value + 1 < pages.length) {
-                      _pageController.animateToPage(
-                        _currentPage.value + 1,
-                        duration: AppDurations.midAnimation,
-                        curve: Curves.easeIn,
-                      );
-                    } else {
-                      Navigation.goTo(
-                        Routes.registration,
-                        replacement: true,
-                      );
-                    }
-                  },
-                ),
-              ],
+                      }
+                    },
+                    next: () {
+                      if (_currentPage.value + 1 < pages.length) {
+                        _pageController.animateToPage(
+                          _currentPage.value + 1,
+                          duration: AppDurations.midAnimation,
+                          curve: Curves.easeIn,
+                        );
+                      } else {
+                        Navigation.goTo(
+                          Routes.registration,
+                          replacement: true,
+                        );
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ],

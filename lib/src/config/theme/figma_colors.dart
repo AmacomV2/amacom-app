@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// Class to get directly app Colors used on design
 class FigmaColors {
   /// Background color
-  static const Color background = Color(0xffededf4);
+  static const Color background = Colors.white;
 
   /// Secondary color variant
   static const Color secondary_50 = Color(0xfffbfbfb);
@@ -25,19 +25,19 @@ class FigmaColors {
   static const Color secondary_500 = Color(0xff323231);
 
   /// Primary color variant
-  static const Color primary_50 = Color(0xffebf1ff);
+  static const Color primary_50 = Color(0xffd4efdf);
 
   /// Primary color variant
-  static const Color primary_100 = Color(0xffdde9ff);
+  static const Color primary_100 = Color(0xff52be80);
 
   /// Primary color variant
-  static const Color primary_200 = Color(0xff95bcff);
+  static const Color primary_200 = Color(0xff27ae60);
 
   /// Primary color variant
-  static const Color primary_300 = Color(0xff3377ff);
+  static const Color primary_300 = Color(0xff1e8449);
 
   /// Primary color
-  static const Color primary_400 = Color(0xff1c418c);
+  static const Color primary_400 = Color(0xff145a32);
 
   /// Primary color variant
   static const Color information_50 = Color(0xfff2f7fe);
