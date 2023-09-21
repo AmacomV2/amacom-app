@@ -18,7 +18,6 @@ class Routes {
       otpVerification: (BuildContext context) => const EmailVerificationScreen(),
       netWorkResource: (BuildContext context) => const NetworkResourceView(),
       passwordRecoverForm: (BuildContext context) => PasswordRecoverScreen(),
-      petRegistration: (BuildContext context) => const PetRegistrationScreen(),
       personalData: (BuildContext context) => const PersonalDataScreen(),
     };
   }

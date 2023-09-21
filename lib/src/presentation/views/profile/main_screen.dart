@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:amacom_app/src/config/menu/profile_menu_items.dart';
-import 'package:amacom_app/src/presentation/views/profile/widgets/pets_list.dart';
 import 'package:amacom_app/src/presentation/views/profile/widgets/profile_header.dart';
 import 'package:amacom_app/src/presentation/views/profile/widgets/profile_options.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
@@ -21,9 +20,6 @@ class ProfileScreen extends StatelessWidget {
     return SizedBox(
       child: Column(
         children: [
-          // const _ProfileRegistrationImageTitle(
-          //   peopleName: 'Maria Meza Velasco',
-          // ),
           const ProfileHeader(),
           Expanded(
             child: Container(
@@ -31,7 +27,6 @@ class ProfileScreen extends StatelessWidget {
               padding: responsive.appHorizontalPadding,
               child: const Column(
                 children: [
-                  PetsList(),
                   SafeSpacer(),
                   Expanded(
                     child: SingleChildScrollView(

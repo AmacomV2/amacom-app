@@ -1,8 +1,11 @@
+import 'package:amacom_app/src/config/theme/figma_colors.dart';
+import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_asset_icon.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 /// Stores H-list widget
 class Stores extends StatelessWidget {
@@ -17,8 +20,22 @@ class Stores extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        CalendarTimeline(
+          initialDate: DateTime.now(),
+          firstDate:  DateTime.now().subtract(const Duration(days: 10)),
+          lastDate: DateTime(2025, 11, 20),
+          onDateSelected: (date) => log(date),
+          leftMargin: 20,
+          dayColor: FigmaColors.primary_200,
+          activeDayColor: Colors.white,
+          activeBackgroundDayColor: FigmaColors.primary_50,
+          dotsColor: FigmaColors.primary_100,
+          selectableDayPredicate: (date) => date.day != 23,
+          locale: 'es',
+        ),
+        const SafeSpacer(),
         const Text(
-          'Tiendas destacadas',
+          'Novedades',
           style: TextStyle(
             fontSize: 20,
             color: Colors.black,
@@ -132,6 +149,7 @@ class _DataContainer extends StatelessWidget {
     required this.storeCashback,
     required this.color,
   });
+
   ///
   final String pathImage;
   final String storeTitle;
@@ -185,8 +203,7 @@ class _DataContainer extends StatelessWidget {
             ],
           ),
           Container(
-            padding:
-                EdgeInsets.only(top: 18, right: responsiveD.maxWidthValue(20)),
+            padding: EdgeInsets.only(top: 18, right: responsiveD.maxWidthValue(20)),
             child: CustomAssetIcon(path: pathImage, height: 100, width: 75),
           )
         ],

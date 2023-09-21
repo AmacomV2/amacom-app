@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
             .appRouter,
       );
     }
-    debugInvertOversizedImages = true;
+    // debugInvertOversizedImages = true;
     // final routes = Routes.getRoutes();
     return MaterialApp.router(
       routerConfig: getIt.get<GoRouter>(),

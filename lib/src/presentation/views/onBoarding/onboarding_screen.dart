@@ -41,9 +41,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       backgroundColor: colors.onPrimaryContainer,
       body: Column(
         children: [
-          const HeaderSpacer(
-            height: 16,
-          ),
+          const HeaderSpacer(),
           Padding(
             padding: responsive.horizontalPadding(18),
             child: Row(
@@ -61,7 +59,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       border: true,
                       onTap: () {
                         Navigation.goTo(
-                          Routes.registration,
+                          Routes.login,
                           replacement: true,
                         );
                       },
@@ -89,8 +87,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     children: [
                       ValueListenableBuilder(
                         valueListenable: _currentPage,
-                        builder:
-                            (BuildContext context, int value, Widget? child) {
+                        builder: (BuildContext context, int value, Widget? child) {
                           return OnBoardingProgressIndicator(
                             key: UniqueKey(),
                             pageController: _pageController,
@@ -121,7 +118,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         );
                       } else {
                         Navigation.goTo(
-                          Routes.registration,
+                          Routes.login,
                           replacement: true,
                         );
                       }

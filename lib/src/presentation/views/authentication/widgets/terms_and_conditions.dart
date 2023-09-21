@@ -67,7 +67,8 @@ class TermsAndConditions extends ConsumerWidget {
               Navigation.goTo(
                 CustomAppRouter.networkResource,
                 extra: {
-                  'url': 'https://rewindrecursos.s3.amazonaws.com/REWIND+-+Te%CC%81rminos+y+Condiciones.pdf'
+                  'title': 'Términos y condiciones',
+                  'url': 'https://dagrs.berkeley.edu/sites/default/files/2020-01/sample.pdf'
                 },
               );
             },

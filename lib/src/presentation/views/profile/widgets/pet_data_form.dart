@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:amacom_app/src/presentation/widgets/menu_back_arrow.dart';
 
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
-import 'package:amacom_app/src/presentation/views/petRegistration/widgets/pet_image.dart';
 
 /// Pet information form
 ///
@@ -32,7 +31,6 @@ class PetDataForm extends StatelessWidget {
               ),
             ),
             SafeSpacer(),
-            PetRegistrationImage(), //TODO change by person image
           ],
         ),
       ),

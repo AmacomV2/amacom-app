@@ -27,8 +27,8 @@ class BackArrowButton extends StatelessWidget {
       onTap: onTap ?? Navigation.goBack(),
       borderRadius: BorderRadius.circular(100),
       child: Container(
-        width: 38,
-        height: 38,
+        width: 35,
+        height: 35,
         alignment: Alignment.center,
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(

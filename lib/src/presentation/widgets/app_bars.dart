@@ -48,7 +48,6 @@ class CustomAppBar extends StatelessWidget {
             : MainAxisAlignment.start,
         children: [
           BackArrowButton(
-            size: 20,
             onTap: onBack ?? () => Navigation.goBack(),
           ),
           if (!centerTitle)
@@ -59,7 +58,6 @@ class CustomAppBar extends StatelessWidget {
             Text(
               title!,
               style: theme.textTheme.headlineSmall?.copyWith(
-                color: theme.colorScheme.primary,
               ),
             ),
           if (action != null) action!,

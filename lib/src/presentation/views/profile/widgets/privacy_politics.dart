@@ -49,14 +49,18 @@ class PrivacyPolitics extends StatelessWidget {
                       const HorizontalSpacer(
                         width: 8,
                       ),
-                      Text(
-                        textAlign: TextAlign.center,
-                        'www.AmacomApp.com/politicadeprivacidad.co',
-                        style: TextStyle(
-                          color: theme.colorScheme.primary,
-                          decoration: TextDecoration.underline,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                      Expanded(
+                        child: Text(
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          'www.amacomApp.com/politicadeprivacidad.co',
+                          style: TextStyle(
+                            color: theme.colorScheme.primary,
+                            decoration: TextDecoration.underline,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ],

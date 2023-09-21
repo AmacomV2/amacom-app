@@ -34,9 +34,7 @@ class AuthHeader extends StatelessWidget {
     final titleWidget = Text(
       title ?? 'Crear cuenta',
       textAlign: TextAlign.center,
-      style: theme.textTheme.headlineSmall?.apply(
-        color: theme.colorScheme.primary,
-      ),
+      style: theme.textTheme.headlineSmall?.apply(),
     );
     return Column(
       children: [
@@ -51,7 +49,7 @@ class AuthHeader extends StatelessWidget {
         //   ),
         if (showLogo)
           Image.asset(
-            'assets/icon/logo.png',
+            'assets/logos/hands.png',
             height: responsive.maxHeightValue(100),
           ),
         const SafeSpacer(
@@ -62,12 +60,12 @@ class AuthHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BackArrowButton(
-                  onTap: onBack ?? () => Navigation.goBack(),
-                ).paddingRight(8),
+                onTap: onBack ?? () => Navigation.goBack(),
+              ).paddingRight(8),
               Expanded(child: titleWidget),
               const HorizontalSpacer(
-                  width: 26,
-                )
+                width: 26,
+              )
             ],
           ),
         if (!includeBackArrow) titleWidget,

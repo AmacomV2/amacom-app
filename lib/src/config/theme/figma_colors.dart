@@ -25,19 +25,19 @@ class FigmaColors {
   static const Color secondary_500 = Color(0xff323231);
 
   /// Primary color variant
-  static const Color primary_50 = Color(0xffd4efdf);
+  static const Color primary_50 = Color(0xffF49CBB);
 
   /// Primary color variant
-  static const Color primary_100 = Color(0xff52be80);
+  static const Color primary_100 = Color(0xffF26A8D);
 
   /// Primary color variant
-  static const Color primary_200 = Color(0xff27ae60);
+  static const Color primary_200 = Color(0xffDD2D4A);
 
   /// Primary color variant
-  static const Color primary_300 = Color(0xff1e8449);
+  static const Color primary_300 = Color.fromARGB(255, 177, 18, 39);
 
   /// Primary color
-  static const Color primary_400 = Color(0xff145a32);
+  static const Color primary_400 = Color(0xff880D1E);
 
   /// Primary color variant
   static const Color information_50 = Color(0xfff2f7fe);
@@ -105,7 +105,7 @@ class FigmaColors {
   /// to use
   static Color getFontColorForBackground(
     Color background, {
-    double luminanceThreshold = 0.55,
+    double luminanceThreshold = 0.4,
     Color? lightColor,
     Color? darkColor,
   }) {

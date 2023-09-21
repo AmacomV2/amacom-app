@@ -21,10 +21,14 @@ class PasswordRecoveringRepository implements IPasswordRecoveringRepository {
       method: Method.post,
       body: {'email': email},
     );
-    final result = await ApiDataSource().request(
-      requestData: requestData,
-      withAuthToken: false,
-    );
+    //final result = await ApiDataSource().request(
+    //  requestData: requestData,
+    //  withAuthToken: false,
+    //);
+    final result = {
+      'data':{},
+      'error':false
+    };
     BaseResponse data;
     try {
       data = BaseResponse.fromJson(
@@ -79,10 +83,14 @@ class PasswordRecoveringRepository implements IPasswordRecoveringRepository {
         'code': code,
       },
     );
-    final result = await ApiDataSource().request(
-      requestData: requestData,
-      withAuthToken: false,
-    );
+    //final result = await ApiDataSource().request(
+    //  requestData: requestData,
+    //  withAuthToken: false,
+    //);
+     final result = {
+      'data':{},
+      'error':false
+    };
     BaseResponse data;
     try {
       data = BaseResponse.fromJson(

@@ -16,7 +16,7 @@ class AppSizes {
 
 
   /// App NavBar height
-  static double navBarHeight = 120;
+  static double navBarHeight = 100;
 
   /// Generic border radius used on inputs and more
   static double inputsBorderRadius = 20;

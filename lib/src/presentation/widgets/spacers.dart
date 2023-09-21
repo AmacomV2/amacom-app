@@ -28,7 +28,7 @@ class BottomNavBarSpacer extends StatelessWidget {
   Widget build(BuildContext context) {
     final responsive = ResponsiveDesign(context);
     return SizedBox(
-      height: responsive.maxHeightValue(AppSizes.navBarHeight*0.6),
+      height: responsive.maxHeightValue(AppSizes.navBarHeight),
     );
   }
 }

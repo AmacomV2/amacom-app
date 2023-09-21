@@ -21,16 +21,23 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<Session> userLogin(UserLoginDTO login) async {
-    final requestData = RequestData(
-      path: '/auth/login',
-      method: Method.post,
-      body: login.toJson(),
-    );
-    final result = await api.request(
-      requestData: requestData,
-      fromJsonT: Session.fromJson,
-      withAuthToken: false,
-    ).timeout(AppDurations.timeout);
+    // final requestData = RequestData(
+    //   path: '/auth/login',
+    //   method: Method.post,
+    //   body: login.toJson(),
+    // );
+    // final result = await api.request(
+    //   requestData: requestData,
+    //   fromJsonT: Session.fromJson,
+    //   withAuthToken: false,
+    // ).timeout(AppDurations.timeout);
+    final result = await Future.value({
+      'data': {
+        'accessToken' : '',
+        'refreshToken' : '',
+      },
+      'error': false
+    });
     BaseResponse data;
     try {
       data = BaseResponse.fromJson(result, Session.fromJson);

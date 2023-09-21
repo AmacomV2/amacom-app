@@ -62,10 +62,9 @@ class LoadingScreen extends ConsumerWidget {
               height: double.infinity,
               width: double.infinity,
               alignment: Alignment.center,
-              child: SvgPicture.asset(
-                'assets/logos/logo.svg',
-                semanticsLabel: 'AmacomApp Logo',
-                height: responsive.maxHeightValue(46),
+              child: Image.asset(
+                'assets/logos/hands.png',
+                height: responsive.maxHeightValue(80),
               ),
             ),
           ],

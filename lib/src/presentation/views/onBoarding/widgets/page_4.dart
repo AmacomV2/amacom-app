@@ -47,12 +47,12 @@ class OnBoardingPage4 extends StatelessWidget {
           width: responsive.maxWidthValue(200),
           onTap: () {
             Navigation.goTo(
-              Routes.registration,
+              Routes.login,
               replacement: true,
             );
           },
           text: 'Claro que sí',
-          color: colorsScheme.primary,
+          color: colorsScheme.primaryContainer,
           padding: AppSizes.genericButtonPadding.copyWith(
             left: responsive.maxWidthValue(45),
             right: responsive.maxWidthValue(45),

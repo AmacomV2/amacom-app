@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/presentation/state/home/navigation_bar_provider.dart';
-import 'package:amacom_app/src/presentation/views/profile/widgets/user_image.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 
@@ -16,20 +14,20 @@ class CustomBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final responsive = GlobalLocator.responsiveDesign;
     return SizedBox(
-      height: responsive.safeBottomHeight(AppSizes.navBarHeight),
+      height: responsive.safeBottomHeight(AppSizes.navBarHeight + 10),
       width: responsive.screenHeight,
       child: Stack(
         children: [
           Positioned(
             bottom: 0,
             child: Container(
-              height: responsive.safeBottomHeight(85),
+              height: responsive.safeBottomHeight(75),
               width: responsive.screenHeight,
               margin: EdgeInsets.only(
-                top: responsive.maxHeightValue(AppSizes.navBarHeight - 85),
+                top: responsive.maxHeightValue(AppSizes.navBarHeight - 75),
               ),
               child: Container(
-                decoration: const BoxDecoration(color: Color(0xff3377FF)),
+                decoration: const BoxDecoration(color: FigmaColors.primary_400),
               ),
             ),
           ),
@@ -45,16 +43,16 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   _OptionItem(
-                    option: NavigationBarSelection.FINANCES,
-                  ),
-                  _OptionItem(
-                    option: NavigationBarSelection.DAILY,
-                  ),
-                  _OptionItem(
                     option: NavigationBarSelection.HOME,
                   ),
                   _OptionItem(
-                    option: NavigationBarSelection.STORES,
+                    option: NavigationBarSelection.RESOURCES,
+                  ),
+                  _OptionItem(
+                    option: NavigationBarSelection.CALENDAR,
+                  ),
+                  _OptionItem(
+                    option: NavigationBarSelection.SITUATIONS,
                   ),
                   _OptionItem(
                     option: NavigationBarSelection.PROFILE,
@@ -82,94 +80,84 @@ class _OptionItem extends ConsumerWidget {
     String iconPath;
     String label;
     bool isSelected = option == currentSelection;
-    bool showUserImage = false;
     switch (option) {
       case NavigationBarSelection.HOME:
-        iconPath = 'assets/svg/icons/home.svg';
+        iconPath = 'assets/icon/home.png';
         label = 'Inicio';
         break;
       case NavigationBarSelection.PROFILE:
-        iconPath = 'assets/svg/icons/stores.svg';
-        label = 'Mi perfil';
-        showUserImage = true;
+        iconPath = 'assets/icon/user-settings.png';
+        label = 'Perfil';
         break;
-      case NavigationBarSelection.DAILY:
-        iconPath = 'assets/svg/icons/daily.svg';
-        label = 'Día a día';
+      case NavigationBarSelection.CALENDAR:
+        iconPath = 'assets/icon/calendar.png';
+        label = 'Eventos';
         break;
-      case NavigationBarSelection.FINANCES:
-        iconPath = 'assets/svg/icons/finances.svg';
-        label = 'Finanzas';
+      case NavigationBarSelection.RESOURCES:
+        iconPath = 'assets/icon/open-folder.png';
+        label = 'Recursos';
         break;
-      case NavigationBarSelection.STORES:
-        iconPath = 'assets/svg/icons/stores.svg';
-        label = 'Comercios';
+      case NavigationBarSelection.SITUATIONS:
+        iconPath = 'assets/icon/report.png';
+        label = 'Reportes';
         break;
     }
     final responsive = GlobalLocator.responsiveDesign;
     return GestureDetector(
       onTap: () {
-        ref
-            .read(navigationBarProvider.notifier)
-            .update((state) => state = option);
+        ref.read(navigationBarProvider.notifier).update((state) => state = option);
       },
       behavior: HitTestBehavior.translucent,
       child: Container(
         padding: const EdgeInsets.all(0.1),
+        width: 67,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             if (isSelected)
-              showUserImage
-                  ? UserImage(
-                      height: responsive.maxHeightValue(70),
-                      width: responsive.maxHeightValue(70),
-                    )
-                  : Container(
-                      width: responsive.maxHeightValue(70),
-                      height: responsive.maxHeightValue(70),
-                      padding: const EdgeInsets.all(7),
-                      decoration: BoxDecoration(
-                        border:
-                            Border.all(color: const Color(0xff3377FF), width: 2),
-                        color: Colors.white,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(100)),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(
-                          responsive.maxHeightValue(4),
-                        ),
-                        child: SvgPicture.asset(
-                          iconPath,
-                          // ignore: deprecated_member_use
-                          color: Theme.of(context).colorScheme.primary,
-                          height: responsive.maxHeightValue(40),
-                          width: responsive.maxHeightValue(40),
-                        ),
-                      ),
-                    ),
+              Container(
+                alignment: Alignment.center,
+                clipBehavior: Clip.hardEdge,
+                width: responsive.maxHeightValue(60),
+                height: responsive.maxHeightValue(60),
+                padding: const EdgeInsets.all(1),
+                decoration: BoxDecoration(
+                  border: Border.all(color: FigmaColors.primary_400, width: 3),
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.all(Radius.circular(100)),
+                ),
+                child: Container(
+                  padding: const EdgeInsets.all(7),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: FigmaColors.primary_300, width: 1.5),
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.all(Radius.circular(100)),
+                  ),
+                  child: Image.asset(
+                    iconPath,
+                    // ignore: deprecated_member_use
+                    height: responsive.maxHeightValue(30),
+                    width: responsive.maxHeightValue(30),
+                    color: FigmaColors.primary_400,
+                  ),
+                ),
+              ),
             if (!isSelected)
-              showUserImage
-                  ? UserImage(
-                      height: responsive.maxHeightValue(26),
-                      width: responsive.maxHeightValue(26),
-                    )
-                  : SvgPicture.asset(
-                      iconPath,
-                      // ignore: deprecated_member_use
-                      color: isSelected ? Colors.white : FigmaColors.primary_200,
-                      height: responsive.maxHeightValue(26),
-                      width: responsive.maxHeightValue(26),
-                    ),
+              Image.asset(
+                iconPath,
+                // ignore: deprecated_member_use
+                color: isSelected ? Colors.white : FigmaColors.secondary_100,
+                height: responsive.maxHeightValue(20),
+                width: responsive.maxHeightValue(20),
+              ),
             SafeSpacer(
               height: isSelected ? 6 : 4,
             ),
             Text(
               label,
               style: TextStyle(
-                color: (isSelected) ? Colors.white : FigmaColors.primary_200,
-                fontWeight: FontWeight.w600,
+                color: (isSelected) ? Colors.white : FigmaColors.secondary_100,
+                fontWeight: (isSelected) ? FontWeight.w700 : FontWeight.w600,
               ),
             ),
           ],

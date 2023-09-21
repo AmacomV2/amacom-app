@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:amacom_app/src/presentation/views/petRegistration/pet_registration.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_bottom_navigation_bar.dart';
 
 import 'package:go_router/go_router.dart';
@@ -39,8 +38,8 @@ class CustomAppRouter {
   /// Represents the route path for the tutorial screen.
   static const String tutorial = '/tutorial';
 
-  /// Represents the route path for the user screen.
-  static const String us = '/us';
+  /// Represents the route path for the new situation screen.
+  static const String newSituation = '/newSituation';
 
   /// Represents the route path for the personal information screen.
   static const String personalInformation = '/personalInformation';
@@ -109,8 +108,13 @@ class CustomAppRouter {
             builder: (context, state) => const LoginScreen(),
           ),
           GoRoute(
+            path: newSituation,
+            name: newSituation,
+            builder: (context, state) => const NewSituationScreen(),
+          ),
+          GoRoute(
             path: '/emailVerification',
-            name: '/emailVerification',
+            name: emailVerification,
             builder: (context, state) {
               String email = '';
               try {
@@ -124,17 +128,23 @@ class CustomAppRouter {
           GoRoute(
             path: '/networkResource',
             name: networkResource,
-            builder: (context, state) => const NetworkResourceView(),
+            builder: (context, state){
+              String url = '';
+              String? title;
+              try {
+                url = (state.extra as Map)['url'];
+                title = (state.extra as Map)['title'];
+              } catch (_) {}
+              return NetworkResourceView(
+                url: url,
+                title: title,
+              )
+              ;},
           ),
           GoRoute(
             path: '/recoveryPassword',
             name: passwordRecoverForm,
             builder: (context, state) => PasswordRecoverScreen(),
-          ),
-          GoRoute(
-            path: '/petRegistration',
-            name: petRegistration,
-            builder: (context, state) => const PetRegistrationScreen(),
           ),
           GoRoute(
             path: '/mainProfile',
@@ -173,7 +183,7 @@ class CustomAppRouter {
           ),
           GoRoute(
             path: '/privacyPolitics',
-            name: '/privacyPolitics',
+            name: privacyPolitics,
             builder: (context, state) => const PrivacyPolitics(),
           ),
           GoRoute(
@@ -185,11 +195,6 @@ class CustomAppRouter {
             path: '/registrationComplete',
             name: registrationComplete,
             builder: (context, state) => const RegistrationCompleteScreen(),
-          ),
-          GoRoute(
-            path: '/petRegistrationComplete',
-            name: petRegistrationComplete,
-            builder: (context, state) => const PetRegistrationCompleteScreen(),
           ),
           GoRoute(
             path: '/customMenu',
