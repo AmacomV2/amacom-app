@@ -46,18 +46,22 @@ class PasswordRecoveringRepository implements IPasswordRecoveringRepository {
     required String email,
     required String password,
   }) async {
-    final requestData = RequestData(
-      path: '/recovering/setNewPassword',
-      method: Method.post,
-      body: {
-        'email': email,
-        'password': password,
-      },
-    );
-    final result = await ApiDataSource().request(
-      requestData: requestData,
-      withAuthToken: false,
-    );
+    // final requestData = RequestData(
+    //   path: '/recovering/setNewPassword',
+    //   method: Method.post,
+    //   body: {
+    //     'email': email,
+    //     'password': password,
+    //   },
+    // );
+    // final result = await ApiDataSource().request(
+    //   requestData: requestData,
+    //   withAuthToken: false,
+    // );
+    final result = {
+      'data':true,
+      'error':false
+    };
     BaseResponse data;
     try {
       data = BaseResponse.fromJson(

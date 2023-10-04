@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:amacom_app/src/config/theme/theme.dart';
 import 'package:amacom_app/src/domain/entities/user.dart';
 import 'package:amacom_app/src/presentation/state/authentication/user_provider.dart';
@@ -76,17 +75,7 @@ class LoadingScreen extends ConsumerWidget {
         Future.delayed(
           Duration.zero,
           () {
-            if (data.email.verified) {
-              Navigation.goTo(CustomAppRouter.home, removeUntil: true);
-            } else {
-              Navigation.goTo(
-                CustomAppRouter.emailVerification,
-                removeUntil: true,
-                extra: {
-                  'email': data.email.email,
-                },
-              );
-            }
+            Navigation.goTo(CustomAppRouter.home, removeUntil: true);
           },
         );
         return screen;

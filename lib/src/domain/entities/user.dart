@@ -17,7 +17,7 @@ class User {
         id: json['id'],
         firstName: json['firstName'],
         lastName: json['lastName'],
-        email: Email.fromJson(json['email']),
+        email:json['email'],
         phone: json['phone'],
         avatar: json['avatar'] ?? '',
         role: Role.fromJson(json['role']),
@@ -32,7 +32,7 @@ class User {
   final String lastName;
 
   ///
-  final Email email;
+  final String email;
 
   ///
   final String? phone;

@@ -43,9 +43,10 @@ class PasswordRecoverScreen extends StatelessWidget {
       body: ColumnWithPadding(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const AuthHeader(
+          AuthHeader(
             showLogo: true,
             includeBackArrow: true,
+            onBack: () => Navigation.goBack(),
             title: 'Recuperar contraseña',
           ),
           const SafeSpacer(),

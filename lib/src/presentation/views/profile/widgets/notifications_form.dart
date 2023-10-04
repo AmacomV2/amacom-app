@@ -18,19 +18,11 @@ class NotificationsForm extends StatelessWidget {
     final height = responsive.maxHeightValue(72);
     final List<Map<String, dynamic>> options = [
       {
-        'name': 'Notificaciones de paseos',
+        'name': 'Notificaciones de eventos',
         'selected': false,
       },
       {
-        'name': 'Notificaciones de salud',
-        'selected': true,
-      },
-      {
-        'name': 'Notificaciones de higiene',
-        'selected': false,
-      },
-      {
-        'name': 'Notificaciones de amor',
+        'name': 'Notificaciones de situaciones',
         'selected': true,
       },
     ];

@@ -23,7 +23,7 @@ class _PersonalDataFormState extends ConsumerState<PersonalDataForm> {
     final userData = ref.read(userProvider).value;
     _nameController.text = userData?.firstName ?? '';
     _lastNameController.text = userData?.lastName ?? '';
-    _emailController.text = userData?.email.email ?? '';
+    _emailController.text = userData?.email ?? '';
     _phoneController.text = userData?.phone ?? '';
     super.initState();
   }

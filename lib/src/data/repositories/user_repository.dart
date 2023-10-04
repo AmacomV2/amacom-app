@@ -8,7 +8,6 @@ import 'package:amacom_app/src/domain/entities/request_data.dart';
 import 'package:amacom_app/src/domain/entities/session.dart';
 import 'package:amacom_app/src/domain/entities/user.dart';
 import 'package:amacom_app/src/domain/repositories/user_repository.dart';
-import 'package:amacom_app/src/utils/constant/durations.dart';
 import 'package:uuid/uuid.dart';
 
 /// Implementation for UserRepository using APIDataSource
@@ -106,15 +105,31 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<User> getUserData() async {
-    final requestData = RequestData(
-      path: '/auth/getUser',
-      method: Method.get,
-    );
-    final result = await api.request(
-      requestData: requestData,
-      fromJsonT: User.fromJson,
-      withAuthToken: true,
-    );
+    // final requestData = RequestData(
+    //   path: '/auth/getUser',
+    //   method: Method.get,
+    // );
+    // final result = await api.request(
+    //   requestData: requestData,
+    //   fromJsonT: User.fromJson,
+    //   withAuthToken: true,
+    // );
+    final result = {
+      'error' : false,
+      'data': {
+        'id': '',
+        'firstName': 'Name',
+        'lastName': 'LastName',
+        'email': 'email@mail.com',
+        'phone': '',
+        'avatar': 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F736x%2F74%2F74%2Fce%2F7474ce023daef33ad954a6aed569177a.jpg%3Fb%3Dt&f=1&nofb=1&ipt=6d0ca7b046193db1ca9534799e4187ce14e545de5ec1de9590c0fdd290847f47&ipo=images',
+        'role': {
+          'id': 'asd',
+        'name': 'final_user',
+        'description': 'ff',
+        },
+      }
+    };
     BaseResponse data;
     try {
       data = BaseResponse.fromJson(result, User.fromJson);

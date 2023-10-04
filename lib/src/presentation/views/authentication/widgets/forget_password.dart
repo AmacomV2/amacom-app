@@ -16,7 +16,7 @@ class ForgetPassword extends ConsumerWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(20),
       onTap: () {
-        context.pushReplacementNamed(Routes.passwordRecoverForm);
+        context.pushNamed(Routes.passwordRecoverForm);
       },
       child: Padding(
         padding: const EdgeInsets.all(0.5),
