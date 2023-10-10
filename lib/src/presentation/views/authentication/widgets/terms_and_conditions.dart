@@ -68,7 +68,8 @@ class TermsAndConditions extends ConsumerWidget {
                 CustomAppRouter.networkResource,
                 extra: {
                   'title': 'Términos y condiciones',
-                  'url': 'https://dagrs.berkeley.edu/sites/default/files/2020-01/sample.pdf'
+                  'url':
+                      'https://dagrs.berkeley.edu/sites/default/files/2020-01/sample.pdf',
                 },
               );
             },
@@ -81,7 +82,7 @@ class TermsAndConditions extends ConsumerWidget {
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }

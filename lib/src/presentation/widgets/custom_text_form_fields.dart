@@ -1,6 +1,6 @@
+import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:amacom_app/src/config/theme/figma_colors.dart';
 
 /// Custom TexFormField used commonly on app
 class CustomTextFormField extends StatelessWidget {
@@ -21,8 +21,9 @@ class CustomTextFormField extends StatelessWidget {
     this.keyboardType,
     this.enabled = true,
     this.label,
+    this.fillColor,
     this.showRequiredIndicator = false,
-    this.floatingLabelBehavior = FloatingLabelBehavior.always,
+    this.floatingLabelBehavior = FloatingLabelBehavior.auto,
   });
 
   ///
@@ -75,6 +76,9 @@ class CustomTextFormField extends StatelessWidget {
   /// To enable or disable field
   final bool enabled;
 
+  /// Input fill color
+  final Color? fillColor;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -94,6 +98,7 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obscureText ?? false,
       textCapitalization: textCapitalization ?? TextCapitalization.words,
       decoration: InputDecoration(
+        fillColor: fillColor,
         floatingLabelBehavior: floatingLabelBehavior,
         hintText: hintText,
         suffixIcon: suffixIcon,
@@ -245,7 +250,7 @@ class LabelRequired extends StatelessWidget {
                 fontWeight: FontWeight.w500,
                 color: theme.colorScheme.error,
               ),
-            )
+            ),
         ],
       ),
     );

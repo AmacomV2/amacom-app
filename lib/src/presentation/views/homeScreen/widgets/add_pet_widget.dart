@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_asset_icon.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 //// Add pet banner
@@ -12,6 +12,7 @@ class BannerAddPet extends StatelessWidget {
     super.key,
     this.hasPets = false,
   });
+
   /// To load a different view if user has no pets
   final bool hasPets;
 
@@ -34,7 +35,11 @@ class BannerAddPet extends StatelessWidget {
                 height: 167,
                 child: Padding(
                   padding: const EdgeInsets.only(
-                      top: 14.0, left: 14.0, right: 150, bottom: 14.0,),
+                    top: 14.0,
+                    left: 14.0,
+                    right: 150,
+                    bottom: 14.0,
+                  ),
                   child: Row(
                     children: [
                       Column(
@@ -78,7 +83,7 @@ class BannerAddPet extends StatelessWidget {
                                     Icons.arrow_forward_ios_rounded,
                                     size: 18,
                                     color: Color(0xff3377FF),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),

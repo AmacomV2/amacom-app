@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
-
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+///
 class MenuBackArrowButton extends StatelessWidget {
+  ///
   const MenuBackArrowButton({
     super.key,
   });
@@ -17,7 +18,7 @@ class MenuBackArrowButton extends StatelessWidget {
         ),
         BackArrowButton(
           onTap: () => context.pop(),
-        )
+        ),
       ],
     );
   }

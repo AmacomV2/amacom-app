@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/config/theme/theme.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
 import 'package:amacom_app/src/utils/utils/app_dialogs.dart';
+import 'package:flutter/material.dart';
 
 /// Custom rounded button
 ///
@@ -19,6 +19,10 @@ class GenericRoundedButton extends StatelessWidget {
     this.adaptiveTextColor = true,
     this.padding,
     this.width,
+    this.height,
+    this.leading,
+    this.borderColor,
+    this.suffix,
   });
 
   /// Button's callback
@@ -26,6 +30,9 @@ class GenericRoundedButton extends StatelessWidget {
 
   /// Button background color
   final Color? color;
+
+  /// Button background color
+  final Color? borderColor;
 
   /// Button textColor
   final Color? textColor;
@@ -45,6 +52,15 @@ class GenericRoundedButton extends StatelessWidget {
   /// Button's width
   final double? width;
 
+  /// Button's width
+  final double? height;
+
+  /// Optional button leading
+  final Widget? leading;
+
+  /// Optional button leading
+  final Widget? suffix;
+
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.labelMedium;
@@ -56,28 +72,55 @@ class GenericRoundedButton extends StatelessWidget {
         child: Container(
           alignment: Alignment.center,
           width: width,
+          height: height,
           decoration: BoxDecoration(
             color: color ?? FigmaColors.background,
             borderRadius: BorderRadius.circular(AppSizes.genericBorderRadius),
             border: border
                 ? Border.all(
-                    color: color ?? FigmaColors.primary_200,
-                    width: 1,
+                    color: color ?? borderColor ?? FigmaColors.primary_200,
+                    width: 0.5,
                     strokeAlign: 1,
                   )
                 : null,
           ),
           padding: padding ?? AppSizes.genericButtonPadding,
-          child: Text(
-            text,
-            style: textStyle?.copyWith(
-              color: adaptiveTextColor
-                  ? FigmaColors.getFontColorForBackground(
-                      color ?? FigmaColors.primary_50,
-                    )
-                  : textColor,
-            ),
-          ),
+          child: leading == null && suffix == null
+              ? Text(
+                  text,
+                  style: textStyle?.copyWith(
+                    color: adaptiveTextColor
+                        ? FigmaColors.getFontColorForBackground(
+                            color ?? FigmaColors.primary_50,
+                          )
+                        : textColor,
+                  ),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (suffix != null) suffix!,
+                    if (suffix != null)
+                      const HorizontalSpacer(
+                        width: 8,
+                      ),
+                    Text(
+                      text,
+                      style: textStyle?.copyWith(
+                        color: adaptiveTextColor
+                            ? FigmaColors.getFontColorForBackground(
+                                color ?? FigmaColors.primary_50,
+                              )
+                            : textColor,
+                      ),
+                    ),
+                    if (leading != null)
+                      const HorizontalSpacer(
+                        width: 8,
+                      ),
+                    if (leading != null) leading!,
+                  ],
+                ),
         ),
       ),
     );
@@ -192,7 +235,7 @@ class _CustomButtonWithStateState extends State<CustomButtonWithState> {
           alignment: Alignment.center,
           child: loading
               ? SizedCustomProgressIndicator(
-                size: 19,
+                  size: 19,
                   color: FigmaColors.getFontColorForBackground(
                     widget.color ?? theme.colorScheme.primary,
                   ),
@@ -203,7 +246,7 @@ class _CustomButtonWithStateState extends State<CustomButtonWithState> {
                   children: [
                     // if (svgPicture != null) Text('svgPicture'),
                     //validate if svgPicture doesn't exist
-    
+
                     // (svgPicture != null &&
                     //         svgPicture?.iconFromSVG != null &&
                     //         svgPicture?.iconFromPNG != null)

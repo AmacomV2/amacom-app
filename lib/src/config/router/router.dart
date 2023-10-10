@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:amacom_app/src/presentation/widgets/custom_bottom_navigation_bar.dart';
-
-import 'package:go_router/go_router.dart';
-
 import 'package:amacom_app/src/presentation/views/screens.dart';
+import 'package:amacom_app/src/presentation/widgets/custom_bottom_navigation_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 /// A custom implementation of GoRouter that uses a [navKey].
 class CustomAppRouter {
@@ -69,8 +67,8 @@ class CustomAppRouter {
   /// Represents the route path for the pet data screen.
   static const String petData = '/petData';
 
-  /// Represents the route path for the notifications screen.
-  static const String notifications = '/notifications';
+  /// Represents the route path for the settings screen.
+  static const String settings = '/settings';
 
   /// Represents the route path for the support screen.
   static const String support = '/support';
@@ -128,7 +126,7 @@ class CustomAppRouter {
           GoRoute(
             path: '/networkResource',
             name: networkResource,
-            builder: (context, state){
+            builder: (context, state) {
               String url = '';
               String? title;
               try {
@@ -138,8 +136,8 @@ class CustomAppRouter {
               return NetworkResourceView(
                 url: url,
                 title: title,
-              )
-              ;},
+              );
+            },
           ),
           GoRoute(
             path: '/recoveryPassword',
@@ -172,9 +170,9 @@ class CustomAppRouter {
             builder: (context, state) => const ChangePasswordByForm(),
           ),
           GoRoute(
-            path: '/notifications',
-            name: '/notifications',
-            builder: (context, state) => const NotificationsForm(),
+            path: '/settings',
+            name: '/settings',
+            builder: (context, state) => const SettingsForm(),
           ),
           GoRoute(
             path: '/support',

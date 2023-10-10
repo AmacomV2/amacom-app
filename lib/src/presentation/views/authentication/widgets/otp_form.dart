@@ -1,7 +1,7 @@
+import 'package:amacom_app/src/presentation/state/authentication/code_validation_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:amacom_app/src/presentation/state/authentication/code_validation_provider.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 /// OTP code input
@@ -48,7 +48,7 @@ class OTPPasswordResetForm extends StatelessWidget {
           onCompleted: (value) {},
           showUnderline: false,
           textStyle: theme.textTheme.headlineMedium,
-          fieldWidth: 70,
+          fieldWidth: 65,
           decoration: const InputDecoration(
             counter: SizedBox(),
             hintMaxLines: null,
@@ -173,7 +173,7 @@ class _CustomOTPTextFieldState extends State<_CustomOTPTextField> {
       children: List.generate(list.length, (index) {
         return Container(
           width: widget.fieldWidth,
-          margin: const EdgeInsets.symmetric(horizontal: 8),
+          margin: const EdgeInsets.symmetric(horizontal: 6),
           decoration: BoxDecoration(
             borderRadius: radius(),
           ),

@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/presentation/state/home/navigation_bar_provider.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Home App navigation bar
 class CustomBottomNavigationBar extends StatelessWidget {
@@ -60,7 +61,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -80,37 +81,40 @@ class _OptionItem extends ConsumerWidget {
     String iconPath;
     String label;
     bool isSelected = option == currentSelection;
+    final appLocalizations = AppLocalizations.of(context);
     switch (option) {
       case NavigationBarSelection.HOME:
         iconPath = 'assets/icon/home.png';
-        label = 'Inicio';
+        label = appLocalizations!.home;
         break;
       case NavigationBarSelection.PROFILE:
         iconPath = 'assets/icon/user-settings.png';
-        label = 'Perfil';
+        label = appLocalizations!.profile;
         break;
       case NavigationBarSelection.CALENDAR:
         iconPath = 'assets/icon/calendar.png';
-        label = 'Eventos';
+        label = appLocalizations!.agenda;
         break;
       case NavigationBarSelection.RESOURCES:
         iconPath = 'assets/icon/open-folder.png';
-        label = 'Recursos';
+        label = appLocalizations!.resources;
         break;
       case NavigationBarSelection.SITUATIONS:
         iconPath = 'assets/icon/report.png';
-        label = 'Reportes';
+        label = appLocalizations!.reports;
         break;
     }
     final responsive = GlobalLocator.responsiveDesign;
     return GestureDetector(
       onTap: () {
-        ref.read(navigationBarProvider.notifier).update((state) => state = option);
+        ref
+            .read(navigationBarProvider.notifier)
+            .update((state) => state = option);
       },
       behavior: HitTestBehavior.translucent,
       child: Container(
         padding: const EdgeInsets.all(0.1),
-        width: 67,
+        width: 70,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -127,9 +131,10 @@ class _OptionItem extends ConsumerWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(100)),
                 ),
                 child: Container(
-                  padding: const EdgeInsets.all(7),
+                  padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
-                    border: Border.all(color: FigmaColors.primary_300, width: 1.5),
+                    border:
+                        Border.all(color: FigmaColors.primary_300, width: 1.5),
                     color: Colors.white,
                     borderRadius: const BorderRadius.all(Radius.circular(100)),
                   ),

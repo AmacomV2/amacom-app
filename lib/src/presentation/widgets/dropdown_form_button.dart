@@ -20,6 +20,7 @@ class CustomDropDownFrom extends StatelessWidget {
     this.label,
     this.showRequiredIndicator = false,
     this.suffixIcon,
+    this.floatingLabelBehavior = FloatingLabelBehavior.auto,
   });
 
   /// On value change callback
@@ -27,6 +28,9 @@ class CustomDropDownFrom extends StatelessWidget {
 
   /// To show or not required indicator
   final bool showRequiredIndicator;
+
+  ///
+  final FloatingLabelBehavior floatingLabelBehavior;
 
   /// Items to show
   final List<DropdownMenuItem<Object?>>? items;
@@ -70,7 +74,7 @@ class CustomDropDownFrom extends StatelessWidget {
       onChanged: onChanged,
       style: theme.textTheme.bodyLarge,
       decoration: InputDecoration(
-        floatingLabelBehavior: FloatingLabelBehavior.always,
+        floatingLabelBehavior: floatingLabelBehavior,
         hintText: hintText,
         suffixIcon: suffixIcon,
         labelText: showRequiredIndicator ? null : labelText,

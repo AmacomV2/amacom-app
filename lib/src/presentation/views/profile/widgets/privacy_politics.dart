@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/config/theme/theme.dart';
-
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
 
 /// Pet information form
 ///
@@ -26,7 +25,7 @@ class PrivacyPolitics extends StatelessWidget {
           ),
           Expanded(
             child: ScrollColumnExpandable(
-              padding: EdgeInsets.zero,
+              padding: responsive.appHorizontalPadding,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
@@ -68,9 +67,10 @@ class PrivacyPolitics extends StatelessWidget {
                 ),
                 Container(
                   color: Colors.white,
-                  child: const ColumnWithPadding(
+                  child: ColumnWithPadding(
+                    padding: responsive.appHInnerPadding,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
                       SafeSpacer(
                         height: 18,
                       ),
@@ -84,7 +84,8 @@ class PrivacyPolitics extends StatelessWidget {
                       SafeSpacer(
                         height: 10,
                       ),
-                      Text('''These Terms of Service (“ Terms ”) are a binding legal agreement between you and Airbnb governing your right to use Airbnb's websites, apps and other offerings (collectively, the “ Airbnb Platform ”). When these Terms use “ Airbnb ,” “ we ,” “ us , ” or “ our ,” they mean the Airbnb entity listed in Exhibit 1 with whom you contract. \n\nThe Airbnb Platform provides an online site that allows users (“ Members ”) to post, offer, search and book services. Members who post and offer services are “ Hosts ”, while members who search for, book or use services are “ Guests ”. Hosts offer accommodations (“ Accommodations ”), activities, excursions and events (“ Experiences ”), as well as a variety of travel and other services (collectively, the “ Host Services ”, and each offering of a Host Service Host a “ Announcement”). You must register an account to access and use many features of the Airbnb Platform, as well as keep your account information accurate. As the provider of the Airbnb Platform, Airbnb does not own, control, offer or administer any Listings, Host Services or tour services. Airbnb is not a party to contracts directly between Hosts and Guests, nor is it a real estate agent, travel agency or insurer. Airbnb is not acting as an agent for any Member, except as specified in the Payments Terms of Service (“ Payments Terms ”). For more information about the Airbnb feature, see Section 16.
+                      Text(
+                        '''These Terms of Service (“ Terms ”) are a binding legal agreement between you and Airbnb governing your right to use Airbnb's websites, apps and other offerings (collectively, the “ Airbnb Platform ”). When these Terms use “ Airbnb ,” “ we ,” “ us , ” or “ our ,” they mean the Airbnb entity listed in Exhibit 1 with whom you contract. \n\nThe Airbnb Platform provides an online site that allows users (“ Members ”) to post, offer, search and book services. Members who post and offer services are “ Hosts ”, while members who search for, book or use services are “ Guests ”. Hosts offer accommodations (“ Accommodations ”), activities, excursions and events (“ Experiences ”), as well as a variety of travel and other services (collectively, the “ Host Services ”, and each offering of a Host Service Host a “ Announcement”). You must register an account to access and use many features of the Airbnb Platform, as well as keep your account information accurate. As the provider of the Airbnb Platform, Airbnb does not own, control, offer or administer any Listings, Host Services or tour services. Airbnb is not a party to contracts directly between Hosts and Guests, nor is it a real estate agent, travel agency or insurer. Airbnb is not acting as an agent for any Member, except as specified in the Payments Terms of Service (“ Payments Terms ”). For more information about the Airbnb feature, see Section 16.
                 We maintain other terms and policies that supplement these Terms, such as the Privacy Policy , which describes the collection and use of personal data, and the Payment Terms , which govern the payment services provided to Members by Airbnb payment entities. (collectively, "Airbnb Payments ").
                 
                 These Terms of Service (“ Terms ”) are a binding legal agreement between you and Airbnb governing your right to use Airbnb's websites, apps and other offerings (collectively, the “ Airbnb Platform ”). When these Terms use “ Airbnb ,” “ we ,” “ us , ” or “ our ,” they mean the Airbnb entity listed in Exhibit 1 with whom you contract.
@@ -93,13 +94,13 @@ class PrivacyPolitics extends StatelessWidget {
                       ''',
                         textAlign: TextAlign.left,
                       ),
-                      BottomSpacer()
+                      BottomSpacer(),
                     ],
                   ),
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

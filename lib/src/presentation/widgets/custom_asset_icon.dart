@@ -1,8 +1,10 @@
+import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:amacom_app/src/utils/utils/utils.dart';
 
+///
 class CustomAssetIcon extends StatelessWidget {
+  ///
   const CustomAssetIcon({
     super.key,
     required this.path,
@@ -12,13 +14,22 @@ class CustomAssetIcon extends StatelessWidget {
     this.padding,
   });
 
+  ///
   final String path;
+
+  ///
 
   final BoxFit? fit;
 
+  ///
+
   final double height;
 
+  ///
+
   final double? width;
+
+  ///
 
   final EdgeInsets? padding;
   @override

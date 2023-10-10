@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/durations.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 /// Registration complete screen
 ///
@@ -64,7 +64,7 @@ class RegistrationCompleteScreen extends StatelessWidget {
               'assets/images/fur_dog.png',
               width: responsive.maxWidthValue(337),
               height: responsive.maxHeightValue(580),
-            )
+            ),
           ],
         ),
       ),

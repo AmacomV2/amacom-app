@@ -1,32 +1,33 @@
 {
-    "cSpell.words": [
-      "amacom",
-      "apng",
-      "avchd",
-      "concat",
-      "cupertino",
-      "Cupertino",
-      "dtos",
-      "figma",
-      "goldplay",
-      "Goldplay",
-      "jfif",
-      "pjpeg",
-      "RGBO",
-      "riverpod",
-      "rmvb",
-      "uuid",
-      "webm",
-      "webp"
-    ],
-    "dart.flutterSdkPath": ".fvm/flutter_sdk",
-    //Eliminar archivos .fvm de búsqueda
-    "search.exclude": {
-      "**/.fvm": true
-    },
-    // Eliminar de la observación de archivos
-    "files.watcherExclude": {
-      "**/.fvm": true
-    }
-  
+  "cSpell.words": [
+    "amacom",
+    "apng",
+    "avchd",
+    "Bezier",
+    "concat",
+    "cupertino",
+    "Cupertino",
+    "dtos",
+    "figma",
+    "goldplay",
+    "Goldplay",
+    "jfif",
+    "lerp",
+    "pjpeg",
+    "RGBO",
+    "riverpod",
+    "rmvb",
+    "uuid",
+    "webm",
+    "webp"
+  ],
+  "dart.flutterSdkPath": ".fvm/flutter_sdk",
+  //Eliminar archivos .fvm de búsqueda
+  "search.exclude": {
+    "**/.fvm": true
+  },
+  // Eliminar de la observación de archivos
+  "files.watcherExclude": {
+    "**/.fvm": true
   }
+}

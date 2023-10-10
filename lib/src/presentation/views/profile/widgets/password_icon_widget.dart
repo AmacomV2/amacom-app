@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_asset_icon.dart';
+import 'package:flutter/material.dart';
 
+///
 class PasswordIcon extends StatelessWidget {
+  ///
   const PasswordIcon({
     super.key,
   });

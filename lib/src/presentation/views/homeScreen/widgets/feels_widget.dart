@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/config/theme/theme.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_asset_icon.dart';
 import 'package:amacom_app/src/presentation/widgets/spacers.dart';
+import 'package:flutter/material.dart';
 
 /// Pet status
 ///
@@ -55,12 +55,12 @@ class PetFeelings extends StatelessWidget {
                 percent: 100,
                 colorPercent: FigmaColors.success_400,
                 labelFeel: 'Feliz',
-                petName: 'Loli',
+                petName: 'Pet',
                 feelImage: '3_feel.png',
-              )
+              ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

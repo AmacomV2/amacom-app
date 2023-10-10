@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:amacom_app/src/data/repositories/code_validation_repository.dart';
 import 'package:amacom_app/src/presentation/state/authentication/code_validation_provider.dart';
 import 'package:amacom_app/src/presentation/views/authentication/widgets/authentication_widgets.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 /// OTP verification screen
@@ -83,7 +83,7 @@ class EmailVerificationScreen extends ConsumerWidget {
               }
             },
           ),
-          const SafeBottomSpacer()
+          const SafeBottomSpacer(),
         ],
       ),
     );

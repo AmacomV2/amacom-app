@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/utils/constant/sizes.dart';
+import 'package:flutter/material.dart';
 
 /// Custom Body widget
 ///
@@ -14,6 +14,7 @@ class CustomBody extends StatelessWidget {
     this.height = double.infinity,
     required this.child,
     this.padding,
+    this.margin,
   });
 
   /// Background color to apply
@@ -31,10 +32,14 @@ class CustomBody extends StatelessWidget {
   /// Widget optional padding
   final EdgeInsets? padding;
 
+  /// Widget outer optional padding
+  final EdgeInsets? margin;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: padding,
+      margin: margin,
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.only(

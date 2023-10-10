@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 /// Show app dialogs from anywhere without needing to pass
@@ -74,7 +74,67 @@ class AppDialogs {
                     width: double.infinity,
                     onTap: onTap ?? () => navigatorKey.currentState?.pop(),
                     text: buttonText,
-                  )
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+        transitionBuilder: (_, anim, __, child) {
+          Tween<Offset> tween;
+          if (anim.status == AnimationStatus.reverse) {
+            tween = Tween(begin: const Offset(-1, 0), end: Offset.zero);
+          } else {
+            tween = Tween(begin: const Offset(1, 0), end: Offset.zero);
+          }
+
+          return SlideTransition(
+            position: tween.animate(anim),
+            child: FadeTransition(
+              opacity: anim,
+              child: child,
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  /// Show a generic app dialog with a centered button
+  static Future<void> genericDialog({
+    required Widget widget,
+    VoidCallback? onTap,
+    String buttonText = 'Aceptar',
+  }) async {
+    final responsiveD = _responsiveDesign;
+    final navigatorKey = GlobalLocator.appNavigator;
+    if (navigatorKey.currentContext != null) {
+      await showGeneralDialog(
+        context: navigatorKey.currentContext!,
+        barrierLabel: 'Barrier',
+        barrierDismissible: true,
+        barrierColor: Colors.black.withOpacity(0.5),
+        transitionDuration: const Duration(milliseconds: 400),
+        pageBuilder: (_, __, ___) {
+          return Center(
+            child: Container(
+              width: responsiveD.maxWidthValue(350),
+              margin: responsiveD.appHorizontalPadding,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius:
+                    BorderRadius.circular(AppSizes.genericDialogsBorderRadius),
+              ),
+              child: ColumnWithPadding(
+                padding: responsiveD.appDialogsPadding,
+                children: [
+                  widget,
+                  const SafeSpacer(),
+                  GenericRoundedButton(
+                    width: double.infinity,
+                    onTap: onTap ?? () => navigatorKey.currentState?.pop(),
+                    text: buttonText,
+                  ),
                 ],
               ),
             ),
@@ -207,54 +267,54 @@ class AppDialogs {
     IconData? icon,
     Duration? duration,
   }) {
-    final context =  GlobalLocator.appNavigator.currentContext;
-    if(context!=null) {
+    final context = GlobalLocator.appNavigator.currentContext;
+    if (context != null) {
       try {
-      final colors = Theme.of(context).colorScheme;
-      final responsive = GlobalLocator.responsiveDesign;
+        final colors = Theme.of(context).colorScheme;
+        final responsive = GlobalLocator.responsiveDesign;
 
-      snackBar(
-        context,
-        duration: duration ?? 2.seconds,
-        backgroundColor: color ?? FigmaColors.success_600,
-        content: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (icon != null)
-              Icon(
-                icon,
-                color: Colors.white,
-                size: 22,
-              ),
-            const HorizontalSpacer(
-              width: 20,
-            ),
-            Text(
-              text,
-              style: TextStyle(
-                color: FigmaColors.getFontColorForBackground(
-                  color ?? colors.error,
+        snackBar(
+          context,
+          duration: duration ?? 2.seconds,
+          backgroundColor: color ?? FigmaColors.success_600,
+          content: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (icon != null)
+                Icon(
+                  icon,
+                  color: Colors.white,
+                  size: 22,
                 ),
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+              const HorizontalSpacer(
+                width: 20,
               ),
-              textAlign: TextAlign.left,
-            ).expand(),
-          ],
-        ).paddingSymmetric(
-          horizontal: responsive.width(10),
-        ),
-        margin: EdgeInsets.symmetric(
-          horizontal: responsive.width(30),
-          vertical: responsive.safeBottomHeight(50),
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      );
-    } catch (e) {
-      log(e);
-    }
+              Text(
+                text,
+                style: TextStyle(
+                  color: FigmaColors.getFontColorForBackground(
+                    color ?? colors.error,
+                  ),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.left,
+              ).expand(),
+            ],
+          ).paddingSymmetric(
+            horizontal: responsive.width(10),
+          ),
+          margin: EdgeInsets.symmetric(
+            horizontal: responsive.width(30),
+            vertical: responsive.safeBottomHeight(50),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        );
+      } catch (e) {
+        log(e);
+      }
     }
   }
 }

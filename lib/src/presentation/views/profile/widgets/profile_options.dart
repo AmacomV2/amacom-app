@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:amacom_app/src/config/menu/profile_menu_items.dart';
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/data/repositories/user_repository.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_asset_icon.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Profile options
 ///
@@ -16,6 +17,9 @@ class ProfileOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final responsive = GlobalLocator.responsiveDesign;
+    final appLocalizations = AppLocalizations.of(context);
+
+    final items = appMenuItems(appLocalizations);
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -28,9 +32,9 @@ class ProfileOptions extends StatelessWidget {
           padding: EdgeInsets.zero,
           primary: false,
           shrinkWrap: true,
-          itemCount: appMenuItems.length,
+          itemCount: items.length,
           itemBuilder: (context, index) {
-            final menuItem = appMenuItems[index];
+            final menuItem = items[index];
             return _CustomListTile(
               menuItem: menuItem,
               height: responsive.maxHeightValue(80),
@@ -64,26 +68,7 @@ class ProfileOptions extends StatelessWidget {
             );
           },
         ),
-        const SafeSpacer(
-          height: 10,
-        ),
-        CustomButtonWithState(
-          adaptiveTextColor: false,
-          onTap: () {},
-          text: 'Borrar cuenta',
-          // svgPicture: SvgPngToIcon(assetName: 'trash_outline'),
-          svgPicture: const CustomAssetIcon(
-            path: 'assets/svg/icons/trash_outline.svg',
-            height: 28,
-            width: 28,
-          ),
-          color: Colors.red.shade100,
-          textColor: Colors.red,
-        ),
-        const SafeSpacer(
-          height: 90,
-        ),
-        const BottomNavBarSpacer()
+        const BottomNavBarSpacer(),
       ],
     );
   }
@@ -106,15 +91,22 @@ class _CustomListTile extends StatelessWidget {
       height: height,
       child: ListTile(
         style: Theme.of(context).listTileTheme.style,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 6,
+        ),
         leading: menuItem.icon,
         trailing: Container(
-          height: 38,
-          width: 38,
+          height: 30,
+          width: 30,
           decoration: BoxDecoration(
             color: const Color(0x0ffdde9f),
             borderRadius: BorderRadius.circular(500),
           ),
-          child: const NextArrowButton(),
+          child: const CustomIconButton(
+            borderColor: Colors.white,
+            size: 20,
+            icon: Icons.arrow_forward_ios_rounded,
+          ),
         ),
         title: Text(menuItem.title),
         onTap: () {

@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/presentation/views/authentication/widgets/authentication_widgets.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
 
 /// Password recover screen
 ///
@@ -37,7 +37,7 @@ class PasswordRecoverScreen extends StatelessWidget {
         onSuccess: () {
           Navigation.goBack();
         },
-      )
+      ),
     ];
     return Scaffold(
       body: ColumnWithPadding(

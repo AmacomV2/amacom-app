@@ -1,10 +1,10 @@
+import 'package:amacom_app/src/config/theme/theme.dart';
+import 'package:amacom_app/src/presentation/state/authentication/user_provider.dart';
+import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:amacom_app/src/config/theme/theme.dart';
-import 'package:amacom_app/src/presentation/state/authentication/user_provider.dart';
-import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 
 /// User Image
 ///
@@ -98,7 +98,7 @@ class UserImage extends ConsumerWidget {
                 width: 16,
               ),
             ),
-          )
+          ),
       ],
     );
   }

@@ -1,6 +1,6 @@
+import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:go_router/go_router.dart';
 
 /// Go to login widget, shown on registration's screen bottom.
@@ -78,7 +78,7 @@ class _GoTo extends StatelessWidget {
               color: theme.colorScheme.primary,
             ),
             recognizer: TapGestureRecognizer()..onTap = onTap,
-          )
+          ),
         ],
       ),
     );

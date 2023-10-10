@@ -1,9 +1,9 @@
 import 'dart:io';
-
-import 'package:flutter/material.dart';
 import 'dart:math' as match;
 
 import 'package:amacom_app/src/utils/constant/sizes.dart';
+import 'package:flutter/material.dart';
+
 export 'package:amacom_app/src/utils/constant/sizes.dart';
 
 const double _kAspectRatio = 0.56222;
@@ -127,6 +127,10 @@ class ResponsiveDesign {
   /// return app commonly horizontal padding
   EdgeInsets get appHorizontalPadding =>
       horizontalPadding(AppSizes.bodyDefaultHPadding);
+
+  /// return app commonly horizontal inner padding
+  EdgeInsets get appHInnerPadding =>
+      horizontalPadding(AppSizes.bodyDefaultHInnerPadding);
 
   /// return app commonly padding
   EdgeInsets get appDialogsPadding => EdgeInsets.symmetric(

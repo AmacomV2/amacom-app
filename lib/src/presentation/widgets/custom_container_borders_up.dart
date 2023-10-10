@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 
+///
 class CustomContainerBordersUp extends StatelessWidget {
+  ///
   const CustomContainerBordersUp({
     super.key,
     this.child,
     this.topPadding = 50,
   });
 
+  ///
   final Widget? child;
+
+  ///
   final double? topPadding;
 
   @override

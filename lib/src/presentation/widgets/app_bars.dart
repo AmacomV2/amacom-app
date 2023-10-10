@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// AppBar used commonly on app screens
 class CustomAppBar extends StatelessWidget {
@@ -14,10 +14,19 @@ class CustomAppBar extends StatelessWidget {
     this.centerTitle = false,
     this.padding = false,
     this.includeBottomSpacer = true,
+    this.titleIcon,
+    this.prefix,
+    this.includeBackArrow = true,
   });
 
   /// AppBar actions
   final Widget? action;
+
+  /// AppBar actions
+  final Widget? titleIcon;
+
+  /// AppBar actions
+  final Widget? prefix;
 
   /// Callback on back
   final VoidCallback? onBack;
@@ -27,6 +36,9 @@ class CustomAppBar extends StatelessWidget {
 
   /// Center title on appBar
   final bool centerTitle;
+
+  /// Include back arrow or not
+  final bool includeBackArrow;
 
   /// include bottom SafeSpacer
   final bool includeBottomSpacer;
@@ -47,27 +59,47 @@ class CustomAppBar extends StatelessWidget {
             ? MainAxisAlignment.spaceBetween
             : MainAxisAlignment.start,
         children: [
-          BackArrowButton(
-            onTap: onBack ?? () => Navigation.goBack(),
-          ),
+          prefix ??
+              (includeBackArrow
+                  ? CustomIconButton(
+                      size: 24,
+                      icon: Icons.arrow_back_rounded,
+                      onTap: onBack ?? () => Navigation.goBack(),
+                    )
+                  : const SizedBox(
+                      width: 28,
+                    )),
           if (!centerTitle)
             const HorizontalSpacer(
               width: 4,
             ),
-          if (title != null)
-            Text(
-              title!,
-              style: theme.textTheme.headlineSmall?.copyWith(
-              ),
-            ),
+          Row(
+            children: [
+              if (titleIcon != null) titleIcon!,
+              if (titleIcon != null)
+                const HorizontalSpacer(
+                  width: 8,
+                ),
+              if (title != null)
+                Text(
+                  title!.toUpperCase(),
+                  style: theme.textTheme.headlineSmall?.copyWith(
+                    fontSize: 26,
+                  ),
+                ),
+            ],
+          ),
           if (action != null) action!,
-          if (centerTitle)
+          if (centerTitle && action == null)
             const SizedBox(
               width: 28,
-            )
+            ),
         ],
       ),
-      if (includeBottomSpacer) const SafeSpacer(),
+      if (includeBottomSpacer)
+        const SafeSpacer(
+          height: 16,
+        ),
     ];
     if (padding) return ColumnWithPadding(children: children);
     return Column(

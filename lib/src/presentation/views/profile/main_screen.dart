@@ -1,12 +1,10 @@
-import 'package:flutter/material.dart';
-
 import 'package:amacom_app/src/config/menu/profile_menu_items.dart';
 import 'package:amacom_app/src/presentation/views/profile/widgets/profile_header.dart';
 import 'package:amacom_app/src/presentation/views/profile/widgets/profile_options.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
-
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
 
 /// Profile screen widget.
 class ProfileScreen extends StatelessWidget {
@@ -18,7 +16,7 @@ class ProfileScreen extends StatelessWidget {
     appMenuItems; // Unused variable
     final responsive = GlobalLocator.responsiveDesign;
     return SizedBox(
-      child: Column(
+      child: ColumnWithPadding(
         children: [
           const ProfileHeader(),
           Expanded(

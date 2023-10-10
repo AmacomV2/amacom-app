@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
 
 /// Page No4 on onBoarding screen
 class OnBoardingPage4 extends StatelessWidget {
@@ -57,7 +57,7 @@ class OnBoardingPage4 extends StatelessWidget {
             left: responsive.maxWidthValue(45),
             right: responsive.maxWidthValue(45),
           ),
-        )
+        ),
       ],
     );
   }

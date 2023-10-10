@@ -1,8 +1,7 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:amacom_app/src/data/dataSources/api_data_source.dart';
 import 'package:amacom_app/src/domain/entities/baseResponse/base_response.dart';
-import 'package:amacom_app/src/domain/entities/request_data.dart';
 import 'package:amacom_app/src/domain/repositories/password_recovering_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Code Validations Repo
 ///
@@ -16,18 +15,18 @@ class PasswordRecoveringRepository implements IPasswordRecoveringRepository {
 
   @override
   Future<BaseResponse?> sendCode(String email) async {
-    final requestData = RequestData(
-      path: '/recovering/sendCode',
-      method: Method.post,
-      body: {'email': email},
-    );
+    // final requestData = RequestData(
+    //   path: '/recovering/sendCode',
+    //   method: Method.post,
+    //   body: {'email': email},
+    // );
     //final result = await ApiDataSource().request(
     //  requestData: requestData,
     //  withAuthToken: false,
     //);
     final result = {
-      'data':{},
-      'error':false
+      'data': {},
+      'error': false,
     };
     BaseResponse data;
     try {
@@ -59,8 +58,8 @@ class PasswordRecoveringRepository implements IPasswordRecoveringRepository {
     //   withAuthToken: false,
     // );
     final result = {
-      'data':true,
-      'error':false
+      'data': true,
+      'error': false,
     };
     BaseResponse data;
     try {
@@ -79,21 +78,21 @@ class PasswordRecoveringRepository implements IPasswordRecoveringRepository {
     required String email,
     required String code,
   }) async {
-    final requestData = RequestData(
-      path: '/recovering/verifyCode',
-      method: Method.post,
-      body: {
-        'email': email,
-        'code': code,
-      },
-    );
+    // final requestData = RequestData(
+    //   path: '/recovering/verifyCode',
+    //   method: Method.post,
+    //   body: {
+    //     'email': email,
+    //     'code': code,
+    //   },
+    // );
     //final result = await ApiDataSource().request(
     //  requestData: requestData,
     //  withAuthToken: false,
     //);
-     final result = {
-      'data':{},
-      'error':false
+    final result = {
+      'data': {},
+      'error': false,
     };
     BaseResponse data;
     try {
@@ -109,6 +108,7 @@ class PasswordRecoveringRepository implements IPasswordRecoveringRepository {
 }
 
 /// Code validation repo instance
-final passwordRecoveringRepoProvider = Provider.autoDispose<IPasswordRecoveringRepository>(
+final passwordRecoveringRepoProvider =
+    Provider.autoDispose<IPasswordRecoveringRepository>(
   (ref) => PasswordRecoveringRepository(api: ref.read(apiProvider)),
 );

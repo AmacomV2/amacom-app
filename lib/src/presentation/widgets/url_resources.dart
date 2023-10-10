@@ -1,8 +1,8 @@
+import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
+import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:amacom_app/src/presentation/widgets/widgets.dart';
-import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:video_player/video_player.dart';
@@ -65,7 +65,8 @@ class _UrlResourceState extends State<UrlResource> {
         imageUrl: widget.recourseUrl,
         memCacheWidth: responsive.screenWidth.toInt(),
         fit: widget.fit ?? BoxFit.cover,
-        progressIndicatorBuilder: (context, url, progress) => CustomCircularProgressIndicator(
+        progressIndicatorBuilder: (context, url, progress) =>
+            CustomCircularProgressIndicator(
           strokeWidth: 3,
           headRadius: 3.5,
           value: progress.progress,
@@ -86,7 +87,9 @@ class _UrlResourceState extends State<UrlResource> {
       return InkWell(
         onTap: () {
           setState(() {
-            (_controller?.value.isPlaying ?? false) ? _controller?.pause() : _controller?.play();
+            (_controller?.value.isPlaying ?? false)
+                ? _controller?.pause()
+                : _controller?.play();
           });
         },
         child: Stack(
@@ -115,7 +118,7 @@ class _UrlResourceState extends State<UrlResource> {
                   size: indicatorSize * 0.8,
                   color: Colors.white,
                 ),
-              )
+              ),
           ],
         ),
       );
@@ -142,7 +145,8 @@ class NetworkResourceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
     return Scaffold(
       body: ColumnWithPadding(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -162,14 +166,16 @@ class NetworkResourceView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GestureDetector(
-                    onTap: ()=>AppUrlResources.launchGivenUrl(url ?? ''),
+                    onTap: () => AppUrlResources.launchGivenUrl(url ?? ''),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 10,
                       ),
-                      decoration:
-                          BoxDecoration(color: theme.colorScheme.primary.withOpacity(0.13), borderRadius: BorderRadius.circular(8)),
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.primary.withOpacity(0.13),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                       child: Row(
                         children: [
                           FaIcon(

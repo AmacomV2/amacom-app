@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/presentation/views/profile/widgets/personal_data_form.dart';
 import 'package:amacom_app/src/presentation/views/profile/widgets/user_image.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_body.dart';
-
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
 
 /// Pet information form
 ///
@@ -36,9 +35,12 @@ class PersonalDataScreen extends StatelessWidget {
           const SafeSpacer(
             height: 35,
           ),
-          const Expanded(
-            child: CustomBody(
-              child: PersonalDataForm(),
+          Expanded(
+            child: Padding(
+              padding: responsive.appHInnerPadding,
+              child: const CustomBody(
+                child: PersonalDataForm(),
+              ),
             ),
           ),
           CustomButtonWithState(

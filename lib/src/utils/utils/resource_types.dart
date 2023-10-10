@@ -18,7 +18,7 @@ class ResourceTypeHelper {
     // 'svg',
     'gif',
     'webp',
-    'avif'
+    'avif',
   ];
 
   /// Image types
@@ -59,7 +59,7 @@ class ResourceTypeHelper {
     'vob',
     'webm',
     'wmv',
-    'yuv'
+    'yuv',
   ];
 
   /// Return resource type

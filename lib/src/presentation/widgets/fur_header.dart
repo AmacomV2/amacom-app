@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -65,7 +65,7 @@ class AuthHeader extends StatelessWidget {
               Expanded(child: titleWidget),
               const HorizontalSpacer(
                 width: 26,
-              )
+              ),
             ],
           ),
         if (!includeBackArrow) titleWidget,

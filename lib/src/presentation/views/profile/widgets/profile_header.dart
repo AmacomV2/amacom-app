@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/presentation/state/authentication/user_provider.dart';
 import 'package:amacom_app/src/presentation/views/profile/widgets/user_image.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Profile screen header
 ///
@@ -17,9 +18,26 @@ class ProfileHeader extends ConsumerWidget {
     final theme = Theme.of(context);
     final primary = theme.colorScheme.primary;
     final responsiveD = GlobalLocator.responsiveDesign;
+    final appLocalizations = AppLocalizations.of(context);
+
     return Column(
       children: [
-        const HeaderSpacer(),
+        CustomAppBar(
+          title: appLocalizations?.myProfile,
+          includeBackArrow: false,
+          centerTitle: true,
+          titleIcon: const ImageIcon(
+            AssetImage(
+              'assets/icon/user-settings.png',
+            ),
+            size: 20,
+          ),
+          action: CustomIconButton(
+            size: 22,
+            icon: Icons.settings,
+            onTap: () => Navigation.goTo(CustomAppRouter.settings),
+          ),
+        ),
         Stack(
           children: [
             Container(
@@ -65,7 +83,7 @@ class ProfileHeader extends ConsumerWidget {
               ),
             ),
           ],
-        )
+        ),
       ],
     );
   }

@@ -1,10 +1,9 @@
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
+import 'package:amacom_app/src/presentation/widgets/custom_asset_icon.dart';
+import 'package:amacom_app/src/presentation/widgets/widgets.dart';
+import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:flutter/material.dart';
-import 'package:amacom_app/src/presentation/widgets/custom_asset_icon.dart';
-import 'package:amacom_app/src/utils/utils/utils.dart';
-
-import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 /// Stores H-list widget
@@ -22,7 +21,7 @@ class Stores extends StatelessWidget {
       children: [
         CalendarTimeline(
           initialDate: DateTime.now(),
-          firstDate:  DateTime.now().subtract(const Duration(days: 10)),
+          firstDate: DateTime.now().subtract(const Duration(days: 10)),
           lastDate: DateTime(2025, 11, 20),
           onDateSelected: (date) => log(date),
           leftMargin: 20,
@@ -31,7 +30,6 @@ class Stores extends StatelessWidget {
           activeBackgroundDayColor: FigmaColors.primary_50,
           dotsColor: FigmaColors.primary_100,
           selectableDayPredicate: (date) => date.day != 23,
-          locale: 'es',
         ),
         const SafeSpacer(),
         const Text(
@@ -87,10 +85,10 @@ class Stores extends StatelessWidget {
                 color: Colors.blue.shade200,
                 painterColor: Colors.blue,
                 pathImage: 'assets/png/icons/5_pet.png',
-              )
+              ),
             ],
           ),
-        )
+        ),
       ],
     );
   }
@@ -203,9 +201,10 @@ class _DataContainer extends StatelessWidget {
             ],
           ),
           Container(
-            padding: EdgeInsets.only(top: 18, right: responsiveD.maxWidthValue(20)),
+            padding:
+                EdgeInsets.only(top: 18, right: responsiveD.maxWidthValue(20)),
             child: CustomAssetIcon(path: pathImage, height: 100, width: 75),
-          )
+          ),
         ],
       ),
     );

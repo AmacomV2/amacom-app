@@ -11,3 +11,4 @@ export 'package:amacom_app/src/presentation/widgets/fur_header.dart';
 export 'package:amacom_app/src/presentation/widgets/icon_buttons.dart';
 export 'package:amacom_app/src/presentation/widgets/scroll_column_expandable.dart';
 export 'package:amacom_app/src/presentation/widgets/spacers.dart';
+export 'package:amacom_app/src/presentation/widgets/degree_selector.dart';

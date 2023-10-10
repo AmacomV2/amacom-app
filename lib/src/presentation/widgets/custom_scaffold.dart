@@ -1,6 +1,6 @@
+import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:amacom_app/src/config/theme/figma_colors.dart';
 
 /// Custom Scaffold
 ///
@@ -49,6 +49,8 @@ class CustomScaffold extends StatelessWidget {
 
   /// Scaffold element
   final bool? resizeToAvoidBottomInset;
+
+  ///
 
   final bool extendBody;
   @override

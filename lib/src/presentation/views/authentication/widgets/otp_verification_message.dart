@@ -15,7 +15,6 @@ class OTPVerificationMessage extends StatelessWidget {
   /// Email direction
   final String? destination;
 
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -38,7 +37,7 @@ class OTPVerificationMessage extends StatelessWidget {
             style: textStyle?.copyWith(
               fontWeight: FontWeight.w600,
             ),
-          )
+          ),
         ],
       ),
     );

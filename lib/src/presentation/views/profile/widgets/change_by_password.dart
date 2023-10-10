@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_body.dart';
-
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
 
 /// Pet information form
 ///
@@ -23,9 +22,12 @@ class ChangePasswordByForm extends StatelessWidget {
             centerTitle: true,
             padding: true,
           ),
-          const Expanded(
+          Expanded(
             child: CustomBody(
-              child: ScrollColumnExpandable(
+              padding: responsive.appHInnerPadding,
+              margin: responsive.appHorizontalPadding,
+              child: const ScrollColumnExpandable(
+                padding: EdgeInsets.zero,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SafeSpacer(),

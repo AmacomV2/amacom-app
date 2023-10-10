@@ -1,6 +1,7 @@
-import 'package:amacom_app/src/config/theme/figma_colors.dart';
-import 'package:amacom_app/src/presentation/widgets/custom_asset_icon.dart';
+// ignore_for_file: deprecated_member_use
 
+import 'package:amacom_app/src/config/settings.dart';
+import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -36,64 +37,54 @@ class ProfileMenuItem {
 }
 
 /// A list of predefined menu items for the user profile.
-List appMenuItems = <ProfileMenuItem>[
-  /// The menu item for personal data.
-  ProfileMenuItem(
-    title: 'Datos personales',
-    link: CustomAppRouter.personalData,
-    icon: SvgPicture.asset(
-      'assets/svg/icons/person.svg',
-      color: FigmaColors.primary_50,
-      height: 24,
-      width: 24,
+List<ProfileMenuItem> appMenuItems(AppLocalizations? appLocalizations) {
+  return [
+    /// The menu item for personal data.
+    ProfileMenuItem(
+      title: appLocalizations?.personalData ?? '',
+      link: CustomAppRouter.personalData,
+      icon: SvgPicture.asset(
+        'assets/svg/icons/person.svg',
+        color: FigmaColors.primary_50,
+        height: 24,
+        width: 24,
+      ),
     ),
-  ),
 
-  /// The menu item for changing the password.
-  ProfileMenuItem(
-    title: 'Cambiar contraseña',
-    link: CustomAppRouter.changePassword,
-    icon: SvgPicture.asset(
-      'assets/svg/icons/lock.svg',
-      color: FigmaColors.primary_50,
-      height: 24,
-      width: 24,
+    /// The menu item for privacy policy.
+    ProfileMenuItem(
+      title: appLocalizations?.logbook ?? 'Mi diario',
+      link: CustomAppRouter.privacyPolitics,
+      icon: SvgPicture.asset(
+        'assets/svg/icons/privacy.svg',
+        color: FigmaColors.primary_50,
+        height: 24,
+        width: 24,
+      ),
     ),
-  ),
 
-  /// The menu item for notifications.
-  ProfileMenuItem(
-    title: 'Notificaciones',
-    link: CustomAppRouter.notifications,
-    icon: SvgPicture.asset(
-      'assets/svg/icons/notifications.svg',
-      color: FigmaColors.primary_50,
-      height: 24,
-      width: 24,
+    /// The menu item for changing the password.
+    ProfileMenuItem(
+      title: appLocalizations?.changePassword ?? 'Cambiar contraseña',
+      link: CustomAppRouter.changePassword,
+      icon: SvgPicture.asset(
+        'assets/svg/icons/lock.svg',
+        color: FigmaColors.primary_50,
+        height: 24,
+        width: 24,
+      ),
     ),
-  ),
 
-  /// The menu item for support.
-  ProfileMenuItem(
-    title: 'Soporte',
-    link: CustomAppRouter.support,
-    icon: SvgPicture.asset(
-      'assets/svg/icons/support.svg',
-      color: FigmaColors.primary_50,
-      height: 18,
-      width: 18,
+    /// The menu item for support.
+    ProfileMenuItem(
+      title: appLocalizations?.support ?? 'Soporte',
+      link: CustomAppRouter.support,
+      icon: SvgPicture.asset(
+        'assets/svg/icons/support.svg',
+        color: FigmaColors.primary_50,
+        height: 18,
+        width: 18,
+      ),
     ),
-  ),
-
-  /// The menu item for privacy policy.
-  ProfileMenuItem(
-    title: 'Política de privacidad',
-    link: CustomAppRouter.privacyPolitics,
-    icon: SvgPicture.asset(
-      'assets/svg/icons/privacy.svg',
-      color: FigmaColors.primary_50,
-      height: 24,
-      width: 24,
-    ),
-  ),
-];
+  ];
+}

@@ -1,0 +1,24 @@
+{
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "accept": "Accept",
+  "agenda": "Agenda",
+  "changePassword": "Change password",
+  "en": "English",
+  "es": "Spanish",
+  "hello": "Hi",
+  "helloWorld": "Hello World!",
+  "home": "Home",
+  "language": "Language",
+  "logbook": "My diary",
+  "logout": "Logout",
+  "myProfile": "My profile",
+  "personalData": "Personal data",
+  "profile": "Profile",
+  "reports": "Reports",
+  "resources": "Resources",
+  "settingsTitle": "App settings",
+  "situations": "Situations",
+  "support": "Support"
+}

@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
-
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
 
 /// App theme.
 ///
@@ -105,17 +104,17 @@ ThemeData globalTheme() {
   /// Take defined colors from design.
   ColorScheme colorSchemeTheme(ColorScheme themeColor) {
     return themeColor.copyWith(
-      primary:  FigmaColors.primary_300,
+      primary: FigmaColors.primary_300,
       inversePrimary: FigmaColors.primary_300,
       primaryContainer: FigmaColors.primary_200,
-      outline:  FigmaColors.primary_300,
+      outline: FigmaColors.primary_300,
       secondary: const Color(0xff323231),
       onSecondary: const Color(0xffFBFBFB),
       onPrimary: const Color(0xffEBF1FF),
       tertiary: const Color(0xff323231),
       onTertiaryContainer: const Color(0xffD9DBD8),
       onPrimaryContainer: FigmaColors.primary_50,
-      background:  Colors.white,
+      background: Colors.white,
       error: FigmaColors.danger_700,
       onError: Colors.white,
     );
@@ -198,7 +197,7 @@ ThemeData globalTheme() {
       outlineBorder: outlineBorder,
       contentPadding: const EdgeInsets.symmetric(
         horizontal: 16,
-        vertical: 16,
+        vertical: 12,
       ),
       labelStyle: theme.labelStyle?.copyWith(
         fontFamily: 'Goldplay',
@@ -216,7 +215,7 @@ ThemeData globalTheme() {
         fontFamily: 'Goldplay',
         fontWeight: FontWeight.w500,
         fontSize: 16.0,
-        color:  FigmaColors.danger_400,
+        color: FigmaColors.danger_400,
       ),
       hintStyle: theme.labelStyle?.copyWith(
         fontFamily: 'Goldplay',
@@ -260,15 +259,14 @@ ThemeData globalTheme() {
   ListTileThemeData listTileThemeData(
     ListTileThemeData listTileThemeData,
   ) {
-    return listTileThemeData.copyWith(iconColor:  FigmaColors.primary_300);
+    return listTileThemeData.copyWith(iconColor: FigmaColors.primary_300);
   }
 
   final ThemeData theme = ThemeData.light();
 
   return theme.copyWith(
-    primaryColor: const Color(0xff1C418C),
+    primaryColor: FigmaColors.primary_400,
     shadowColor: Colors.grey,
-    colorScheme: colorSchemeTheme(theme.colorScheme),
     sliderTheme: sliderThemeData(theme.sliderTheme),
     scaffoldBackgroundColor: FigmaColors.background,
     textTheme: globalTextTheme(theme.textTheme),
@@ -288,5 +286,7 @@ ThemeData globalTheme() {
       theme.bottomNavigationBarTheme,
     ),
     listTileTheme: listTileThemeData(theme.listTileTheme),
+    colorScheme: colorSchemeTheme(theme.colorScheme)
+        .copyWith(background: FigmaColors.background),
   );
 }

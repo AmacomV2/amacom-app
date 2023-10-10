@@ -1,14 +1,12 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
+import 'package:amacom_app/src/presentation/state/authentication/user_provider.dart';
+import 'package:amacom_app/src/presentation/views/homeScreen/widgets/stores_widget.dart';
+import 'package:amacom_app/src/presentation/widgets/widgets.dart';
+import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:amacom_app/src/presentation/state/authentication/user_provider.dart';
-import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import 'package:amacom_app/src/presentation/widgets/widgets.dart';
-
-import 'package:amacom_app/src/presentation/views/homeScreen/widgets/add_pet_widget.dart';
-import 'package:amacom_app/src/presentation/views/homeScreen/widgets/stores_widget.dart';
 
 /// HomeScreen
 ///
@@ -106,12 +104,12 @@ class _IconNotification extends StatelessWidget {
           width: 45,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(500),
-            
           ),
           child: Badge(
             backgroundColor: FigmaColors.danger_400,
             child: SvgPicture.asset(
               'assets/svg/icons/bell.svg',
+              // ignore: deprecated_member_use
               color: FigmaColors.primary_400,
               height: responsive.maxHeightValue(40),
             ),
@@ -131,9 +129,10 @@ class _Greeting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context);
     return Text(
       '''
-Hola,
+${appLocalizations?.hello},
 $ownerName''',
       style: const TextStyle(
         fontSize: 23,

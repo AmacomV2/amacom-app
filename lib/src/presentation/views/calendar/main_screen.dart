@@ -1,5 +1,4 @@
 import 'package:amacom_app/src/presentation/widgets/custom_scaffold.dart';
-import 'package:amacom_app/src/presentation/widgets/scroll_column_expandable.dart';
 import 'package:amacom_app/src/presentation/widgets/spacers.dart';
 import 'package:amacom_app/src/utils/utils/global_locator.dart';
 import 'package:flutter/material.dart';
@@ -40,12 +39,13 @@ class _MyHomePageState extends State<CalendarScreen> {
                         // change the display mode as appointment using the appointment display
                         // mode property
                         monthViewSettings: const MonthViewSettings(
-                          appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+                          appointmentDisplayMode:
+                              MonthAppointmentDisplayMode.appointment,
                           showAgenda: true,
                         ),
                       ),
                     ),
-                    const BottomNavBarSpacer()
+                    const BottomNavBarSpacer(),
                   ],
                 ),
               ),
@@ -61,7 +61,15 @@ class _MyHomePageState extends State<CalendarScreen> {
     final DateTime today = DateTime.now();
     final DateTime startTime = DateTime(today.year, today.month, today.day, 9);
     final DateTime endTime = startTime.add(const Duration(hours: 2));
-    meetings.add(Meeting('Conference', startTime, endTime, const Color(0xFF0F8644), false));
+    meetings.add(
+      Meeting(
+        'Conference',
+        startTime,
+        endTime,
+        const Color(0xFF0F8644),
+        false,
+      ),
+    );
     return meetings;
   }
 }

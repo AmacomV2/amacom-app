@@ -11,8 +11,9 @@ class NewSituationHeader extends StatelessWidget {
     return const ColumnWithPadding(
       children: [
         CustomAppBar(
-          title: 'Registra una situación',
+          title: 'NUEVA SITUACIÓN',
           centerTitle: true,
+          includeBottomSpacer: false,
         ),
       ],
     );

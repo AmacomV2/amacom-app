@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 class AppUrlResources {
   /// App terms and conditions url
   static const termsAndConditions =
-      'https://rewindrecursos.s3.amazonaws.com/REWIND+-+Te%CC%81rminos+y+Condiciones.pdf';
+      'https://dagrs.berkeley.edu/sites/default/files/2020-01/sample.pdf';
 
   /// App terms and conditions url
   static const privacyPolicy =

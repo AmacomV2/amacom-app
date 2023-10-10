@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:amacom_app/src/data/repositories/password_recovering_repository.dart';
 import 'package:amacom_app/src/presentation/state/authentication/password_recovering_providers.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// User new password from recovering form
 class NewPasswordForm extends ConsumerStatefulWidget {
@@ -77,9 +77,9 @@ class _NewPasswordFormState extends ConsumerState<NewPasswordForm> {
                 final resp = await ref
                     .read(passwordRecoveringRepoProvider)
                     .setNewPassword(
-                        email: ref.read(passRecoveringEmailProvider) ?? '',
-                        password:
-                            ref.read(passRecoveringPasswordProvider) ?? '',);
+                      email: ref.read(passRecoveringEmailProvider) ?? '',
+                      password: ref.read(passRecoveringPasswordProvider) ?? '',
+                    );
                 if (resp?.error == false) {
                   AppDialogs.showCustomSnackBar(
                     AppMessages.passwordChangeSuccess,
@@ -94,7 +94,7 @@ class _NewPasswordFormState extends ConsumerState<NewPasswordForm> {
               }
             },
           ),
-          const BottomSpacer()
+          const BottomSpacer(),
         ],
       ),
     );
