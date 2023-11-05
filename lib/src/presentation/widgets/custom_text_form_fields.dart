@@ -19,11 +19,12 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.textCapitalization,
     this.keyboardType,
+    this.prefixIcon,
     this.enabled = true,
     this.label,
-    this.fillColor,
+    this.fillColor = Colors.white,
     this.showRequiredIndicator = false,
-    this.floatingLabelBehavior = FloatingLabelBehavior.auto,
+    this.floatingLabelBehavior = FloatingLabelBehavior.always,
   });
 
   ///
@@ -67,6 +68,9 @@ class CustomTextFormField extends StatelessWidget {
   /// Suffix widget
   final Widget? suffixIcon;
 
+  /// Prefix widget
+  final Widget? prefixIcon;
+
   /// Label widget
   final Widget? label;
 
@@ -77,7 +81,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool enabled;
 
   /// Input fill color
-  final Color? fillColor;
+  final Color fillColor;
 
   @override
   Widget build(BuildContext context) {
@@ -99,9 +103,11 @@ class CustomTextFormField extends StatelessWidget {
       textCapitalization: textCapitalization ?? TextCapitalization.words,
       decoration: InputDecoration(
         fillColor: fillColor,
+        filled: true,
         floatingLabelBehavior: floatingLabelBehavior,
         hintText: hintText,
         suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
         labelStyle: theme.textTheme.bodyLarge?.copyWith(
           fontWeight: FontWeight.w500,
           color:
@@ -131,6 +137,7 @@ class CustomPasswordFormField extends StatelessWidget {
   /// Constructor
   CustomPasswordFormField({
     super.key,
+    this.fillColor = Colors.white,
     this.validator,
     this.hintText,
     this.labelText,
@@ -169,6 +176,9 @@ class CustomPasswordFormField extends StatelessWidget {
   /// To show or not required indicator
   final bool showRequiredIndicator;
 
+  /// Input fill color
+  final Color fillColor;
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -180,6 +190,8 @@ class CustomPasswordFormField extends StatelessWidget {
       ),
       builder: (BuildContext context, bool value, Widget? child) {
         return CustomTextFormField(
+          prefixIcon: const Icon(Icons.vpn_key_outlined),
+          fillColor: fillColor,
           controller: controller,
           validator: validator,
           showRequiredIndicator: showRequiredIndicator,

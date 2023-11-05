@@ -8,7 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 /// User Image
 ///
-/// Shows current user avatar
+/// Shows current user imageUrl
 class UserImage extends ConsumerWidget {
   ///
   const UserImage({
@@ -36,7 +36,7 @@ class UserImage extends ConsumerWidget {
       children: [
         ref.watch(userProvider).when(
           data: (data) {
-            if (data.avatar.isEmpty) {}
+            if (data.imageUrl.isEmpty) {}
             return Container(
               padding: const EdgeInsets.all(0.5),
               decoration: BoxDecoration(
@@ -59,14 +59,14 @@ class UserImage extends ConsumerWidget {
                     width: 1,
                   ),
                 ),
-                child: data.avatar.isEmpty
+                child: data.imageUrl.isEmpty
                     ? Icon(
                         Icons.image_not_supported_outlined,
                         size: 30,
                         color: primary,
                       )
                     : CachedNetworkImage(
-                        imageUrl: data.avatar,
+                        imageUrl: data.imageUrl,
                         fit: BoxFit.cover,
                         maxHeightDiskCache: (height * 2).toInt(),
                       ),
@@ -96,6 +96,7 @@ class UserImage extends ConsumerWidget {
                 'assets/svg/pencil.svg',
                 height: 16,
                 width: 16,
+                color: theme.primaryColor,
               ),
             ),
           ),

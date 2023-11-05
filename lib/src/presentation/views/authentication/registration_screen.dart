@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/presentation/views/authentication/widgets/authentication_widgets.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
+import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 /// Person registration screen
 ///
@@ -11,15 +13,28 @@ class RegistrationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: ColumnWithPadding(
         children: [
-          AuthHeader(),
-          Expanded(
+          CustomAppBar2(
+            title: 'Crea una cuenta',
+            subtitle: 'Por favor llena los campos de texto requeridos',
+            onBack: () {
+              if (context.canPop()) {
+                Navigation.goBack();
+              } else {
+                Navigation.goTo(
+                  CustomAppRouter.login,
+                  replacement: true,
+                );
+              }
+            },
+          ),
+          const Expanded(
             child: RegistrationForm(),
           ),
-          GoToLogin(),
-          SafeBottomSpacer(),
+          const GoToLogin(),
+          const SafeBottomSpacer(),
         ],
       ),
     );

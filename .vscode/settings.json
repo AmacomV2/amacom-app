@@ -17,6 +17,7 @@
     "RGBO",
     "riverpod",
     "rmvb",
+    "unfocus",
     "uuid",
     "webm",
     "webp"
@@ -29,5 +30,8 @@
   // Eliminar de la observación de archivos
   "files.watcherExclude": {
     "**/.fvm": true
-  }
+  },
+  "conventionalCommits.scopes": [
+    "Auth and Profile"
+  ]
 }

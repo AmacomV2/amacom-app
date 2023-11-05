@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:amacom_app/src/config/theme/theme.dart';
-import 'package:amacom_app/src/domain/entities/user.dart';
+import 'package:amacom_app/src/domain/entities/person.dart';
 import 'package:amacom_app/src/presentation/state/authentication/user_provider.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Loading screen
 class LoadingScreen extends ConsumerWidget {
@@ -71,7 +71,7 @@ class LoadingScreen extends ConsumerWidget {
       ),
     );
     return ref.watch(userProvider).when(
-      data: (User data) {
+      data: (Person data) {
         Future.delayed(
           Duration.zero,
           () {

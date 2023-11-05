@@ -152,13 +152,10 @@ class NetworkResourceView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: double.infinity,
-            child: CustomAppBar(
-              centerTitle: true,
-              title: title,
-              onBack: () => Navigator.of(context).pop(),
-            ),
+          CustomAppBar(
+            centerTitle: true,
+            title: title,
+            onBack: () => Navigator.of(context).pop(),
           ),
           if ((url ?? arguments['url']) != null)
             Expanded(

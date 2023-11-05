@@ -74,7 +74,7 @@ class _NameAndNotification extends ConsumerWidget {
           ref.watch(userProvider).when(
                 data: (user) {
                   return _Greeting(
-                    ownerName: user.names,
+                    ownerName: user.fullName,
                   );
                 },
                 error: (error, stackTrace) => const _Greeting(

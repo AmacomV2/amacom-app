@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:amacom_app/src/data/repositories/user_repository.dart';
 import 'package:amacom_app/src/domain/dtos/user_login_dto.dart';
 import 'package:amacom_app/src/presentation/state/authentication/user_login_form_providers.dart';
 import 'package:amacom_app/src/presentation/views/authentication/widgets/forget_password.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// User login form
 class LoginForm extends ConsumerStatefulWidget {
@@ -39,6 +39,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = GlobalLocator.responsiveDesign;
     return Form(
       key: _formKey,
       child: ScrollColumnExpandable(
@@ -49,11 +50,13 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             height: 6,
           ),
           CustomTextFormField(
+            prefixIcon: const Icon(Icons.person_outline_rounded),
             textCapitalization: TextCapitalization.none,
             controller: _emailController,
-            hintText: 'Escribe tu correo electrónico',
-            labelText: 'Correo electrónico',
-            validator: AppValidations.validateEmail,
+            hintText: 'Escribe tu nombre de usuario',
+            labelText: 'Nombre de usuario',
+            validator: AppValidations.notEmptyFieldValidation,
+            fillColor: Colors.white,
           ),
           const SafeSpacer(
             height: 20,
@@ -63,25 +66,24 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             labelText: 'Contraseña',
             hintText: 'Escribe tu contraseña',
             validator: AppValidations.validatePassword,
+            fillColor: Colors.white,
           ),
           const SafeSpacer(
-            height: 24,
-          ),
-          const ForgetPassword(),
-          const SafeSpacer(
-            height: 32,
+            height: 20,
           ),
           CustomButtonWithState(
+            height: responsive.maxHeightValue(70),
+            width: 230,
             adaptiveTextColor: true,
             enabled: (ref.watch(loginEmailProvider) ?? '').isNotEmpty &&
                 (ref.watch(loginPasswordProvider) ?? '').isNotEmpty,
-            text: 'Continuar',
+            text: 'INICIAR SESIÓN',
             onTap: () async {
               if (_formKey.currentState?.validate() ?? false) {
                 try {
                   await ref.read(userRepository).userLogin(
                         UserLoginDTO(
-                          email: ref.read(loginEmailProvider) ??
+                          username: ref.read(loginEmailProvider) ??
                               _emailController.text,
                           password: ref.read(loginPasswordProvider) ??
                               _passwordController.text,
@@ -95,7 +97,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                   AppDialogs.genericConfirmationDialog(
                     title: 'Error de credenciales',
                     message:
-                        'Tu correo o contraseña son incorrectas, inténtalo de nuevo.',
+                        'Tu nombre de usuario o contraseña son incorrectas, inténtalo de nuevo.',
                     buttonText: 'Continuar',
                     onTap: () {
                       GlobalLocator.appNavigator.currentState?.pop();
@@ -105,6 +107,10 @@ class _LoginFormState extends ConsumerState<LoginForm> {
               }
             },
           ),
+          const SafeSpacer(
+            height: 16,
+          ),
+          const ForgetPassword(),
         ],
       ),
     );

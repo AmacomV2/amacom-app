@@ -53,12 +53,12 @@ class ProfileHeader extends ConsumerWidget {
               child: ColumnWithPadding(
                 children: [
                   const SafeSpacer(
-                    height: 74.5,
+                    height: 85.5,
                   ),
                   ref.watch(userProvider).when(
                     data: (data) {
                       return Text(
-                        data.names,
+                        data.fullName,
                         style: theme.textTheme.headlineSmall
                             ?.copyWith(color: primary),
                       );
@@ -78,8 +78,8 @@ class ProfileHeader extends ConsumerWidget {
             ),
             Center(
               child: UserImage(
-                height: responsiveD.maxHeightValue(106),
-                width: responsiveD.maxHeightValue(106),
+                height: responsiveD.maxHeightValue(120),
+                width: responsiveD.maxHeightValue(120),
               ),
             ),
           ],

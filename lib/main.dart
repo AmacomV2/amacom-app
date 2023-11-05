@@ -47,17 +47,6 @@ class MyApp extends ConsumerWidget {
             .appRouter,
       );
     }
-    Future.delayed(
-      Duration.zero,
-      () {
-        if (ref.read(localeProvider) == null) {
-          ref.read(localeProvider.notifier).update(
-                (state) => state =
-                    Locale(AppLocalizations.of(context)?.localeName ?? 'es'),
-              );
-        }
-      },
-    );
     // debugInvertOversizedImages = true;
     return MaterialApp.router(
       routerConfig: getIt.get<GoRouter>(),

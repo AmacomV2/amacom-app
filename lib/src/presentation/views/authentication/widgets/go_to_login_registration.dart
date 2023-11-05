@@ -30,8 +30,8 @@ class GoToRegistration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _GoTo(
-      text1: '¿No tienes una cuenta?',
-      text2: ' Registrarme',
+      text1: '¿No tienes una cuenta? ',
+      text2: 'Registrarme',
       onTap: () {
         if (context.canPop()) {
           context.pop();

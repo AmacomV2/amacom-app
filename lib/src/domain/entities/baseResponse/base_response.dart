@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'base_response.g.dart';
 
 @JsonSerializable(
@@ -24,9 +25,8 @@ class BaseResponse<T> {
   ) =>
       _$BaseResponseFromJson(json, fromJsonT);
 
-
   /// Bool to know if api request had a server error
-  @JsonKey(name: 'error', defaultValue: false)
+  @JsonKey(name: 'ok', defaultValue: true)
   final bool error;
 
   /// Var who contains api request message

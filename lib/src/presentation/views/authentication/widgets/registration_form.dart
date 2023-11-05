@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:amacom_app/src/data/repositories/user_repository.dart';
 import 'package:amacom_app/src/domain/dtos/user_register_dto.dart';
 import 'package:amacom_app/src/presentation/state/authentication/registration_form_providers.dart';
 import 'package:amacom_app/src/presentation/views/authentication/widgets/terms_and_conditions.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Registration form
 class RegistrationForm extends ConsumerStatefulWidget {
@@ -134,9 +134,11 @@ class _RegistrationFormState extends ConsumerState<RegistrationForm> {
             height: 40,
           ),
           CustomButtonWithState(
+            height: GlobalLocator.responsiveDesign.maxHeightValue(70),
+            width: 230,
             adaptiveTextColor: true,
             enabled: ref.watch(regTermsAndConditionsProvider),
-            text: 'Continuar',
+            text: 'Registrarme',
             onTap: () async {
               if (_formKey.currentState?.validate() ?? false) {
                 try {

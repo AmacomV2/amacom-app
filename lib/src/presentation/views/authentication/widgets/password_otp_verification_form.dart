@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:amacom_app/src/data/repositories/password_recovering_repository.dart';
 import 'package:amacom_app/src/presentation/state/authentication/code_validation_provider.dart';
 import 'package:amacom_app/src/presentation/state/authentication/password_recovering_providers.dart';
@@ -7,6 +5,8 @@ import 'package:amacom_app/src/presentation/views/authentication/widgets/authent
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/app_messages.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Password OTP verification form
 ///

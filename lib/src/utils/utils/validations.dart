@@ -38,10 +38,10 @@ class AppValidations {
       bool hasUppercase = password?.contains(RegExp(r'[A-Z]')) ?? false;
       bool hasDigits = password?.contains(RegExp(r'[0-9]')) ?? false;
       bool hasLowercase = password?.contains(RegExp(r'[a-z]')) ?? false;
-      bool hasMinLength = (password?.length ?? 0) >= 8;
+      bool hasMinLength = (password?.length ?? 0) >= 6;
       if (!hasMinLength) {
         // if (!hasMinLength) {
-        return 'La contraseña debe tener al menos 8 caracteres';
+        return 'La contraseña debe tener al menos 6 caracteres';
       }
       if (!hasDigits) {
         return 'La contraseña debe contener al menos un dígito.';

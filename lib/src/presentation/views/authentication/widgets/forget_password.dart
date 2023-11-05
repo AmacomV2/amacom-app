@@ -1,6 +1,6 @@
+import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:go_router/go_router.dart';
 
 /// Go to Recover password screen
@@ -21,7 +21,7 @@ class ForgetPassword extends ConsumerWidget {
       child: Padding(
         padding: const EdgeInsets.all(0.5),
         child: Text(
-          '¿Has olvidado tu contraseña?',
+          'Olvidé mi contraseña',
           style: theme.textTheme.bodyLarge?.copyWith(
             decoration: TextDecoration.underline,
             fontWeight: FontWeight.w600,

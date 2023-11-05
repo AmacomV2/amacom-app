@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:amacom_app/src/data/repositories/password_recovering_repository.dart';
 import 'package:amacom_app/src/presentation/state/authentication/password_recovering_providers.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/app_messages.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// User password recovering form
 class RecoverPasswordForm extends ConsumerStatefulWidget {
@@ -48,7 +48,7 @@ class _RecoverPasswordFormState extends ConsumerState<RecoverPasswordForm> {
         children: [
           Text(
             'Te enviaremos un código para restablecer tu contraseña',
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.left,
             style: textTheme.bodyLarge?.copyWith(
               fontWeight: FontWeight.w500,
             ),
@@ -56,6 +56,7 @@ class _RecoverPasswordFormState extends ConsumerState<RecoverPasswordForm> {
           const SafeSpacer(),
           CustomTextFormField(
             controller: _emailController,
+            prefixIcon: const Icon(Icons.mail_outline_rounded),
             hintText: 'Escribe tu correo electrónico',
             labelText: 'Correo electrónico',
             textCapitalization: TextCapitalization.none,
@@ -71,6 +72,7 @@ class _RecoverPasswordFormState extends ConsumerState<RecoverPasswordForm> {
             text: 'Restablecer contraseña',
             onTap: () async {
               if (_formKey.currentState?.validate() ?? false) {
+                Focus.of(context).unfocus();
                 final resp = await ref
                     .read(passwordRecoveringRepoProvider)
                     .sendCode(ref.read(passRecoveringEmailProvider) ?? '');
