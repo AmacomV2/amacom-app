@@ -76,7 +76,7 @@ class _RecoverPasswordFormState extends ConsumerState<RecoverPasswordForm> {
                 final resp = await ref
                     .read(passwordRecoveringRepoProvider)
                     .sendCode(ref.read(passRecoveringEmailProvider) ?? '');
-                if (resp?.error == false) {
+                if (resp?.ok == true) {
                   AppDialogs.showCustomSnackBar(
                     AppMessages.verificationCodeSent,
                     icon: Icons.check_circle_outline_rounded,

@@ -7,6 +7,7 @@ export 'package:amacom_app/src/presentation/widgets/custom_container_borders_up.
 export 'package:amacom_app/src/presentation/widgets/custom_readonly_text_form_fields.dart';
 export 'package:amacom_app/src/presentation/widgets/custom_scaffold.dart';
 export 'package:amacom_app/src/presentation/widgets/custom_text_form_fields.dart';
+export 'package:amacom_app/src/presentation/widgets/date_text.dart';
 export 'package:amacom_app/src/presentation/widgets/degree_selector.dart';
 export 'package:amacom_app/src/presentation/widgets/dropdown_form_button.dart';
 export 'package:amacom_app/src/presentation/widgets/icon_buttons.dart';

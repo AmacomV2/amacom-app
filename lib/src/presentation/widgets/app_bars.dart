@@ -173,14 +173,20 @@ class CustomAppBar2 extends StatelessWidget {
     final theme = Theme.of(context);
     final children = [
       if (onTop) const HeaderSpacer(),
-      prefix ??
-          InkWell(
-            onTap: onBack ?? () => Navigation.goBack(),
-            child: const Icon(
-              Icons.arrow_back_rounded,
-              size: 30,
-            ),
-          ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          prefix ??
+              InkWell(
+                onTap: onBack ?? () => Navigation.goBack(),
+                child: Icon(
+                  Icons.arrow_back_rounded,
+                  size: AppSizes.appBarIcons,
+                ),
+              ),
+          action ?? const SizedBox(),
+        ],
+      ),
       const SafeSpacer(
         height: 8,
       ),
@@ -188,10 +194,12 @@ class CustomAppBar2 extends StatelessWidget {
         children: [
           if (titleIcon != null) titleIcon!,
           if (title != null)
-            Text(
-              title!,
-              style: theme.textTheme.headlineSmall?.copyWith(
-                fontSize: 26,
+            Expanded(
+              child: Text(
+                title!,
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  fontSize: 26,
+                ),
               ),
             ),
         ],

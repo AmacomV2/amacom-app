@@ -1,3 +1,7 @@
+import 'package:amacom_app/src/utils/extensions/extensions.dart';
+import 'package:intl/intl.dart';
+import 'package:nb_utils/nb_utils.dart';
+
 /// Custom dateTime extensions
 extension DateOnlyCompare on DateTime {
   /// Compare two datesTimes only date
@@ -43,5 +47,32 @@ extension DateOnlyCompare on DateTime {
         isBeforeOrSameDay(
           after,
         );
+  }
+}
+
+/// Custom dateTime extensions
+extension DateToText on DateTime {
+  /// get date converted into String
+  String asText(String locale) {
+    final formatter = DateFormat('yMMMMEEEEd', locale);
+    return formatter.format(this).capitalizeEachWord().replaceAll('De', 'de');
+  }
+
+  ///
+  String monthText(String locale) {
+    final formatter = DateFormat('MMMM', locale);
+    return formatter.format(this).capitalize();
+  }
+
+  ///
+  String monthTextShort(String locale) {
+    final formatter = DateFormat('MMM', locale);
+    return formatter.format(this).capitalize();
+  }
+
+  ///
+  String timeToText() {
+    final formatter = DateFormat('jm');
+    return formatter.format(this).capitalize();
   }
 }

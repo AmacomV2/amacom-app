@@ -1,7 +1,8 @@
 import 'dart:math' as math;
+
+import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:get_it/get_it.dart';
 
 /// Sized custom progress indicator
@@ -32,15 +33,63 @@ class SizedCustomProgressIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: SizedBox(
-      height: size,
-      width: size,
-      child: CustomCircularProgressIndicator(
-        strokeWidth: strokeWidth,
-        headRadius: headRadius,
-        color: color,
+      child: SizedBox(
+        height: size,
+        width: size,
+        child: CustomCircularProgressIndicator(
+          strokeWidth: strokeWidth,
+          headRadius: headRadius,
+          color: color,
+        ),
       ),
-    ),);
+    );
+  }
+}
+
+/// It's equal to [SizedCustomProgressIndicator] but with background
+class SizedCustomProgressIndicator2 extends StatelessWidget {
+  /// Constructor
+  const SizedCustomProgressIndicator2({
+    Key? key,
+    this.size = 25,
+    this.headRadius = 2.5,
+    this.strokeWidth = 2,
+    this.color,
+  }) : super(
+          key: key,
+        );
+
+  /// Widget size (h and w)
+  final double size;
+
+  /// Progress indicator stroke width
+  final double strokeWidth;
+
+  /// Progress indicator head radius
+  final double headRadius;
+
+  /// Optional color to apply on
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size + 6,
+      height: size + 6,
+      padding: const EdgeInsets.all(6.0),
+      margin: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(99),
+      ),
+      child: SizedCustomProgressIndicator(
+        color: color,
+        headRadius: headRadius,
+        size: size,
+        key: key,
+        strokeWidth: strokeWidth,
+      ),
+    );
   }
 }
 
@@ -62,6 +111,7 @@ class CustomCircularProgressIndicator extends ProgressIndicator {
     super.semanticsValue,
     this.headRadius = 5,
   });
+
   /// The width of the line used to draw the circle.
   final double strokeWidth;
 
@@ -102,7 +152,6 @@ class _CustomCircularProgressIndicatorState
 
   @override
   void initState() {
-
     super.initState();
     _controller = AnimationController(
       duration: const Duration(milliseconds: _kIndeterminateCircularDuration),

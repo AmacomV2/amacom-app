@@ -54,7 +54,7 @@ List<ProfileMenuItem> appMenuItems(AppLocalizations? appLocalizations) {
     /// The menu item for privacy policy.
     ProfileMenuItem(
       title: appLocalizations?.logbook ?? 'Mi diario',
-      link: CustomAppRouter.privacyPolitics,
+      link: CustomAppRouter.logbooks,
       icon: SvgPicture.asset(
         'assets/svg/icons/privacy.svg',
         color: FigmaColors.primary_50,

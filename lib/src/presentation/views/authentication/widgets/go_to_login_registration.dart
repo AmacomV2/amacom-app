@@ -15,7 +15,7 @@ class GoToLogin extends StatelessWidget {
       text2: ' Iniciar sesión',
       onTap: () {
         Navigation.goTo(
-          Routes.login,
+          CustomAppRouter.login,
         );
       },
     );
@@ -37,7 +37,7 @@ class GoToRegistration extends StatelessWidget {
           context.pop();
         } else {
           context.pushReplacementNamed(
-            Routes.registration,
+            CustomAppRouter.registration,
           );
         }
       },

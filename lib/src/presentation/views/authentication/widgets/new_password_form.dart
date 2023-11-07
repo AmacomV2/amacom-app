@@ -80,7 +80,7 @@ class _NewPasswordFormState extends ConsumerState<NewPasswordForm> {
                       email: ref.read(passRecoveringEmailProvider) ?? '',
                       password: ref.read(passRecoveringPasswordProvider) ?? '',
                     );
-                if (resp?.error == false) {
+                if (resp?.ok == true) {
                   AppDialogs.showCustomSnackBar(
                     AppMessages.passwordChangeSuccess,
                     icon: Icons.check_circle_outline_rounded,

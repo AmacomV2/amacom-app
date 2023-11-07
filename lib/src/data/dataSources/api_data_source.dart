@@ -63,7 +63,7 @@ class ApiDataSource {
 
   static Map<String, dynamic> _resolveInternalError(dynamic e) {
     return {
-      'success': false,
+      'ok': false,
       'message': '${AppMessages.internalError}$e',
       'error': true,
       'data': [],
@@ -73,7 +73,7 @@ class ApiDataSource {
   static Map<String, dynamic> _resolveServerErrorCode(DioError e) {
     return {
       'message': '${e.response?.data['message'] ?? e.message}',
-      'error': true,
+      'ok': false,
       'data': {},
     };
   }
@@ -89,7 +89,7 @@ class ApiDataSource {
     } else {
       toast(AppMessages.noInternetConnection);
       return {
-        'error': true,
+        'ok': false,
         'message': AppMessages.noInternetConnection,
         'data': [],
       };
@@ -101,20 +101,34 @@ class ApiDataSource {
     try {
       switch (requestData.method) {
         case Method.get:
-          data = await get(requestData.path);
+          data = await get(
+            requestData.path,
+            queryParameters: requestData.queryParameters,
+          );
           break;
         case Method.post:
-          data = await post(requestData.path, requestData.body);
+          data = await post(
+            requestData.path,
+            requestData.body,
+            queryParameters: requestData.queryParameters,
+          );
           break;
         case Method.put:
-          data = await put(requestData.path, requestData.body);
+          data = await put(
+            requestData.path,
+            requestData.body,
+            queryParameters: requestData.queryParameters,
+          );
           break;
         case Method.delete:
-          data = await delete(requestData.path);
+          data = await delete(
+            requestData.path,
+            queryParameters: requestData.queryParameters,
+          );
           break;
         default:
           return {
-            'error': true,
+            'ok': false,
             'message': 'El método de comunicación http no fue encontrado.',
             'data': [],
           };

@@ -13,6 +13,9 @@
     "Goldplay",
     "jfif",
     "lerp",
+    "nullable",
+    "pageable",
+    "Pageable",
     "pjpeg",
     "RGBO",
     "riverpod",
@@ -32,6 +35,7 @@
     "**/.fvm": true
   },
   "conventionalCommits.scopes": [
-    "Auth and Profile"
+    "Auth and Profile",
+    "Logbooks"
   ]
 }

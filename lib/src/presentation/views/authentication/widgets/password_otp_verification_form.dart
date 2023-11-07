@@ -46,7 +46,7 @@ class PasswordOTPVerificationForm extends ConsumerWidget {
                       email: ref.read(passRecoveringEmailProvider) ?? '',
                       code: ref.watch(codeValidationProvider) ?? '',
                     );
-            if (resp?.error == false) {
+            if (resp?.ok == true) {
               AppDialogs.showCustomSnackBar(
                 AppMessages.verificationCodeVerified,
                 icon: Icons.check_circle_outline_rounded,
@@ -62,7 +62,7 @@ class PasswordOTPVerificationForm extends ConsumerWidget {
             final resp = await ref
                 .read(passwordRecoveringRepoProvider)
                 .sendCode(ref.read(passRecoveringEmailProvider) ?? '');
-            if (resp?.error == false) {
+            if (resp?.ok == true) {
               AppDialogs.showCustomSnackBar(
                 AppMessages.verificationCodeSent,
                 icon: Icons.check_circle_outline_rounded,

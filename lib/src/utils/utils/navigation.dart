@@ -1,9 +1,8 @@
+import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nb_utils/nb_utils.dart' hide ContextExtensions;
 
-import 'package:amacom_app/src/utils/utils/utils.dart';
-export 'package:amacom_app/src/config/routes.dart';
 export 'package:amacom_app/src/config/router/router.dart';
 
 /// Perform non async navigation task

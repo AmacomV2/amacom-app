@@ -82,8 +82,11 @@ class CustomAppRouter {
   /// Represents the route name for the registration complete screen.
   static const String registrationComplete = 'registrationComplete';
 
-  /// Represents the route name for the pet registration complete screen.
-  static const String petRegistrationComplete = 'petRegistrationComplete';
+  /// Represents the route name for logbooks screen.
+  static const String logbooks = '/logbooks';
+
+  /// Represents the route name for logbook detail screen.
+  static const String logbookDetail = '/logbookDetail';
 
   /// Creates a GoRouter instance with defined routes and their corresponding builders.
   GoRouter get appRouter => GoRouter(
@@ -104,6 +107,16 @@ class CustomAppRouter {
             path: '/login',
             name: '/login',
             builder: (context, state) => const LoginScreen(),
+          ),
+          GoRoute(
+            path: logbooks,
+            name: logbooks,
+            builder: (context, state) => const LogbooksScreen(),
+          ),
+          GoRoute(
+            path: logbookDetail,
+            name: logbookDetail,
+            builder: (context, state) => const LogbookDetailScreen(),
           ),
           GoRoute(
             path: newSituation,

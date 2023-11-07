@@ -14,6 +14,9 @@ class AppSizes {
   /// Commonly used buttons height
   static double buttonsHeight = 50;
 
+  /// Appbar icons size
+  static double appBarIcons = 30;
+
   /// App NavBar height
   static double navBarHeight = 100;
 

@@ -25,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
     this.fillColor = Colors.white,
     this.showRequiredIndicator = false,
     this.floatingLabelBehavior = FloatingLabelBehavior.always,
+    this.onChanged,
   });
 
   ///
@@ -83,11 +84,15 @@ class CustomTextFormField extends StatelessWidget {
   /// Input fill color
   final Color fillColor;
 
+  ///
+  final Function(String?)? onChanged;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return TextFormField(
+      onChanged: onChanged,
       style: theme.textTheme.bodyLarge?.copyWith(
         fontWeight: FontWeight.w500,
       ),

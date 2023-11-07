@@ -6,6 +6,7 @@ import 'package:amacom_app/src/domain/entities/person.dart';
 import 'package:amacom_app/src/domain/entities/request_data.dart';
 import 'package:amacom_app/src/domain/entities/session.dart';
 import 'package:amacom_app/src/domain/repositories/user_repository.dart';
+import 'package:amacom_app/src/utils/utils/global_locator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:uuid/uuid.dart';
@@ -36,7 +37,8 @@ class UserRepository implements IUserRepository {
     } catch (e) {
       data = BaseResponse.fromJson(result, (_) {});
     }
-    if (data.error) {
+    if (!data.ok) {
+      GlobalLocator.appLogger.e(data.message);
       throw Exception(data.message);
     } else {
       setSessionData(data.data);
@@ -81,7 +83,7 @@ class UserRepository implements IUserRepository {
     } catch (e) {
       data = BaseResponse.fromJson(result, (_) {});
     }
-    if (data.error) {
+    if (!data.ok) {
       throw Exception(data.message);
     } else {
       setSessionData(data.data);
@@ -112,7 +114,7 @@ class UserRepository implements IUserRepository {
     } catch (e) {
       data = BaseResponse.fromJson(result, (_) {});
     }
-    if (data.error) {
+    if (!data.ok) {
       throw Exception(data.message);
     } else {
       return data.data;

@@ -1,6 +1,7 @@
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -107,38 +108,103 @@ class AppDialogs {
     String buttonText = 'Aceptar',
   }) async {
     final responsiveD = _responsiveDesign;
+    return genericDialogBase(
+      widget: Center(
+        child: Container(
+          width: responsiveD.maxWidthValue(350),
+          margin: responsiveD.appHorizontalPadding,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius:
+                BorderRadius.circular(AppSizes.genericDialogsBorderRadius),
+          ),
+          child: ColumnWithPadding(
+            padding: responsiveD.appDialogsPadding,
+            children: [
+              widget,
+              const SafeSpacer(),
+              GenericRoundedButton(
+                width: double.infinity,
+                onTap: onTap ?? () => navigatorKey.currentState?.pop(),
+                text: buttonText,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Show a generic app dialog with a centered button
+  static Future<bool?> genericConfirmDialog(
+    BuildContext context, {
+    required String title,
+    String? subtitle,
+    VoidCallback? onTap,
+    String buttonTextYes = 'Aceptar',
+    String buttonTextNo = 'Cancelar',
+  }) async {
+    final theme = Theme.of(context);
+    return await showCupertinoDialog<bool>(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: Text(
+            title,
+            style: theme.textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.w600,
+              fontSize: 19,
+            ),
+          ),
+          content: subtitle == null
+              ? null
+              : Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    subtitle,
+                    style: theme.textTheme.bodyLarge?.copyWith(),
+                  ),
+                ),
+          actions: [
+            CupertinoDialogAction(
+              textStyle: theme.textTheme.bodyLarge?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: FigmaColors.success_600,
+              ),
+              child: Text(
+                buttonTextYes,
+              ),
+              onPressed: () => Navigator.pop(context, true),
+            ),
+            CupertinoDialogAction(
+              textStyle: theme.textTheme.bodyLarge?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: FigmaColors.danger_700,
+              ),
+              child: Text(buttonTextNo),
+              onPressed: () => Navigator.pop(context, false),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  /// Show a generic app dialog with a centered button
+  static Future<dynamic> genericDialogBase({
+    required Widget widget,
+  }) async {
     final navigatorKey = GlobalLocator.appNavigator;
     if (navigatorKey.currentContext != null) {
-      await showGeneralDialog(
+      await showGeneralDialog<dynamic>(
         context: navigatorKey.currentContext!,
         barrierLabel: 'Barrier',
         barrierDismissible: true,
         barrierColor: Colors.black.withOpacity(0.5),
         transitionDuration: const Duration(milliseconds: 400),
         pageBuilder: (_, __, ___) {
-          return Center(
-            child: Container(
-              width: responsiveD.maxWidthValue(350),
-              margin: responsiveD.appHorizontalPadding,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius:
-                    BorderRadius.circular(AppSizes.genericDialogsBorderRadius),
-              ),
-              child: ColumnWithPadding(
-                padding: responsiveD.appDialogsPadding,
-                children: [
-                  widget,
-                  const SafeSpacer(),
-                  GenericRoundedButton(
-                    width: double.infinity,
-                    onTap: onTap ?? () => navigatorKey.currentState?.pop(),
-                    text: buttonText,
-                  ),
-                ],
-              ),
-            ),
-          );
+          return widget;
         },
         transitionBuilder: (_, anim, __, child) {
           Tween<Offset> tween;
