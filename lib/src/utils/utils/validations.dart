@@ -54,16 +54,16 @@ class AppValidations {
   }
 
   /// Checks if field is not empty
-  static String? notEmptyFieldValidation(Object? value) {
+  static String? notEmptyFieldValidation(Object? value, {String? message}) {
     if (value is String?) {
       if (value == null || value.isEmpty) {
-        return AppMessages.fieldRequired;
+        return message ?? AppMessages.fieldRequired;
       }
       return null;
     }
     // ignore: unnecessary_null_comparison
     if (value == null) {
-      return AppMessages.fieldRequired;
+      return message ?? AppMessages.fieldRequired;
     }
     return null;
   }

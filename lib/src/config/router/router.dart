@@ -85,6 +85,9 @@ class CustomAppRouter {
   /// Represents the route name for logbooks screen.
   static const String logbooks = '/logbooks';
 
+  /// Represents the route name for logbook creation screen.
+  static const String logbookCreation = '/logbookCreation';
+
   /// Represents the route name for logbook detail screen.
   static const String logbookDetail = '/logbookDetail';
 
@@ -112,6 +115,11 @@ class CustomAppRouter {
             path: logbooks,
             name: logbooks,
             builder: (context, state) => const LogbooksScreen(),
+          ),
+          GoRoute(
+            path: logbookCreation,
+            name: logbookCreation,
+            builder: (context, state) => const LogbookCreationScreen(),
           ),
           GoRoute(
             path: logbookDetail,

@@ -4,4 +4,5 @@ export 'package:amacom_app/src/presentation/views/logbooks/widgets/logbook_card.
 export 'package:amacom_app/src/presentation/views/logbooks/widgets/logbooks_body.dart';
 export 'package:amacom_app/src/presentation/views/logbooks/widgets/logbooks_header.dart';
 export 'package:amacom_app/src/presentation/views/logbooks/widgets/logbooks_list.dart';
+export 'package:amacom_app/src/presentation/views/logbooks/widgets/new_logbook_form.dart';
 export 'package:amacom_app/src/presentation/views/logbooks/widgets/search.dart';

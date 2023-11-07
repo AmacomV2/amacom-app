@@ -13,7 +13,7 @@ class LogbooksScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CustomScaffold(
       floatingActionButton: AddLogbook(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: Column(
         children: [
           LogbooksHeader(),

@@ -1,3 +1,4 @@
+import 'package:amacom_app/src/utils/utils/navigation.dart';
 import 'package:flutter/material.dart';
 
 /// Add logbook button shown on logbooks main screen
@@ -9,7 +10,9 @@ class AddLogbook extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigation.goTo(CustomAppRouter.logbookCreation);
+      },
       child: Container(
         height: 50,
         width: 50,

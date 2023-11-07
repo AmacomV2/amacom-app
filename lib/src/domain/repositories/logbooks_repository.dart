@@ -5,7 +5,7 @@ import 'package:amacom_app/src/domain/entities/pageable/pageable.dart';
 /// Logbooks repository interface
 abstract class ILogbooksRepository {
   /// Logbooks creation
-  Future<bool> create(LogbookDTO logbookDTO);
+  Future<Logbook> create(LogbookDTO logbookDTO);
 
   /// Perform logbook delete
   Future<bool> delete(String logbookId);

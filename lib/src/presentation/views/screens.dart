@@ -1,6 +1,7 @@
 export 'package:amacom_app/src/presentation/views/authentication/authentication.dart';
 export 'package:amacom_app/src/presentation/views/home/home_page.dart';
 export 'package:amacom_app/src/presentation/views/homeScreen/home_screen.dart';
+export 'package:amacom_app/src/presentation/views/logbooks/logbook_creation.dart';
 export 'package:amacom_app/src/presentation/views/logbooks/logbook_detail.dart';
 export 'package:amacom_app/src/presentation/views/logbooks/main_screen.dart';
 export 'package:amacom_app/src/presentation/views/onBoarding/onboarding.dart';

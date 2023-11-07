@@ -16,8 +16,29 @@ class LogbooksRepository implements ILogbooksRepository {
   /// APiDataSource object
   final ApiDataSource api;
   @override
-  Future<bool> create(LogbookDTO logbookDTO) {
-    throw UnimplementedError();
+  Future<Logbook> create(LogbookDTO logbookDTO) async {
+    final requestData = RequestData(
+      path: '/logBook/create',
+      method: Method.post,
+      body: logbookDTO.toJson(),
+    );
+    final result = await api.request(
+      requestData: requestData,
+      withAuthToken: true,
+    );
+    BaseResponse data;
+    try {
+      data = BaseResponse.fromJson(result, (json) {
+        return Logbook.fromJson(json as Map);
+      });
+    } catch (e) {
+      data = BaseResponse.fromJson(result, (_) {});
+    }
+    if (!data.ok) {
+      throw Exception(data.message);
+    } else {
+      return data.data;
+    }
   }
 
   @override
