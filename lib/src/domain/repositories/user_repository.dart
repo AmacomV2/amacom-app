@@ -15,6 +15,10 @@ abstract class IUserRepository {
   /// Perform user registration, return a user object ID
   Future<void> setSessionData(Session session);
 
+  /// Perform user password change
+  Future<bool> changePassword(
+      {required String oldPassword, required String newPassword});
+
   /// Perform user registration, return a user object ID
   Future<Person> getUserData();
 

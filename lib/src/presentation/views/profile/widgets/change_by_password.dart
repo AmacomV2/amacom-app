@@ -1,4 +1,4 @@
-import 'package:amacom_app/src/presentation/widgets/custom_body.dart';
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -13,61 +13,47 @@ class ChangePasswordByForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final responsive = GlobalLocator.responsiveDesign;
+    final appLocalizations = AppLocalizations.of(context);
     return CustomScaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const CustomAppBar(
-            title: 'Cambiar contraseña',
-            centerTitle: true,
+          CustomAppBar2(
+            title: appLocalizations?.changePassword,
+            subtitle: appLocalizations?.changePasswordText,
             padding: true,
           ),
           Expanded(
-            child: CustomBody(
-              padding: responsive.appHInnerPadding,
-              margin: responsive.appHorizontalPadding,
-              child: const ScrollColumnExpandable(
-                padding: EdgeInsets.zero,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SafeSpacer(),
-                  Text(
-                    'Te enviaremos un correo electrónico con la nueva contraseña asignada a tu cuenta',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SafeSpacer(
-                    height: 32,
-                  ),
-                  CustomTextFormField(
-                    labelText: 'Contraseña actual',
-                    hintText: 'Escribe tu contraseña actual',
-                    keyboardType: TextInputType.visiblePassword,
-                  ),
-                  SafeSpacer(
-                    height: 16,
-                  ),
-                  CustomTextFormField(
-                    labelText: 'Nueva contraseña',
-                    hintText: 'Escribe tu nueva contraseña',
-                    keyboardType: TextInputType.visiblePassword,
-                  ),
-                  SafeSpacer(
-                    height: 16,
-                  ),
-                  CustomTextFormField(
-                    labelText: 'Confirmar contraseña',
-                    hintText: 'Escribe aqui tu contraseña',
-                    keyboardType: TextInputType.visiblePassword,
-                  ),
-                  SafeSpacer(
-                    height: 16,
-                  ),
-                ],
-              ),
+            child: ScrollColumnExpandable(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SafeSpacer(
+                  height: 10,
+                ),
+                CustomPasswordFormField(
+                  labelText: appLocalizations?.currentPassword,
+                  hintText:
+                      '${appLocalizations?.writeHereYour}${appLocalizations?.currentPassword.toLowerCase()}',
+                ),
+                const SafeSpacer(
+                  height: 16,
+                ),
+                CustomPasswordFormField(
+                  labelText: appLocalizations?.newPassword,
+                  hintText:
+                      '${appLocalizations?.writeHereYour}${appLocalizations?.newPassword.toLowerCase()}',
+                ),
+                const SafeSpacer(
+                  height: 16,
+                ),
+                CustomPasswordFormField(
+                  labelText: appLocalizations?.confirmPassword,
+                  hintText: '${appLocalizations?.passwordHintVar}',
+                ),
+                const SafeSpacer(
+                  height: 16,
+                ),
+              ],
             ),
           ),
           const SafeSpacer(
@@ -75,7 +61,7 @@ class ChangePasswordByForm extends StatelessWidget {
           ),
           CustomButtonWithState(
             onTap: () {},
-            text: 'Guardar',
+            text: appLocalizations?.save ?? '',
             margin: responsive.appHorizontalPadding,
           ),
           const BottomSpacer(),

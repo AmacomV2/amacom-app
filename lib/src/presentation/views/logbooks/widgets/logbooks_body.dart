@@ -55,10 +55,14 @@ class _LogbooksBodyState extends ConsumerState<LogbooksBody> {
       children: [
         if (logbooks != null)
           Expanded(
-            child: LogbooksList(
-              data: logbooks,
-              controller: _controller,
-            ),
+            child: (logbooks.content?.isNotEmpty == true)
+                ? LogbooksList(
+                    data: logbooks.content,
+                    controller: _controller,
+                  )
+                : const Center(
+                    child: EmptyListWidget(),
+                  ),
           ),
         if (logbooks == null || logbooks.last == false)
           ref.watch(logbookListFetchProvider).when(

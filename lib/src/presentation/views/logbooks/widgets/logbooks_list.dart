@@ -1,5 +1,4 @@
 import 'package:amacom_app/src/domain/entities/logbook.dart';
-import 'package:amacom_app/src/domain/entities/pageable/pageable.dart';
 import 'package:amacom_app/src/presentation/state/logbooks/logbook_provider.dart';
 import 'package:amacom_app/src/presentation/state/logbooks/logbooks_provider.dart';
 import 'package:amacom_app/src/presentation/views/logbooks/widgets/widgets.dart';
@@ -19,7 +18,7 @@ class LogbooksList extends ConsumerStatefulWidget {
   const LogbooksList({super.key, required this.data, required this.controller});
 
   ///
-  final Pageable<List<Logbook>>? data;
+  final List<Logbook>? data;
 
   ///
   final ScrollController controller;
@@ -41,7 +40,7 @@ class _LogbooksListState extends ConsumerState<LogbooksList> {
 
   @override
   Widget build(BuildContext context) {
-    int lastYear = widget.data?.content?.first.createdAt.year ?? 0;
+    int lastYear = widget.data?.first.createdAt.year ?? 0;
     final textTheme = Theme.of(context).textTheme;
     return SmartRefresher(
       controller: _refreshController,
@@ -52,12 +51,12 @@ class _LogbooksListState extends ConsumerState<LogbooksList> {
         ),
         controller: widget.controller,
         physics: AppConstants.scrollPhysics,
-        itemCount: widget.data?.content?.length ?? 0,
+        itemCount: widget.data?.length ?? 0,
         separatorBuilder: (BuildContext context, int index) => const SafeSpacer(
           height: 8,
         ),
         itemBuilder: (context, index) {
-          final logbook = widget.data?.content?[index];
+          final logbook = widget.data?[index];
           final card = LogbookCard(
             data: logbook,
             index: index,
@@ -66,6 +65,7 @@ class _LogbooksListState extends ConsumerState<LogbooksList> {
                   .read(selectedLogbookProvider.notifier)
                   .update((state) => logbook);
               Navigation.goTo(CustomAppRouter.logbookDetail);
+              FocusScope.of(context).unfocus();
             },
           );
           if (index == 0 || (logbook?.createdAt.year ?? 0) < lastYear) {

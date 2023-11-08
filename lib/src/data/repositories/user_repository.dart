@@ -120,6 +120,32 @@ class UserRepository implements IUserRepository {
       return data.data;
     }
   }
+
+  @override
+  Future<bool> changePassword({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    final requestData = RequestData(
+      path: '/person/get',
+      method: Method.get,
+    );
+    final result = await api.request(
+      requestData: requestData,
+      withAuthToken: true,
+    );
+    BaseResponse data;
+    try {
+      data = BaseResponse.fromJson(result, (json) => json == true);
+    } catch (e) {
+      data = BaseResponse.fromJson(result, (_) {});
+    }
+    if (!data.ok) {
+      throw Exception(data.message);
+    } else {
+      return data.data;
+    }
+  }
 }
 
 /// User repository riverpod instance

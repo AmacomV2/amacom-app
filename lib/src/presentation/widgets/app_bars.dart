@@ -199,6 +199,7 @@ class CustomAppBar2 extends StatelessWidget {
                 title!,
                 style: theme.textTheme.headlineSmall?.copyWith(
                   fontSize: 26,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
