@@ -1,3 +1,4 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
 
 /// App validation functions
@@ -31,9 +32,12 @@ class AppValidations {
   }
 
   /// Validate if a given string contains at least 1 letter, 1 number and len 6-8.
-  static String? validatePassword(String? password) {
+  static String? validatePassword(
+    String? password, {
+    AppLocalizations? appLocalizations,
+  }) {
     if (password?.isEmpty ?? true) {
-      return 'Debes ingresar una contraseña';
+      return appLocalizations?.fieldRequired;
     } else {
       bool hasUppercase = password?.contains(RegExp(r'[A-Z]')) ?? false;
       bool hasDigits = password?.contains(RegExp(r'[0-9]')) ?? false;
@@ -41,13 +45,13 @@ class AppValidations {
       bool hasMinLength = (password?.length ?? 0) >= 6;
       if (!hasMinLength) {
         // if (!hasMinLength) {
-        return 'La contraseña debe tener al menos 6 caracteres';
+        return appLocalizations?.passwordMinLen;
       }
       if (!hasDigits) {
-        return 'La contraseña debe contener al menos un dígito.';
+        return appLocalizations?.passwordContainDigit;
       }
       if (!(hasUppercase || hasLowercase)) {
-        return 'La contraseña debe contener al menos una mayúscula y una minúscula.';
+        return appLocalizations?.passwordCharsCap;
       }
     }
     return null;

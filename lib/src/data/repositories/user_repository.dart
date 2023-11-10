@@ -127,8 +127,12 @@ class UserRepository implements IUserRepository {
     required String newPassword,
   }) async {
     final requestData = RequestData(
-      path: '/person/get',
-      method: Method.get,
+      path: '/auth/changePassword',
+      method: Method.put,
+      body: {
+        'oldPassword': oldPassword,
+        'newPassword': newPassword,
+      },
     );
     final result = await api.request(
       requestData: requestData,

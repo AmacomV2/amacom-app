@@ -151,6 +151,7 @@ class CustomPasswordFormField extends StatelessWidget {
     this.initialValue,
     this.maxLength,
     this.showRequiredIndicator = false,
+    this.onChanged,
   });
 
   /// TextFormField validation function
@@ -184,6 +185,9 @@ class CustomPasswordFormField extends StatelessWidget {
   /// Input fill color
   final Color fillColor;
 
+  ///
+  final Function(String?)? onChanged;
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -195,6 +199,7 @@ class CustomPasswordFormField extends StatelessWidget {
       ),
       builder: (BuildContext context, bool value, Widget? child) {
         return CustomTextFormField(
+          onChanged: onChanged,
           prefixIcon: const Icon(Icons.vpn_key_outlined),
           fillColor: fillColor,
           controller: controller,

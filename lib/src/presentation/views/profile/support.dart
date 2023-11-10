@@ -59,7 +59,11 @@ class Support extends StatelessWidget {
                             {
                               'title': appLocalizations?.privacyPolicy,
                               'onTap': () => Navigation.goTo(
-                                    CustomAppRouter.privacyPolitics,
+                                    CustomAppRouter.networkResource,
+                                    extra: {
+                                      'title': appLocalizations?.privacyPolicy,
+                                      'url': AppUrlResources.termsAndConditions,
+                                    },
                                   ),
                             },
                             {
@@ -67,7 +71,8 @@ class Support extends StatelessWidget {
                               'onTap': () => Navigation.goTo(
                                     CustomAppRouter.networkResource,
                                     extra: {
-                                      'title': 'Términos y condiciones',
+                                      'title':
+                                          appLocalizations?.termsAndConditions,
                                       'url': AppUrlResources.termsAndConditions,
                                     },
                                   ),
