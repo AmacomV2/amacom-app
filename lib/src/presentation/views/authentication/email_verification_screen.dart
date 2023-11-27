@@ -43,7 +43,6 @@ class EmailVerificationScreen extends ConsumerWidget {
           ),
           const SafeSpacer(),
           OTPVerificationMessage(
-            sms: false,
             destination: email,
           ),
           const SafeSpacer(

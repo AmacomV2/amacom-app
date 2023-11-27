@@ -1,15 +1,19 @@
 import 'package:amacom_app/src/config/settings.dart';
-import 'package:amacom_app/src/utils/constant/constants.dart';
+import 'package:amacom_app/src/utils/utils/global_locator.dart';
 
 /// App validation functions
 class AppValidations {
   /// Validate if a string is an e-mail and if ends in .co or .com
-  static String? validateEmail(String? email) {
+  static String? validateEmail(
+    String? email,
+  ) {
+    final appLocalizations =
+        AppLocalizations.of(GlobalLocator.appNavigator.currentContext!);
     bool emailValid = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+\.[a-zA-Z]+",
     ).hasMatch(email ?? '');
     if (!emailValid) {
-      return 'Dirección de correo electrónico no válida';
+      return appLocalizations?.wrongEmail ?? '';
     }
     return null;
   }
@@ -59,15 +63,17 @@ class AppValidations {
 
   /// Checks if field is not empty
   static String? notEmptyFieldValidation(Object? value, {String? message}) {
+    final appLocalizations =
+        AppLocalizations.of(GlobalLocator.appNavigator.currentContext!);
     if (value is String?) {
       if (value == null || value.isEmpty) {
-        return message ?? AppMessages.fieldRequired;
+        return message ?? appLocalizations?.fieldRequired;
       }
       return null;
     }
     // ignore: unnecessary_null_comparison
     if (value == null) {
-      return message ?? AppMessages.fieldRequired;
+      return message ?? appLocalizations?.fieldRequired;
     }
     return null;
   }

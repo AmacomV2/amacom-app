@@ -1,68 +1,28 @@
-import 'package:amacom_app/src/data/repositories/user_repository.dart';
-import 'package:amacom_app/src/domain/dtos/user_register_dto.dart';
 import 'package:amacom_app/src/presentation/state/authentication/registration_form_providers.dart';
-import 'package:amacom_app/src/presentation/views/authentication/widgets/terms_and_conditions.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Registration form
-class RegistrationForm extends ConsumerStatefulWidget {
-  /// Constructor
-  const RegistrationForm({super.key});
+class RegistrationForm extends ConsumerWidget {
+  ///
+  const RegistrationForm({
+    super.key,
+    required this.formKey,
+  });
+
+  /// Form key
+  final GlobalKey<FormState> formKey;
 
   @override
-  ConsumerState<RegistrationForm> createState() => _RegistrationFormState();
-}
-
-class _RegistrationFormState extends ConsumerState<RegistrationForm> {
-  final _formKey = GlobalKey<FormState>();
-
-  final _nameController = TextEditingController();
-  final _lastNameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  @override
-  void initState() {
-    _nameController.addListener(() {
-      ref.read(regNameProvider.notifier).update(
-            (state) => state = _nameController.text,
-          );
-    });
-    _emailController.addListener(() {
-      ref.read(regEmailProvider.notifier).update(
-            (state) => state = _emailController.text,
-          );
-    });
-    _lastNameController.addListener(() {
-      ref.read(regLastNameProvider.notifier).update(
-            (state) => state = _lastNameController.text,
-          );
-    });
-    _phoneController.addListener(() {
-      ref.read(regPhoneProvider.notifier).update(
-            (state) => state = _phoneController.text,
-          );
-    });
-    _passwordController.addListener(() {
-      ref.read(regPasswordProvider.notifier).update(
-            (state) => state = _passwordController.text,
-          );
-    });
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const inputsSeparator = SafeSpacer(
       height: 20,
     );
     ref.watch(regPasswordProvider);
     return Form(
-      key: _formKey,
+      key: formKey,
       child: ScrollColumnExpandable(
         padding: EdgeInsets.zero,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -71,98 +31,65 @@ class _RegistrationFormState extends ConsumerState<RegistrationForm> {
             height: 16,
           ),
           CustomTextFormField(
-            controller: _nameController,
+            onChanged: (value) => ref.read(regNameProvider.notifier).update(
+                  (state) => state = value,
+                ),
             hintText: 'Escribe aquí',
             labelText: 'Nombres',
             showRequiredIndicator: true,
-            validator: (value) {
-              if ((value ?? '').isEmpty) return 'Este campo es requerido';
-              return null;
-            },
+            validator: AppValidations.notEmptyFieldValidation,
           ),
           inputsSeparator,
           CustomTextFormField(
-            controller: _lastNameController,
+            onChanged: (value) => ref.read(regLastNameProvider.notifier).update(
+                  (state) => state = value,
+                ),
             hintText: 'Escribe aquí',
             labelText: 'Apellidos',
             showRequiredIndicator: true,
-            validator: (value) {
-              if ((value ?? '').isEmpty) return 'Este campo es requerido';
-              return null;
-            },
+            validator: AppValidations.notEmptyFieldValidation,
+          ),
+          inputsSeparator,
+          CustomDropDownFrom(
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            labelText: 'Tipo de documento',
+            showRequiredIndicator: true,
+            hintText: 'Selecciona un tipo de documento',
+            items: const [],
+            onChanged: (value) {},
+            // validator: AppValidations.notEmptyFieldValidation,
           ),
           inputsSeparator,
           CustomTextFormField(
-            controller: _emailController,
-            hintText: 'Escribe tu correo electrónico',
-            labelText: 'Correo electrónico',
+            onChanged: (value) => ref.read(regEmailProvider.notifier).update(
+                  (state) => state = value,
+                ),
+            hintText: 'Ingresa tu documento',
+            labelText: 'Documento ',
+            showRequiredIndicator: true,
             textCapitalization: TextCapitalization.none,
-            showRequiredIndicator: true,
-            validator: AppValidations.validateEmail,
+            keyboardType: TextInputType.number,
+            validator: AppValidations.notEmptyFieldValidation,
           ),
           inputsSeparator,
-          CustomPasswordFormField(
-            controller: _passwordController,
-            hintText: 'Escribe tu contraseña',
-            labelText: 'Contraseña',
-            showRequiredIndicator: true,
-            validator: AppValidations.validatePassword,
+          CustomTextFormField(
+            onChanged: (value) => ref.read(regEmailProvider.notifier).update(
+                  (state) => state = value,
+                ),
+            hintText: 'Ingresa tu dirección',
+            labelText: 'Dirección',
+            textCapitalization: TextCapitalization.none,
           ),
           inputsSeparator,
-          CustomPasswordFormField(
-            hintText: 'Escribe de nuevo tu contraseña',
-            labelText: 'Confirma tu contraseña',
-            showRequiredIndicator: true,
-            validator: (value) {
-              if (value != _passwordController.text) {
-                return 'Las contraseñas no coinciden';
-              }
-              return null;
-            },
+          CustomTextFormField(
+            onChanged: (value) => ref.read(regEmailProvider.notifier).update(
+                  (state) => state = value,
+                ),
+            hintText: 'Ingresa tu ocupación',
+            labelText: 'Ocupación',
+            textCapitalization: TextCapitalization.none,
           ),
-          const SafeSpacer(
-            height: 16,
-          ),
-          TermsAndConditions(
-            onChanged: (value) {
-              ref.read(regTermsAndConditionsProvider.notifier).update(
-                    (state) => state = value ?? false,
-                  );
-            },
-          ),
-          const SafeSpacer(
-            height: 40,
-          ),
-          CustomButtonWithState(
-            height: GlobalLocator.responsiveDesign.maxHeightValue(70),
-            width: 230,
-            adaptiveTextColor: true,
-            enabled: ref.watch(regTermsAndConditionsProvider),
-            text: 'Registrarme',
-            onTap: () async {
-              if (_formKey.currentState?.validate() ?? false) {
-                try {
-                  await ref.read(userRepository).userRegister(
-                        UserRegisterDTO(
-                          email: ref.read(regEmailProvider) ?? '',
-                          lastName: ref.read(regLastNameProvider) ?? '',
-                          firstName: ref.read(regNameProvider) ?? '',
-                          password: ref.read(regPasswordProvider) ?? '',
-                        ),
-                      );
-                  Navigation.goTo(
-                    CustomAppRouter.emailVerification,
-                    extra: {
-                      'email': ref.read(regEmailProvider),
-                    },
-                    removeUntil: true,
-                  );
-                } catch (e) {
-                  AppDialogs.genericConfirmationDialog(title: e.toString());
-                }
-              }
-            },
-          ),
+          inputsSeparator,
           const SafeSpacer(),
         ],
       ),

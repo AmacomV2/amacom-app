@@ -40,12 +40,13 @@ class _UrlResourceState extends State<UrlResource> {
     super.initState();
     final resourceType = ResourceTypeHelper.getType(widget.recourseUrl);
     if (resourceType == ResourceType.VIDEO) {
-      _controller = VideoPlayerController.network(widget.recourseUrl)
-        ..initialize().then(
-          (_) {
-            setState(() {}); //when your thumbnail will show.
-          },
-        );
+      _controller =
+          VideoPlayerController.networkUrl(Uri.parse(widget.recourseUrl))
+            ..initialize().then(
+              (_) {
+                setState(() {}); //when your thumbnail will show.
+              },
+            );
       _controller?.setVolume(1.0);
     }
   }

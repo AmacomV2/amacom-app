@@ -1,3 +1,4 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,6 +14,7 @@ class ForgetPassword extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final appLocalizations = AppLocalizations.of(context);
     return InkWell(
       borderRadius: BorderRadius.circular(20),
       onTap: () {
@@ -21,7 +23,7 @@ class ForgetPassword extends ConsumerWidget {
       child: Padding(
         padding: const EdgeInsets.all(0.5),
         child: Text(
-          'Olvidé mi contraseña',
+          appLocalizations?.resetPassword ?? '',
           style: theme.textTheme.bodyLarge?.copyWith(
             decoration: TextDecoration.underline,
             fontWeight: FontWeight.w600,

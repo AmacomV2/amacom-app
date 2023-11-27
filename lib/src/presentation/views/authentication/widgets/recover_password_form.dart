@@ -1,7 +1,7 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/data/repositories/password_recovering_repository.dart';
 import 'package:amacom_app/src/presentation/state/authentication/password_recovering_providers.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
-import 'package:amacom_app/src/utils/constant/app_messages.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,23 +23,13 @@ class RecoverPasswordForm extends ConsumerStatefulWidget {
 }
 
 class _RecoverPasswordFormState extends ConsumerState<RecoverPasswordForm> {
-  final _emailController = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    _emailController.addListener(() {
-      ref.read(passRecoveringEmailProvider.notifier).update(
-            (state) => _emailController.text,
-          );
-    });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final appLocalizations = AppLocalizations.of(context);
+
     return Form(
       key: _formKey,
       child: ScrollColumnExpandable(
@@ -47,7 +37,7 @@ class _RecoverPasswordFormState extends ConsumerState<RecoverPasswordForm> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            'Te enviaremos un código para restablecer tu contraseña',
+            appLocalizations?.sendCodeText ?? '',
             textAlign: TextAlign.left,
             style: textTheme.bodyLarge?.copyWith(
               fontWeight: FontWeight.w500,
@@ -55,10 +45,13 @@ class _RecoverPasswordFormState extends ConsumerState<RecoverPasswordForm> {
           ),
           const SafeSpacer(),
           CustomTextFormField(
-            controller: _emailController,
             prefixIcon: const Icon(Icons.mail_outline_rounded),
-            hintText: 'Escribe tu correo electrónico',
-            labelText: 'Correo electrónico',
+            onChanged: (value) =>
+                ref.read(passRecoveringEmailProvider.notifier).update(
+                      (state) => value,
+                    ),
+            hintText: appLocalizations?.email ?? '',
+            labelText: appLocalizations?.emailHint ?? '',
             textCapitalization: TextCapitalization.none,
             validator: AppValidations.validateEmail,
           ),
@@ -69,22 +62,23 @@ class _RecoverPasswordFormState extends ConsumerState<RecoverPasswordForm> {
           CustomButtonWithState(
             enabled: (ref.watch(passRecoveringEmailProvider) ?? '').isNotEmpty,
             adaptiveTextColor: true,
-            text: 'Restablecer contraseña',
+            text: appLocalizations?.sendCode ?? '',
             onTap: () async {
               if (_formKey.currentState?.validate() ?? false) {
-                Focus.of(context).unfocus();
+                FocusScope.of(context).unfocus();
+
                 final resp = await ref
                     .read(passwordRecoveringRepoProvider)
                     .sendCode(ref.read(passRecoveringEmailProvider) ?? '');
                 if (resp?.ok == true) {
                   AppDialogs.showCustomSnackBar(
-                    AppMessages.verificationCodeSent,
+                    appLocalizations?.codeSent ?? '',
                     icon: Icons.check_circle_outline_rounded,
                   );
                   widget.onSuccess.call();
                 } else {
                   AppDialogs.genericConfirmationDialog(
-                    title: resp?.message ?? AppMessages.verificationCodeError,
+                    title: appLocalizations?.sendCodeError ?? '',
                   );
                 }
               }

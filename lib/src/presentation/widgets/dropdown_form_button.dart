@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_text_form_fields.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
 
 /// DropDown input
 ///
@@ -74,6 +74,8 @@ class CustomDropDownFrom extends StatelessWidget {
       onChanged: onChanged,
       style: theme.textTheme.bodyLarge,
       decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
         floatingLabelBehavior: floatingLabelBehavior,
         hintText: hintText,
         suffixIcon: suffixIcon,

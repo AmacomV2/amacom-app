@@ -132,11 +132,11 @@ ThemeData globalTheme() {
       menuStyle: MenuStyle(
         padding: const MaterialStatePropertyAll<EdgeInsets>(
           EdgeInsets.symmetric(
-            horizontal: 20,
+            horizontal: 16,
+            vertical: 14,
           ),
         ),
-        backgroundColor:
-            const MaterialStatePropertyAll<Color>(FigmaColors.secondary_200),
+        backgroundColor: const MaterialStatePropertyAll<Color>(Colors.white),
         shape: MaterialStatePropertyAll<OutlinedBorder>(
           RoundedRectangleBorder(
             side: const BorderSide(

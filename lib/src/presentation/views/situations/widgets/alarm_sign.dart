@@ -12,6 +12,7 @@ class AlarmSign extends StatelessWidget {
     required this.onTap,
   });
 
+  ///
   final Function(bool) onTap;
 
   @override

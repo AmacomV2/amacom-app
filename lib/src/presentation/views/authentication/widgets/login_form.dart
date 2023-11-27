@@ -1,3 +1,4 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/data/repositories/user_repository.dart';
 import 'package:amacom_app/src/domain/dtos/user_login_dto.dart';
 import 'package:amacom_app/src/presentation/state/authentication/user_login_form_providers.dart';
@@ -40,6 +41,8 @@ class _LoginFormState extends ConsumerState<LoginForm> {
   @override
   Widget build(BuildContext context) {
     final responsive = GlobalLocator.responsiveDesign;
+    final appLocalizations = AppLocalizations.of(context);
+
     return Form(
       key: _formKey,
       child: ScrollColumnExpandable(
@@ -53,8 +56,8 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             prefixIcon: const Icon(Icons.person_outline_rounded),
             textCapitalization: TextCapitalization.none,
             controller: _emailController,
-            hintText: 'Escribe tu nombre de usuario',
-            labelText: 'Nombre de usuario',
+            hintText: appLocalizations?.username ?? '',
+            labelText: appLocalizations?.usernameHint ?? '',
             validator: AppValidations.notEmptyFieldValidation,
             fillColor: Colors.white,
           ),
@@ -63,8 +66,8 @@ class _LoginFormState extends ConsumerState<LoginForm> {
           ),
           CustomPasswordFormField(
             controller: _passwordController,
-            labelText: 'Contraseña',
-            hintText: 'Escribe tu contraseña',
+            labelText: appLocalizations?.password ?? '',
+            hintText: appLocalizations?.passwordHint ?? '',
             validator: AppValidations.validatePassword,
             fillColor: Colors.white,
           ),
@@ -77,7 +80,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             adaptiveTextColor: true,
             enabled: (ref.watch(loginEmailProvider) ?? '').isNotEmpty &&
                 (ref.watch(loginPasswordProvider) ?? '').isNotEmpty,
-            text: 'INICIAR SESIÓN',
+            text: appLocalizations?.logIn ?? '',
             onTap: () async {
               if (_formKey.currentState?.validate() ?? false) {
                 try {
@@ -95,10 +98,9 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                   );
                 } catch (e) {
                   AppDialogs.genericConfirmationDialog(
-                    title: 'Error de credenciales',
-                    message:
-                        'Tu nombre de usuario o contraseña son incorrectas, inténtalo de nuevo.',
-                    buttonText: 'Continuar',
+                    title: appLocalizations?.wrongCredentials ?? '',
+                    message: appLocalizations?.wrongLogin ?? '',
+                    buttonText: appLocalizations?.accept ?? '',
                     onTap: () {
                       GlobalLocator.appNavigator.currentState?.pop();
                     },

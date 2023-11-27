@@ -38,7 +38,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     final responsive = GlobalLocator.responsiveDesign;
     final colors = Theme.of(context).colorScheme;
     return CustomScaffold(
-      backgroundColor: colors.onPrimaryContainer,
+      backgroundColor: colors.primary,
       body: Column(
         children: [
           const HeaderSpacer(),

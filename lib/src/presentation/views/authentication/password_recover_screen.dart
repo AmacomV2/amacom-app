@@ -1,3 +1,4 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/presentation/views/authentication/widgets/authentication_widgets.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
@@ -39,13 +40,16 @@ class PasswordRecoverScreen extends StatelessWidget {
         },
       ),
     ];
+
+    final appLocalizations = AppLocalizations.of(context);
+
     return Scaffold(
       body: ColumnWithPadding(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const CustomAppBar2(
-            title: 'Recuperar contraseña',
-            subtitle: 'Completa los pasos para recuperar tu contraseña.',
+          CustomAppBar2(
+            title: appLocalizations?.recoverYourPassword ?? '',
+            subtitle: appLocalizations?.recoverYourPasswordText ?? '',
           ),
           Expanded(
             child: PageView.builder(

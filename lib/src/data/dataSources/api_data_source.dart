@@ -70,7 +70,7 @@ class ApiDataSource {
     };
   }
 
-  static Map<String, dynamic> _resolveServerErrorCode(DioError e) {
+  static Map<String, dynamic> _resolveServerErrorCode(DioException e) {
     return {
       'message': '${e.response?.data['message'] ?? e.message}',
       'ok': false,
@@ -228,7 +228,7 @@ class ApiDataSource {
             data: formData,
           );
           return response.data;
-        } on DioError {
+        } on DioException {
           rethrow;
         } on Exception catch (e) {
           return _resolveInternalError(e);
@@ -255,7 +255,7 @@ class ApiDataSource {
             queryParameters: queryParameters,
           );
           return response.data;
-        } on DioError {
+        } on DioException {
           rethrow;
         } on Exception catch (e) {
           _logger.e(endpoint, e);
@@ -280,7 +280,7 @@ class ApiDataSource {
             queryParameters: queryParameters,
           );
           return response.data;
-        } on DioError {
+        } on DioException {
           rethrow;
         } on Exception catch (e) {
           return _resolveInternalError(e);
@@ -301,7 +301,7 @@ class RetryOnConnectionChangeInterceptor extends Interceptor {
   final Dio dio;
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) async {
+  void onError(DioException err, ErrorInterceptorHandler handler) async {
     if (_shouldRetryOnHttpException(err)) {
       try {
         handler.resolve(
@@ -317,7 +317,7 @@ class RetryOnConnectionChangeInterceptor extends Interceptor {
     }
   }
 
-  bool _shouldRetryOnHttpException(DioError err) {
+  bool _shouldRetryOnHttpException(DioException err) {
     return err.response?.statusCode == 401;
   }
 }
