@@ -25,7 +25,9 @@ class SelectSubject extends StatelessWidget {
           height: 8,
         ),
         GenericRoundedButton(
-          onTap: () {},
+          onTap: () async {
+            await AppDialogs.genericBottomSheet(widget: Container());
+          },
           border: true,
           padding: EdgeInsets.symmetric(
             vertical: responsive.maxHeightValue(14),

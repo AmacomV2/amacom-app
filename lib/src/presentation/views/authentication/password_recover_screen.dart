@@ -1,18 +1,37 @@
 import 'package:amacom_app/src/config/settings.dart';
+import 'package:amacom_app/src/presentation/state/authentication/password_recovering_providers.dart';
 import 'package:amacom_app/src/presentation/views/authentication/widgets/authentication_widgets.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Password recover screen
 ///
 /// Ask for email and send a recover OTP
-class PasswordRecoverScreen extends StatelessWidget {
+class PasswordRecoverScreen extends ConsumerStatefulWidget {
   /// Constructor
-  PasswordRecoverScreen({super.key});
+  const PasswordRecoverScreen({super.key});
 
+  @override
+  ConsumerState<PasswordRecoverScreen> createState() =>
+      _PasswordRecoverScreenState();
+}
+
+class _PasswordRecoverScreenState extends ConsumerState<PasswordRecoverScreen> {
   final PageController _pageController = PageController();
+
+  @override
+  void initState() {
+    _pageController.addListener(() {
+      ref
+          .read(passRecoveringIndexProvider.notifier)
+          .update((state) => _pageController.page?.toInt() ?? 0);
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final pages = [
@@ -62,7 +81,12 @@ class PasswordRecoverScreen extends StatelessWidget {
               },
             ),
           ),
-          const SafeSpacer(),
+          PageProgressIndicator(
+            pageController: _pageController,
+            totalPages: 3,
+            currentPage: ref.watch(passRecoveringIndexProvider),
+          ),
+          const SafeBottomSpacer(),
         ],
       ),
     );

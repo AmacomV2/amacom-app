@@ -1,4 +1,6 @@
-import 'package:amacom_app/src/presentation/state/authentication/registration_form_providers.dart';
+import 'package:amacom_app/src/config/settings.dart';
+import 'package:amacom_app/src/presentation/state/forms/forms_data_providers.dart';
+import 'package:amacom_app/src/presentation/state/registration/registration_form_providers.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +22,12 @@ class RegistrationForm extends ConsumerWidget {
     const inputsSeparator = SafeSpacer(
       height: 20,
     );
+    final appLocalizations = AppLocalizations.of(context);
+
     ref.watch(regPasswordProvider);
     return Form(
       key: formKey,
       child: ScrollColumnExpandable(
-        padding: EdgeInsets.zero,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SafeSpacer(
@@ -34,8 +37,9 @@ class RegistrationForm extends ConsumerWidget {
             onChanged: (value) => ref.read(regNameProvider.notifier).update(
                   (state) => state = value,
                 ),
-            hintText: 'Escribe aquí',
-            labelText: 'Nombres',
+            hintText:
+                '${appLocalizations?.writeHereYour}${appLocalizations?.name.toLowerCase()}',
+            labelText: appLocalizations?.name ?? '',
             showRequiredIndicator: true,
             validator: AppValidations.notEmptyFieldValidation,
           ),
@@ -44,52 +48,85 @@ class RegistrationForm extends ConsumerWidget {
             onChanged: (value) => ref.read(regLastNameProvider.notifier).update(
                   (state) => state = value,
                 ),
-            hintText: 'Escribe aquí',
-            labelText: 'Apellidos',
+            hintText:
+                '${appLocalizations?.writeHereYour}${appLocalizations?.lastName.toLowerCase()}',
+            labelText: appLocalizations?.lastName ?? '',
             showRequiredIndicator: true,
             validator: AppValidations.notEmptyFieldValidation,
           ),
           inputsSeparator,
-          CustomDropDownFrom(
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            labelText: 'Tipo de documento',
-            showRequiredIndicator: true,
-            hintText: 'Selecciona un tipo de documento',
-            items: const [],
-            onChanged: (value) {},
-            // validator: AppValidations.notEmptyFieldValidation,
-          ),
+          ref.watch(documentTypesProvider).when(
+                data: (data) {
+                  return CustomDropDownFrom(
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    validator: AppValidations.notEmptyFieldValidation,
+                    hintText:
+                        '${appLocalizations?.selectA}${appLocalizations?.documentType.toLowerCase()}',
+                    labelText: appLocalizations?.documentType ?? '',
+                    showRequiredIndicator: true,
+                    items: data
+                        .map(
+                          (e) => DropdownMenuItem(
+                            value: e.id,
+                            child: Text(e.description ?? e.name),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) => ref
+                        .read(regDocumentTypeProvider.notifier)
+                        .update((state) => value),
+                    // validator: AppValidations.notEmptyFieldValidation,
+                  );
+                },
+                error: (error, stackTrace) {
+                  GlobalLocator.appLogger.e(error);
+                  return CustomErrorWidget(error: error);
+                },
+                loading: () => const SizedCustomProgressIndicator2(),
+              ),
           inputsSeparator,
           CustomTextFormField(
-            onChanged: (value) => ref.read(regEmailProvider.notifier).update(
-                  (state) => state = value,
-                ),
-            hintText: 'Ingresa tu documento',
-            labelText: 'Documento ',
+            onChanged: (value) =>
+                ref.read(regDocumentNoProvider.notifier).update(
+                      (state) => state = value,
+                    ),
+            hintText:
+                '${appLocalizations?.writeHereYour}${appLocalizations?.document.toLowerCase()}',
+            labelText: appLocalizations?.document ?? '',
             showRequiredIndicator: true,
             textCapitalization: TextCapitalization.none,
             keyboardType: TextInputType.number,
             validator: AppValidations.notEmptyFieldValidation,
           ),
           inputsSeparator,
-          CustomTextFormField(
-            onChanged: (value) => ref.read(regEmailProvider.notifier).update(
-                  (state) => state = value,
-                ),
-            hintText: 'Ingresa tu dirección',
-            labelText: 'Dirección',
-            textCapitalization: TextCapitalization.none,
-          ),
-          inputsSeparator,
-          CustomTextFormField(
-            onChanged: (value) => ref.read(regEmailProvider.notifier).update(
-                  (state) => state = value,
-                ),
-            hintText: 'Ingresa tu ocupación',
-            labelText: 'Ocupación',
-            textCapitalization: TextCapitalization.none,
-          ),
-          inputsSeparator,
+          ref.watch(gendersProvider).when(
+                data: (data) {
+                  return CustomDropDownFrom(
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    hintText:
+                        '${appLocalizations?.selectA}${appLocalizations?.gender.toLowerCase()}',
+                    labelText: appLocalizations?.gender ?? '',
+                    showRequiredIndicator: true,
+                    items: data
+                        .map(
+                          (e) => DropdownMenuItem(
+                            value: e.id,
+                            child: Text(e.description ?? e.name),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) => ref
+                        .read(regGenderProvider.notifier)
+                        .update((state) => value),
+                    validator: AppValidations.notEmptyFieldValidation,
+                  );
+                },
+                error: (error, stackTrace) {
+                  GlobalLocator.appLogger.e(error);
+                  return CustomErrorWidget(error: error);
+                },
+                loading: () => const SizedCustomProgressIndicator2(),
+              ),
           const SafeSpacer(),
         ],
       ),

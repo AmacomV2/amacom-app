@@ -11,6 +11,8 @@ export 'package:amacom_app/src/presentation/widgets/date_text.dart';
 export 'package:amacom_app/src/presentation/widgets/degree_selector.dart';
 export 'package:amacom_app/src/presentation/widgets/dropdown_form_button.dart';
 export 'package:amacom_app/src/presentation/widgets/empty.dart';
+export 'package:amacom_app/src/presentation/widgets/error_widget.dart';
 export 'package:amacom_app/src/presentation/widgets/icon_buttons.dart';
+export 'package:amacom_app/src/presentation/widgets/progress_indicator.dart';
 export 'package:amacom_app/src/presentation/widgets/scroll_column_expandable.dart';
 export 'package:amacom_app/src/presentation/widgets/spacers.dart';

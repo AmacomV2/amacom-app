@@ -84,7 +84,7 @@ class _RecoverPasswordFormState extends ConsumerState<RecoverPasswordForm> {
               }
             },
           ),
-          const BottomSpacer(),
+          const SafeSpacer(),
         ],
       ),
     );

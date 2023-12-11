@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 /// Onboarding page progress indicator
-class OnBoardingProgressIndicator extends StatelessWidget {
+class PageProgressIndicator extends StatelessWidget {
   /// Widget constructor
-  const OnBoardingProgressIndicator({
+  const PageProgressIndicator({
     super.key,
     required this.pageController,
     required this.totalPages,

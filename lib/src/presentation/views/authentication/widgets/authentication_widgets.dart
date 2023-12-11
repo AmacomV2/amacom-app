@@ -5,7 +5,9 @@ export 'package:amacom_app/src/presentation/views/authentication/widgets/otp_for
 export 'package:amacom_app/src/presentation/views/authentication/widgets/otp_verification_message.dart';
 export 'package:amacom_app/src/presentation/views/authentication/widgets/password_otp_verification_form.dart';
 export 'package:amacom_app/src/presentation/views/authentication/widgets/recover_password_form.dart';
+export 'package:amacom_app/src/presentation/views/authentication/widgets/registration_button.dart';
 export 'package:amacom_app/src/presentation/views/authentication/widgets/registration_form.dart';
 export 'package:amacom_app/src/presentation/views/authentication/widgets/registration_form_2.dart';
+export 'package:amacom_app/src/presentation/views/authentication/widgets/registration_form_3.dart';
 export 'package:amacom_app/src/presentation/views/authentication/widgets/registration_pages.dart';
 export 'package:amacom_app/src/presentation/views/authentication/widgets/terms_and_conditions.dart';

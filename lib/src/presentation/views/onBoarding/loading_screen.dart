@@ -16,9 +16,9 @@ class LoadingScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final responsive = ResponsiveDesign(context);
-
+    final colors = Theme.of(context).colorScheme;
     final screen = Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: colors.primary,
       body: OverflowBox(
         maxHeight: 9999,
         maxWidth: 9999,
@@ -63,7 +63,7 @@ class LoadingScreen extends ConsumerWidget {
               alignment: Alignment.center,
               child: Image.asset(
                 'assets/logos/hands.png',
-                height: responsive.maxHeightValue(80),
+                height: responsive.maxHeightValue(120),
               ),
             ),
           ],

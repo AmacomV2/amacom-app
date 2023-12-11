@@ -1,11 +1,6 @@
-import 'package:amacom_app/src/data/repositories/user_repository.dart';
-import 'package:amacom_app/src/domain/dtos/user_register_dto.dart';
-import 'package:amacom_app/src/presentation/state/authentication/registration_form_providers.dart';
 import 'package:amacom_app/src/presentation/state/registration/registration_providers.dart';
 import 'package:amacom_app/src/presentation/views/authentication/widgets/authentication_widgets.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
-import 'package:amacom_app/src/utils/constant/constants.dart';
-import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -28,6 +23,7 @@ class RegistrationFormPages extends ConsumerStatefulWidget {
 class _RegistrationFormPagesState extends ConsumerState<RegistrationFormPages> {
   final GlobalKey<FormState> formKey1 = GlobalKey<FormState>();
   final GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey3 = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -55,49 +51,27 @@ class _RegistrationFormPagesState extends ConsumerState<RegistrationFormPages> {
               RegistrationForm2(
                 formKey: formKey2,
               ),
+              RegistrationForm3(
+                formKey: formKey3,
+              ),
             ],
           ),
         ),
-        CustomButtonWithState(
-          height: GlobalLocator.responsiveDesign.maxHeightValue(70),
-          width: 230,
-          adaptiveTextColor: true,
-          enabled: ref.watch(registrationIndexProvider) == 0 ||
-              ref.watch(regTermsAndConditionsProvider),
-          text: ref.watch(registrationIndexProvider) == 0
-              ? 'Siguiente'
-              : 'Registrarme',
-          onTap: () async {
-            if (ref.watch(registrationIndexProvider) == 0 &&
-                (formKey1.currentState?.validate() ?? false)) {
-              widget.pageController.animateToPage(
-                1,
-                duration: AppDurations.animation,
-                curve: Curves.easeInOut,
-              );
-            } else if (formKey2.currentState?.validate() ?? false) {
-              try {
-                await ref.read(userRepository).userRegister(
-                      UserRegisterDTO(
-                        email: ref.read(regEmailProvider) ?? '',
-                        lastName: ref.read(regLastNameProvider) ?? '',
-                        firstName: ref.read(regNameProvider) ?? '',
-                        password: ref.read(regPasswordProvider) ?? '',
-                      ),
-                    );
-                Navigation.goTo(
-                  CustomAppRouter.emailVerification,
-                  extra: {
-                    'email': ref.read(regEmailProvider),
-                  },
-                  removeUntil: true,
-                );
-              } catch (e) {
-                AppDialogs.genericConfirmationDialog(title: e.toString());
-              }
-            }
-          },
+        const SafeSpacer(),
+        RegistrationButton(
+          pageController: widget.pageController,
+          formKey1: formKey1,
+          formKey2: formKey2,
+          formKey3: formKey3,
         ),
+        const SafeSpacer(),
+        PageProgressIndicator(
+          key: UniqueKey(),
+          pageController: widget.pageController,
+          totalPages: 3,
+          currentPage: ref.watch(registrationIndexProvider),
+        ),
+        const SafeBottomSpacer(),
       ],
     );
   }

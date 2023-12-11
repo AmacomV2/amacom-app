@@ -74,7 +74,7 @@ class PasswordOTPVerificationForm extends ConsumerWidget {
             }
           },
         ),
-        const BottomSpacer(),
+        const SafeSpacer(),
       ],
     );
   }

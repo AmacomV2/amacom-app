@@ -98,7 +98,7 @@ class _NewPasswordFormState extends ConsumerState<NewPasswordForm> {
               }
             },
           ),
-          const BottomSpacer(),
+          const SafeSpacer(),
         ],
       ),
     );

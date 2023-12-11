@@ -89,7 +89,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         valueListenable: _currentPage,
                         builder:
                             (BuildContext context, int value, Widget? child) {
-                          return OnBoardingProgressIndicator(
+                          return PageProgressIndicator(
                             key: UniqueKey(),
                             pageController: _pageController,
                             totalPages: pages.length,

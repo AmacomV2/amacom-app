@@ -1,7 +1,7 @@
 import 'package:amacom_app/src/config/theme/theme.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
-import 'package:amacom_app/src/utils/constant/constants.dart';
 import 'package:amacom_app/src/utils/utils/app_dialogs.dart';
+import 'package:amacom_app/src/utils/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 /// Custom rounded button
@@ -201,6 +201,7 @@ class _CustomButtonWithStateState extends State<CustomButtonWithState> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textStyle = theme.textTheme.labelMedium;
+    final responsive = ResponsiveDesign(context);
     return Padding(
       padding: widget.margin ?? EdgeInsets.zero,
       child: InkWell(
@@ -221,8 +222,8 @@ class _CustomButtonWithStateState extends State<CustomButtonWithState> {
         },
         borderRadius: BorderRadius.circular(AppSizes.genericBorderRadius),
         child: Container(
-          width: widget.width ?? double.infinity,
-          height: widget.height,
+          width: widget.width ?? AppSizes.buttonsWidth,
+          height: widget.height ?? responsive.buttonsHeight(),
           decoration: BoxDecoration(
             color: widget.enabled
                 ? (widget.color ?? theme.colorScheme.primary)

@@ -68,7 +68,7 @@ class UserRepository implements IUserRepository {
     var uuid = const Uuid();
     userData.id = uuid.v4();
     final requestData = RequestData(
-      path: '/auth/registration',
+      path: '/auth/register',
       method: Method.post,
       body: userData.toJson(),
     );

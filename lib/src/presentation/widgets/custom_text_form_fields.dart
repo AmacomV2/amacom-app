@@ -26,6 +26,7 @@ class CustomTextFormField extends StatelessWidget {
     this.showRequiredIndicator = false,
     this.floatingLabelBehavior = FloatingLabelBehavior.always,
     this.onChanged,
+    this.onTap,
   });
 
   ///
@@ -87,19 +88,23 @@ class CustomTextFormField extends StatelessWidget {
   ///
   final Function(String?)? onChanged;
 
+  ///
+  final VoidCallback? onTap;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return TextFormField(
       onChanged: onChanged,
+      onTap: onTap,
       style: theme.textTheme.bodyLarge?.copyWith(
         fontWeight: FontWeight.w500,
       ),
       enabled: enabled,
       keyboardType: keyboardType ?? TextInputType.emailAddress,
       controller: controller,
-      initialValue: controller != null ? initialValue : null,
+      initialValue: controller == null ? initialValue : null,
       validator: validator,
       maxLines: maxLines,
       minLines: minLines,
