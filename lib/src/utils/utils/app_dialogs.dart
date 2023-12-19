@@ -251,7 +251,40 @@ class AppDialogs {
             padding: GlobalLocator.responsiveDesign.appHorizontalPadding,
             child: Column(
               children: [
-                const SafeSpacer(),
+                Expanded(child: widget),
+              ],
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  /// Show a generic app dialog with a centered button
+  static Future<dynamic> genericBottomSheetTaller({
+    required Widget widget,
+    double? height,
+  }) async {
+    final navigatorKey = GlobalLocator.appNavigator;
+    if (navigatorKey.currentContext != null) {
+      showBottomSheet(
+        // isDismissible: true,
+        // showDragHandle: true,
+        // useSafeArea: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(AppSizes.bodyContainersRadius),
+            topRight: Radius.circular(AppSizes.bodyContainersRadius),
+          ),
+        ),
+        context: navigatorKey.currentContext!,
+        builder: (context) {
+          return Container(
+            width: double.infinity,
+            height: height ?? GlobalLocator.responsiveDesign.screenHeight * 0.8,
+            padding: GlobalLocator.responsiveDesign.appHorizontalPadding,
+            child: Column(
+              children: [
                 Expanded(child: widget),
               ],
             ),

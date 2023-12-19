@@ -157,7 +157,8 @@ class ApiDataSource {
             queryParameters: queryParameters,
           );
           return response.data;
-        } on DioException {
+        } on DioException catch (e) {
+          GlobalLocator.appLogger.e(e);
           rethrow;
         } on Exception catch (e) {
           return _resolveInternalError(e);

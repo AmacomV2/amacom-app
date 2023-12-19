@@ -1,6 +1,7 @@
 import 'package:amacom_app/src/config/theme/theme.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 /// Generic back arrow button with customizable color and size
 class BackArrowButton extends StatelessWidget {
@@ -259,6 +260,7 @@ class CustomIconButton extends StatelessWidget {
     this.color,
     this.onTap,
     required this.icon,
+    this.faIcon = false,
   });
 
   /// Icons size
@@ -276,6 +278,9 @@ class CustomIconButton extends StatelessWidget {
   ///
   final IconData icon;
 
+  ///
+  final bool faIcon;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -283,7 +288,6 @@ class CustomIconButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(100),
       child: Container(
         alignment: Alignment.center,
-        padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
           color: Colors.white,
@@ -292,16 +296,22 @@ class CustomIconButton extends StatelessWidget {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             border: Border.all(
-              color: borderColor ?? FigmaColors.primary_200,
+              color: borderColor ?? FigmaColors.secondary_200,
             ),
             borderRadius: BorderRadius.circular(100),
           ),
-          padding: const EdgeInsets.all(3),
-          child: Icon(
-            icon,
-            color: color ?? FigmaColors.primary_200,
-            size: size,
-          ),
+          padding: const EdgeInsets.all(5),
+          child: faIcon
+              ? FaIcon(
+                  icon,
+                  color: color ?? FigmaColors.primary_200,
+                  size: size,
+                )
+              : Icon(
+                  icon,
+                  color: color ?? FigmaColors.primary_200,
+                  size: size,
+                ),
         ),
       ),
     );

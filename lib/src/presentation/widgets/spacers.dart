@@ -64,7 +64,7 @@ class SafeSpacer extends StatelessWidget {
   /// Constructor
   const SafeSpacer({
     super.key,
-    this.height = 24,
+    this.height = 20,
   });
 
   /// Optional custom height (in px)

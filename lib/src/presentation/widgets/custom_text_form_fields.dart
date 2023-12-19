@@ -11,6 +11,7 @@ class CustomTextFormField extends StatelessWidget {
     this.hintText,
     this.labelText,
     this.controller,
+    this.onSubmit,
     this.initialValue,
     this.maxLength,
     this.maxLines,
@@ -27,6 +28,7 @@ class CustomTextFormField extends StatelessWidget {
     this.floatingLabelBehavior = FloatingLabelBehavior.always,
     this.onChanged,
     this.onTap,
+    this.focusNode,
   });
 
   ///
@@ -40,6 +42,9 @@ class CustomTextFormField extends StatelessWidget {
 
   /// TextFormField hint text
   final String? hintText;
+
+  ///
+  final FocusNode? focusNode;
 
   /// TextFormField initial value, if specified then controller won't will be assign
   /// to TextFromField
@@ -89,6 +94,9 @@ class CustomTextFormField extends StatelessWidget {
   final Function(String?)? onChanged;
 
   ///
+  final Function(String?)? onSubmit;
+
+  ///
   final VoidCallback? onTap;
 
   @override
@@ -96,8 +104,13 @@ class CustomTextFormField extends StatelessWidget {
     final theme = Theme.of(context);
 
     return TextFormField(
+      focusNode: focusNode,
       onChanged: onChanged,
       onTap: onTap,
+      onFieldSubmitted: onSubmit,
+      onTapOutside: (_) {
+        focusNode?.unfocus();
+      },
       style: theme.textTheme.bodyLarge?.copyWith(
         fontWeight: FontWeight.w500,
       ),

@@ -36,6 +36,7 @@
   },
   "conventionalCommits.scopes": [
     "Auth and Profile",
-    "Logbooks"
+    "Logbooks",
+    "Situations"
   ]
 }

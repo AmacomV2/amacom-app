@@ -44,44 +44,46 @@ class LogbookCreationScreen extends ConsumerWidget {
               ),
             ),
           ),
-          CustomButtonWithState(
-            text: appLocalizations?.save ?? '',
-            onTap: () async {
-              if (formKey.currentState?.validate() == true) {
-                try {
-                  final logbook = await ref.read(logbooksRepository).create(
-                        LogbookDTO(
-                          name: ref.read(logbookTitleProvider) ?? '',
-                          description:
-                              ref.read(logbookDescriptionProvider) ?? '',
-                        ),
-                      );
-                  final logbooks = ref.read(logbooksProvider);
-                  final totalList = [logbook];
-                  totalList.addAll(logbooks?.content ?? []);
-                  logbooks?.content = totalList;
-                  final newState = Pageable<List<Logbook>>.fromJson(
-                    logbooks!.toJson(
-                      (value) => value.map((e) => e.toJson()).toList(),
-                    ),
-                    Logbook.fromJsonList,
-                  );
-                  ref
-                      .read(logbooksProvider.notifier)
-                      .update((state) => state = newState);
-                  if (context.mounted) {
-                    FocusScope.of(context).unfocus();
-                    context.pop();
+          Center(
+            child: CustomButtonWithState(
+              text: appLocalizations?.save ?? '',
+              onTap: () async {
+                if (formKey.currentState?.validate() == true) {
+                  try {
+                    final logbook = await ref.read(logbooksRepository).create(
+                          LogbookDTO(
+                            name: ref.read(logbookTitleProvider) ?? '',
+                            description:
+                                ref.read(logbookDescriptionProvider) ?? '',
+                          ),
+                        );
+                    final logbooks = ref.read(logbooksProvider);
+                    final totalList = [logbook];
+                    totalList.addAll(logbooks?.content ?? []);
+                    logbooks?.content = totalList;
+                    final newState = Pageable<List<Logbook>>.fromJson(
+                      logbooks!.toJson(
+                        (value) => value.map((e) => e.toJson()).toList(),
+                      ),
+                      Logbook.fromJsonList,
+                    );
+                    ref
+                        .read(logbooksProvider.notifier)
+                        .update((state) => state = newState);
+                    if (context.mounted) {
+                      FocusScope.of(context).unfocus();
+                      context.pop();
+                    }
+                  } catch (e) {
+                    AppDialogs.showCustomSnackBar(
+                      e.toString(),
+                      color: FigmaColors.danger_700,
+                      icon: Icons.error_outline_outlined,
+                    );
                   }
-                } catch (e) {
-                  AppDialogs.showCustomSnackBar(
-                    e.toString(),
-                    color: FigmaColors.danger_700,
-                    icon: Icons.error_outline_outlined,
-                  );
                 }
-              }
-            },
+              },
+            ),
           ),
           const SafeBottomSpacer(),
         ],

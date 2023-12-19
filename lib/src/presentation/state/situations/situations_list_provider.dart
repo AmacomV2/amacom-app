@@ -1,26 +1,44 @@
-import 'package:amacom_app/src/domain/entities/situations.dart';
+import 'package:amacom_app/src/data/repositories/situation_repository.dart';
+import 'package:amacom_app/src/domain/entities/entities.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Situations list provider
-final situationsListProvider =
-    FutureProvider<List<SituationEntity>>((ref) async {
-  await Future.delayed(const Duration(seconds: 3));
+///
+/// Calls situations repository to fetch SituationEntity data
+final situationsProvider =
+    StateProvider.autoDispose<Pageable<List<SituationEntity>>?>((ref) {
+  ref.watch(situationsSearchProvider);
+  ref.watch(situationsStatusProvider);
+  ref.watch(situationsAlertProvider);
+  return null;
+});
 
-  return Future.value(
-    SituationEntity.fromJsonList([
-      {
-        'id': 'asd',
-        'person_id': 'asd',
-        'created_by': 'asd',
-        'subject_id': 'asd',
-        'description': 'asd',
-        'first_thought': 'asd',
-        'behavior': 'asd',
-        'affectation_degree': 8,
-        'create_time': '2023-09-28 11:40:55',
-        'update_time': '2023-09-28 11:40:55',
-        'nursing_assessment': 'asd',
-      }
-    ]),
-  );
+/// Situations list provider
+final situationsListFetchProvider =
+    FutureProvider.autoDispose<Pageable<List<SituationEntity>>?>((ref) async {
+  return await ref.read(situationsRepository).getUserSituations(
+        page: ref.watch(situationsPageProvider),
+        query: ref.watch(situationsSearchProvider),
+        status: ref.watch(situationsStatusProvider),
+        alert: ref.watch(situationsAlertProvider),
+      );
+});
+
+/// SituationEntity search query provider
+final situationsSearchProvider = StateProvider.autoDispose<String>((ref) => '');
+
+/// SituationEntity status query provider
+final situationsStatusProvider =
+    StateProvider.autoDispose<String?>((ref) => null);
+
+/// SituationEntity alert query provider
+final situationsAlertProvider =
+    StateProvider.autoDispose<String?>((ref) => null);
+
+/// situationsS list page provider
+final situationsPageProvider = StateProvider.autoDispose<int>((ref) {
+  ref.watch(situationsSearchProvider);
+  ref.watch(situationsStatusProvider);
+  ref.watch(situationsAlertProvider);
+  return 0;
 });

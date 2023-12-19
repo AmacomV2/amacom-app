@@ -16,12 +16,12 @@ class LogbooksHeader extends StatelessWidget {
     final responsive = GlobalLocator.responsiveDesign;
     final theme = Theme.of(context);
     return SizedBox(
-      height: 160 + responsive.height(100),
+      height: 164 + responsive.height(100),
       child: Stack(
         children: [
           Image.asset(
             'assets/images/diary-background.jpg',
-            height: 150 + responsive.height(100),
+            height: 150 + responsive.height(105),
             cacheHeight: responsive.safeHeight(280).toInt(),
             fit: BoxFit.cover,
           ),
@@ -29,7 +29,7 @@ class LogbooksHeader extends StatelessWidget {
             color: theme.scaffoldBackgroundColor.withOpacity(0.5),
             blur: 3,
             child: SizedBox(
-              height: 160 + responsive.height(100),
+              height: 163 + responsive.height(102),
               child: ColumnWithPadding(
                 children: [
                   CustomAppBar2(
