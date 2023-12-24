@@ -20,8 +20,22 @@ class NewSituationPart1 extends StatelessWidget {
       child: ColumnWithPadding(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SelectSubject(),
-          const SafeSpacer(),
+          Text(
+            'Describe con tus palabras la situación actual ',
+            style: theme.textTheme.bodyLarge,
+            textAlign: TextAlign.justify,
+          ),
+          const SafeSpacer(
+            height: 16,
+          ),
+          const CustomTextFormField(
+            maxLines: 5,
+            minLines: 3,
+            labelText: 'Describe tu situación',
+          ),
+          const SafeSpacer(
+            height: 16,
+          ),
           Row(
             children: [
               Expanded(
@@ -52,26 +66,14 @@ class NewSituationPart1 extends StatelessWidget {
             ],
           ),
           const SafeSpacer(
-            height: 10,
+            height: 8,
           ),
           DegreeSelector(
             stateProvider: affectationDegreeProvider,
           ),
           const SafeSpacer(),
-          Text(
-            'Describe con tus palabras la situación actual ',
-            style: theme.textTheme.bodyLarge,
-            textAlign: TextAlign.justify,
-          ),
-          const SafeSpacer(
-            height: 16,
-          ),
-          CustomTextFormField(
-            fillColor: theme.colorScheme.primary,
-            maxLines: 5,
-            minLines: 3,
-            labelText: 'Describe tu situación',
-          ),
+          const SelectSubject(),
+          const SafeSpacer(),
         ],
       ),
     );

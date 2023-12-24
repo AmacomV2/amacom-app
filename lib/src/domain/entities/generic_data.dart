@@ -20,6 +20,21 @@ class GenericData {
         updatedAt: DateTime.tryParse(json['updatedAt'] ?? ''),
       );
 
+  /// From raw json constructor
+  static GenericData? tryFromJson(dynamic json) {
+    try {
+      return GenericData(
+        id: json?['id'],
+        name: json?['name'],
+        description: json?['description'],
+        createdAt: DateTime.tryParse(json?['createdAt'] ?? ''),
+        updatedAt: DateTime.tryParse(json?['updatedAt'] ?? ''),
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
   /// UUID for entity
   String id;
 

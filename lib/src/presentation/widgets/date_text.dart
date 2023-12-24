@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 /// Given a [DateTime] shows it as text in a cool looking way
 class CoolDateToText extends StatelessWidget {
   ///
-  const CoolDateToText(
-      {super.key, required this.date, this.shortMonth = false});
+  const CoolDateToText({
+    super.key,
+    required this.date,
+    this.shortMonth = false,
+  });
 
   ///
   final DateTime date;

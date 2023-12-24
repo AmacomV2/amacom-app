@@ -96,6 +96,7 @@ class UserImage extends ConsumerWidget {
                 'assets/svg/pencil.svg',
                 height: 16,
                 width: 16,
+                // ignore: deprecated_member_use
                 color: theme.primaryColor,
               ),
             ),

@@ -14,27 +14,25 @@ class NewSituationPart2 extends StatelessWidget {
       child: ColumnWithPadding(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SelectFeeling(),
-          const SafeSpacer(),
           Text(
             'Describe como te sentiste ante la situación.',
             style: theme.textTheme.bodyLarge,
             textAlign: TextAlign.justify,
           ),
           const SafeSpacer(),
-          CustomTextFormField(
-            fillColor: theme.colorScheme.primary,
+          const CustomTextFormField(
             minLines: 2,
             maxLines: 5,
             labelText: 'Describe tu primer pensamiento',
           ),
           const SafeSpacer(),
-          CustomTextFormField(
-            fillColor: theme.colorScheme.primary,
+          const CustomTextFormField(
             minLines: 2,
             maxLines: 5,
             labelText: 'Describe el comportamiento tomado',
           ),
+          const SafeSpacer(),
+          const SelectFeeling(),
         ],
       ),
     );

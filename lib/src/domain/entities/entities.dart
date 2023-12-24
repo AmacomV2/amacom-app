@@ -7,4 +7,5 @@ export 'package:amacom_app/src/domain/entities/person.dart';
 export 'package:amacom_app/src/domain/entities/request_data.dart';
 export 'package:amacom_app/src/domain/entities/session.dart';
 export 'package:amacom_app/src/domain/entities/situations.dart';
+export 'package:amacom_app/src/domain/entities/subject.dart';
 export 'package:amacom_app/src/domain/entities/user.dart';

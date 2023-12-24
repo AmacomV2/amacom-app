@@ -3,6 +3,106 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 /// Custom TexFormField used commonly on app
+class CustomPasswordFormField extends StatelessWidget {
+  /// Constructor
+  CustomPasswordFormField({
+    super.key,
+    this.fillColor = Colors.white,
+    this.validator,
+    this.hintText,
+    this.labelText,
+    this.label,
+    this.controller,
+    this.initialValue,
+    this.maxLength,
+    this.showRequiredIndicator = false,
+    this.onChanged,
+  });
+
+  /// TextFormField validation function
+  final String? Function(String?)? validator;
+
+  /// TextFormField label text
+  final String? labelText;
+
+  /// TextFormField label text
+  final Widget? label;
+
+  /// TextFormField hint text
+  final String? hintText;
+
+  /// TextFormField initial value, if specified then controller won't will be assign
+  /// to TextFromField
+  final String? initialValue;
+
+  /// TextFormField controller, if specified then initial value won't will be assign
+  /// to TextFromField
+  final TextEditingController? controller;
+
+  /// Max No of characters
+  final int? maxLength;
+
+  final ValueNotifier<bool> _showPassword = ValueNotifier(true);
+
+  /// To show or not required indicator
+  final bool showRequiredIndicator;
+
+  /// Input fill color
+  final Color fillColor;
+
+  ///
+  final Function(String?)? onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: _showPassword,
+      child: SvgPicture.asset(
+        'assets/svg/eye.svg',
+        height: 24,
+        width: 24,
+      ),
+      builder: (BuildContext context, bool value, Widget? child) {
+        return CustomTextFormField(
+          onChanged: onChanged,
+          prefixIcon: const Icon(Icons.vpn_key_outlined),
+          fillColor: fillColor,
+          controller: controller,
+          validator: validator,
+          showRequiredIndicator: showRequiredIndicator,
+          hintText: hintText,
+          maxLength: maxLength,
+          minLines: null,
+          maxLines: 1,
+          keyboardType: TextInputType.visiblePassword,
+          obscureText: value,
+          labelText: labelText,
+          suffixIcon: InkWell(
+            borderRadius: BorderRadius.circular(100),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 12,
+                horizontal: 9,
+              ),
+              child: !value
+                  ? child
+                  : SvgPicture.asset(
+                      'assets/svg/eye_closed.svg',
+                      height: 24,
+                      width: 24,
+                    ),
+            ),
+            onTap: () {
+              _showPassword.value = !value;
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+
+/// Custom TexFormField used commonly on app
 class CustomTextFormField extends StatelessWidget {
   /// Constructor
   const CustomTextFormField({
@@ -151,106 +251,6 @@ class CustomTextFormField extends StatelessWidget {
                     : null))
             : null,
       ),
-    );
-  }
-}
-
-/// Custom TexFormField used commonly on app
-class CustomPasswordFormField extends StatelessWidget {
-  /// Constructor
-  CustomPasswordFormField({
-    super.key,
-    this.fillColor = Colors.white,
-    this.validator,
-    this.hintText,
-    this.labelText,
-    this.label,
-    this.controller,
-    this.initialValue,
-    this.maxLength,
-    this.showRequiredIndicator = false,
-    this.onChanged,
-  });
-
-  /// TextFormField validation function
-  final String? Function(String?)? validator;
-
-  /// TextFormField label text
-  final String? labelText;
-
-  /// TextFormField label text
-  final Widget? label;
-
-  /// TextFormField hint text
-  final String? hintText;
-
-  /// TextFormField initial value, if specified then controller won't will be assign
-  /// to TextFromField
-  final String? initialValue;
-
-  /// TextFormField controller, if specified then initial value won't will be assign
-  /// to TextFromField
-  final TextEditingController? controller;
-
-  /// Max No of characters
-  final int? maxLength;
-
-  final ValueNotifier<bool> _showPassword = ValueNotifier(true);
-
-  /// To show or not required indicator
-  final bool showRequiredIndicator;
-
-  /// Input fill color
-  final Color fillColor;
-
-  ///
-  final Function(String?)? onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: _showPassword,
-      child: SvgPicture.asset(
-        'assets/svg/eye.svg',
-        height: 24,
-        width: 24,
-      ),
-      builder: (BuildContext context, bool value, Widget? child) {
-        return CustomTextFormField(
-          onChanged: onChanged,
-          prefixIcon: const Icon(Icons.vpn_key_outlined),
-          fillColor: fillColor,
-          controller: controller,
-          validator: validator,
-          showRequiredIndicator: showRequiredIndicator,
-          hintText: hintText,
-          maxLength: maxLength,
-          minLines: null,
-          maxLines: 1,
-          keyboardType: TextInputType.visiblePassword,
-          obscureText: value,
-          labelText: labelText,
-          suffixIcon: InkWell(
-            borderRadius: BorderRadius.circular(100),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 12,
-                horizontal: 9,
-              ),
-              child: !value
-                  ? child
-                  : SvgPicture.asset(
-                      'assets/svg/eye_closed.svg',
-                      height: 24,
-                      width: 24,
-                    ),
-            ),
-            onTap: () {
-              _showPassword.value = !value;
-            },
-          ),
-        );
-      },
     );
   }
 }

@@ -29,7 +29,7 @@ class Stores extends StatelessWidget {
           activeDayColor: Colors.white,
           activeBackgroundDayColor: FigmaColors.primary_50,
           dotsColor: FigmaColors.primary_100,
-          selectableDayPredicate: (date) => date.day != 23,
+          // selectableDayPredicate: (date) => date.day != 23,
         ),
         const SafeSpacer(),
         const Text(
@@ -61,14 +61,6 @@ class Stores extends StatelessWidget {
                 color: Colors.amber.shade200,
                 painterColor: Colors.amber,
                 pathImage: 'assets/png/icons/2_pet.png',
-              ),
-              _StoreItem(
-                storeTitle: 'Can y felix',
-                storeAddress: 'Cra 8# 7ma - 155',
-                storeCashback: '5% Cashback',
-                color: Colors.red.shade200,
-                painterColor: Colors.red,
-                pathImage: 'assets/png/icons/3_pet.png',
               ),
               _StoreItem(
                 storeTitle: 'Animales shop',

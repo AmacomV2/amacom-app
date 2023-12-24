@@ -12,8 +12,8 @@ class Person {
     required this.documentTypeId,
     required this.gender,
     required this.genderId,
-    required this.civilStatus,
-    required this.civilStatusId,
+    this.civilStatus,
+    this.civilStatusId,
     required this.documentNo,
     required this.fullName,
     required this.lastName,
@@ -36,17 +36,17 @@ class Person {
         documentTypeId: json['documentTypeId'],
         gender: GenericData.fromJson(json['gender']),
         genderId: json['genderId'],
-        civilStatus: GenericData.fromJson(json['civilStatus']),
+        civilStatus: GenericData.tryFromJson(json['civilStatus']),
         civilStatusId: json['civilStatusId'],
         documentNo: json['documentNo'],
         fullName: json['fullName'],
         lastName: json['lastName'],
         address: json['address'],
         occupation: json['occupation'],
-        birthDay: DateTime.parse(json['birthDay']),
+        birthDay: DateTime.parse(json['birthDate']),
         consentText: json['consentText'],
         privacyPolicy: json['privacyPolicy'],
-        evaluationCompleted: json['evaluation_completed'],
+        evaluationCompleted: json['evaluationCompleted'],
         imageUrl: json['imageUrl'] ?? '',
         createdAt: json['createdAt'],
         updatedAt: json['updatedAt'],
@@ -71,10 +71,10 @@ class Person {
   String genderId;
 
   /// Person civil status
-  GenericData civilStatus;
+  GenericData? civilStatus;
 
   /// Person civil status UUID
-  String civilStatusId;
+  String? civilStatusId;
 
   /// Person Document No
   String documentNo;

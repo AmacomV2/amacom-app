@@ -50,7 +50,6 @@ class CodeValidationRepository implements ICodeValidationRepository {
 
   @override
   Future<BaseResponse?> verifyPhone({required String code}) {
-    // TODO: implement verifyPhone
     throw UnimplementedError();
   }
 

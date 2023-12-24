@@ -3,6 +3,7 @@ import 'package:amacom_app/src/presentation/state/main_provider.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -22,7 +23,7 @@ void main() async {
 
   runApp(
     const ProviderScope(
-      child: MyApp(),
+      child: KeyboardDismissOnTap(dismissOnCapturedTaps: true, child: MyApp()),
     ),
   );
 }

@@ -163,7 +163,7 @@ class CustomAppRouter {
           GoRoute(
             path: '/recoveryPassword',
             name: passwordRecoverForm,
-            builder: (context, state) => PasswordRecoverScreen(),
+            builder: (context, state) => const PasswordRecoverScreen(),
           ),
           GoRoute(
             path: '/mainProfile',

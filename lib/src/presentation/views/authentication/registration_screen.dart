@@ -21,9 +21,9 @@ class RegistrationScreen extends ConsumerWidget {
     final pageController = PageController();
     final appLocalizations = AppLocalizations.of(context);
 
-    return WillPopScope(
-      onWillPop: () async {
-        return _goBack(
+    return PopScope(
+      onPopInvoked: (value) async {
+        _goBack(
           context: context,
           pageController: pageController,
           ref: ref,
