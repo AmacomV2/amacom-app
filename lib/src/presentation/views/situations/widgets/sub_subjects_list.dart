@@ -1,5 +1,6 @@
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/domain/entities/entities.dart';
+import 'package:amacom_app/src/presentation/state/situations/new_situation_provider.dart';
 import 'package:amacom_app/src/presentation/state/subjects/subjects_list_provider.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/app_constants.dart';
@@ -13,7 +14,6 @@ class SubSubjectsList extends ConsumerWidget {
     super.key,
     required this.parentId,
     required this.onSelected,
-    this.selected = const [],
   });
 
   ///
@@ -22,12 +22,10 @@ class SubSubjectsList extends ConsumerWidget {
   ///
   final Function(SubjectEntity) onSelected;
 
-  ///
-  final List<SubjectEntity> selected;
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    SubjectEntity? selected = ref.watch(situationSubjectProvider);
 
     return ref.watch(subjectsProviderFamily(parentId)).when(
           data: (data) {
@@ -48,9 +46,7 @@ class SubSubjectsList extends ConsumerWidget {
                 children: [
                   ...(data!.content as List<SubjectEntity>).map(
                     (e) {
-                      bool isSelected = selected
-                          .where((element) => element.id == e.id)
-                          .isNotEmpty;
+                      bool isSelected = selected?.id == e.id;
                       return GestureDetector(
                         onTap: () {
                           onSelected.call(e);

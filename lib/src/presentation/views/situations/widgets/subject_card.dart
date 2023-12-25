@@ -23,7 +23,6 @@ class _SubjectCardState extends ConsumerState<SubjectCard> {
 
   @override
   Widget build(BuildContext context) {
-    List<SubjectEntity> selected = ref.watch(situationSubjectsProvider);
     final theme = Theme.of(context);
     return Column(
       children: [
@@ -70,19 +69,10 @@ class _SubjectCardState extends ConsumerState<SubjectCard> {
         if (parentId != null)
           SubSubjectsList(
             parentId: parentId!,
-            selected: selected,
             onSelected: (subject) {
-              final temp = List<SubjectEntity>.from(selected);
-              if (selected
-                  .where((element) => element.id == subject.id)
-                  .isEmpty) {
-                temp.add(subject);
-              } else {
-                temp.removeWhere((element) => element.id == subject.id);
-              }
               ref
-                  .read(situationSubjectsProvider.notifier)
-                  .update((state) => temp);
+                  .read(situationSubjectProvider.notifier)
+                  .update((state) => subject);
             },
           ),
       ],

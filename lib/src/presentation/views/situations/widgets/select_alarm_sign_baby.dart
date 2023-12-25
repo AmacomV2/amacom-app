@@ -1,17 +1,16 @@
 import 'package:amacom_app/src/config/settings.dart';
-import 'package:amacom_app/src/config/theme/figma_colors.dart';
-import 'package:amacom_app/src/presentation/views/situations/widgets/feelings_body.dart';
-import 'package:amacom_app/src/presentation/views/situations/widgets/selected_feelings.dart';
-import 'package:amacom_app/src/presentation/widgets/buttons.dart';
-import 'package:amacom_app/src/presentation/widgets/spacers.dart';
+import 'package:amacom_app/src/config/theme/theme.dart';
+import 'package:amacom_app/src/presentation/views/situations/widgets/alarm_sign_body.dart';
+import 'package:amacom_app/src/presentation/views/situations/widgets/selected_alarm_signs.dart';
+import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-///
-class SelectFeeling extends ConsumerWidget {
+////
+class SelectBabyAlarmSigns extends ConsumerWidget {
   ///
-  const SelectFeeling({super.key});
+  const SelectBabyAlarmSigns({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,21 +21,23 @@ class SelectFeeling extends ConsumerWidget {
     return Column(
       children: [
         Text(
-          '${appLocalizations?.feelingsMessage}',
+          '${appLocalizations?.babyAlarmSignsMessage}',
           style: theme.textTheme.bodyLarge?.copyWith(),
           textAlign: TextAlign.justify,
         ),
         const SafeSpacer(
           height: 8,
         ),
-        const SelectedFeelings(),
+        const SelectedAlarmSignsBaby(),
         const SafeSpacer(
-          height: 8,
+          height: 10,
         ),
         GenericRoundedButton(
           onTap: () async {
             await AppDialogs.genericBottomSheet(
-              widget: const FeelingsBody(),
+              widget: const AlarmSignsBody(
+                type: AlarmSignType.BABY,
+              ),
             );
           },
           border: true,

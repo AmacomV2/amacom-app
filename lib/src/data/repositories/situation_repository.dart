@@ -1,4 +1,5 @@
 import 'package:amacom_app/src/data/dataSources/api_data_source.dart';
+import 'package:amacom_app/src/domain/dtos/new_situation_dto.dart';
 import 'package:amacom_app/src/domain/entities/entities.dart';
 import 'package:amacom_app/src/domain/repositories/situations_repository.dart';
 import 'package:amacom_app/src/utils/utils/global_locator.dart';
@@ -45,6 +46,30 @@ class SituationsRepository implements ISituationsRepository {
         }
         return null;
       });
+    } catch (e) {
+      data = BaseResponse.fromJson(result, (_) {});
+    }
+    if (!data.ok) {
+      throw Exception(data.message);
+    } else {
+      return data.data;
+    }
+  }
+
+  @override
+  Future<SituationEntity> create({required NewSituationDTO situation}) async {
+    final requestData = RequestData(
+      path: '/personSituation/create',
+      method: Method.post,
+      body: situation.toJson(),
+    );
+    final result = await api.request(
+      requestData: requestData,
+      withAuthToken: true,
+    );
+    BaseResponse data;
+    try {
+      data = BaseResponse.fromJson(result, SituationEntity.fromJson);
     } catch (e) {
       data = BaseResponse.fromJson(result, (_) {});
     }

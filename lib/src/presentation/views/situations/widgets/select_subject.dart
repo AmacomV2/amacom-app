@@ -1,7 +1,7 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
-import 'package:amacom_app/src/domain/entities/entities.dart';
 import 'package:amacom_app/src/presentation/state/situations/new_situation_provider.dart';
-import 'package:amacom_app/src/presentation/views/situations/widgets/generic_card.dart';
+import 'package:amacom_app/src/presentation/views/situations/widgets/selected_subjects.dart';
 import 'package:amacom_app/src/presentation/views/situations/widgets/subjects_body.dart';
 import 'package:amacom_app/src/presentation/widgets/buttons.dart';
 import 'package:amacom_app/src/presentation/widgets/spacers.dart';
@@ -18,58 +18,43 @@ class SelectSubject extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final responsive = GlobalLocator.responsiveDesign;
-
+    final appLocalizations = AppLocalizations.of(context);
+    final selected = ref.watch(situationSubjectProvider);
     return Column(
       children: [
         Text(
-          'Escoge temas con los que asocies tu situación ',
+          '${appLocalizations?.relatedTopicsMessage}',
           style: theme.textTheme.bodyLarge?.copyWith(),
           textAlign: TextAlign.justify,
         ),
         const SafeSpacer(
           height: 8,
         ),
-        ...ref
-            .watch(situationSubjectsProvider)
-            .reversed
-            .map(
-              (e) => GenericDismissibleCard(
-                text: e.name,
-                onTap: () {
-                  final temp = List<SubjectEntity>.from(
-                    ref.read(situationSubjectsProvider),
-                  );
-                  temp.removeWhere((element) => element.id == e.id);
-                  ref
-                      .read(situationSubjectsProvider.notifier)
-                      .update((state) => temp);
-                },
-              ),
-            )
-            .toList(),
+        const SelectedSubjects(),
         const SafeSpacer(
           height: 10,
         ),
-        GenericRoundedButton(
-          onTap: () async {
-            await AppDialogs.genericBottomSheet(
-              widget: const SubjectsBody(),
-            );
-          },
-          border: true,
-          padding: EdgeInsets.symmetric(
-            vertical: responsive.maxHeightValue(14),
-            horizontal: responsive.maxWidthValue(12),
+        if (selected == null)
+          GenericRoundedButton(
+            onTap: () async {
+              await AppDialogs.genericBottomSheet(
+                widget: const SubjectsBody(),
+              );
+            },
+            border: true,
+            padding: EdgeInsets.symmetric(
+              vertical: responsive.maxHeightValue(14),
+              horizontal: responsive.maxWidthValue(12),
+            ),
+            textColor: FigmaColors.secondary_500,
+            borderColor: FigmaColors.secondary_300,
+            adaptiveTextColor: false,
+            text: appLocalizations?.select ?? '',
+            suffix: const Icon(
+              Icons.add_circle_outline_rounded,
+              size: 20,
+            ),
           ),
-          textColor: FigmaColors.secondary_500,
-          borderColor: FigmaColors.secondary_300,
-          adaptiveTextColor: false,
-          text: 'Seleccionar',
-          suffix: const Icon(
-            Icons.add_circle_outline_rounded,
-            size: 20,
-          ),
-        ),
       ],
     );
   }

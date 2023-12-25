@@ -33,7 +33,7 @@ class AlarmSignEntity {
   String name;
 
   ///
-  String description;
+  String? description;
 
   ///
   String? imageUrl;

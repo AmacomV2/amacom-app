@@ -1,20 +1,32 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:amacom_app/src/config/settings.dart';
-import 'package:amacom_app/src/presentation/state/feelings/feelings_provider.dart';
-import 'package:amacom_app/src/presentation/views/situations/widgets/feelings_list.dart';
+import 'package:amacom_app/src/presentation/state/alarm_signs/alarm_signs_provider.dart';
+import 'package:amacom_app/src/presentation/views/situations/widgets/alarm_sign_list.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+/// Alarm sign
+// ignore: constant_identifier_names
+enum AlarmSignType { BABY, MOTHER }
+
 ///
-class FeelingsBody extends ConsumerStatefulWidget {
+class AlarmSignsBody extends ConsumerStatefulWidget {
   ///
-  const FeelingsBody({super.key});
+  const AlarmSignsBody({
+    super.key,
+    required this.type,
+  });
+
+  ///
+  final AlarmSignType type;
 
   @override
-  ConsumerState<FeelingsBody> createState() => _FeelingsBodyState();
+  ConsumerState<AlarmSignsBody> createState() => _AlarmSignsBodyState();
 }
 
-class _FeelingsBodyState extends ConsumerState<FeelingsBody> {
+class _AlarmSignsBodyState extends ConsumerState<AlarmSignsBody> {
   /// ListView ScrollController
   final _controller = ScrollController();
 
@@ -27,12 +39,12 @@ class _FeelingsBodyState extends ConsumerState<FeelingsBody> {
       if (_controller.position.atEdge) {
         bool isTop = _controller.position.pixels == 0;
         if (!isTop) {
-          final feelingsData = ref.read(feelingsProvider);
-          if (feelingsData != null) {
-            int currentPage = ref.read(feelingsPageProvider);
-            if (!feelingsData.last) {
+          final alarmSignData = ref.read(alarmSignProvider);
+          if (alarmSignData != null) {
+            int currentPage = ref.read(alarmSignPageProvider);
+            if (!alarmSignData.last) {
               ref
-                  .read(feelingsPageProvider.notifier)
+                  .read(alarmSignPageProvider.notifier)
                   .update((state) => state = (currentPage += 1));
             }
           }
@@ -49,54 +61,58 @@ class _FeelingsBodyState extends ConsumerState<FeelingsBody> {
 
   @override
   Widget build(BuildContext context) {
-    final feelings = ref.watch(feelingsProvider);
+    final alarmSign = ref.watch(alarmSignProvider);
     final theme = Theme.of(context);
     final appLocalizations = AppLocalizations.of(context);
 
     return ColumnWithPadding(
-      mainAxisAlignment:
-          feelings == null ? MainAxisAlignment.center : MainAxisAlignment.start,
+      mainAxisAlignment: alarmSign == null
+          ? MainAxisAlignment.center
+          : MainAxisAlignment.start,
       children: [
         Text(
-          '${appLocalizations?.feelingsMessage}',
+          widget.type == AlarmSignType.MOTHER
+              ? '${appLocalizations?.motherAlarmSignsMessage}'
+              : '${appLocalizations?.babyAlarmSignsMessage}',
           style: theme.textTheme.bodyLarge?.copyWith(),
           textAlign: TextAlign.justify,
         ),
         const SafeSpacer(
           height: 10,
         ),
-        if (feelings != null)
+        if (alarmSign != null)
           Expanded(
-            child: (feelings.content?.isNotEmpty == true)
-                ? FeelingsList(
-                    data: feelings.content,
+            child: (alarmSign.content?.isNotEmpty == true)
+                ? AlarmSignList(
+                    data: alarmSign.content,
                     controller: _controller,
+                    type: widget.type,
                   )
                 : const Center(
                     child: EmptyListWidget(),
                   ),
           ),
-        if (feelings == null || feelings.last == false)
+        if (alarmSign == null || alarmSign.last == false)
           Expanded(
-            child: ref.watch(feelingsListFetchProvider).when(
+            child: ref.watch(alarmSignListFetchProvider(widget.type.name)).when(
                   data: (data) {
-                    if (feelings == null) {
+                    if (alarmSign == null) {
                       Future.delayed(
                         Duration.zero,
                         () => ref
-                            .read(feelingsProvider.notifier)
+                            .read(alarmSignProvider.notifier)
                             .update((state) => state = data),
                       );
                     } else {
                       Future.delayed(
                         Duration.zero,
                         () {
-                          if (data?.number != feelings.number) {
-                            final totalList = feelings.content;
+                          if (data?.number != alarmSign.number) {
+                            final totalList = alarmSign.content;
                             totalList?.addAll(data?.content ?? []);
                             data?.content = totalList;
                             ref
-                                .read(feelingsProvider.notifier)
+                                .read(alarmSignProvider.notifier)
                                 .update((state) => state = data);
                           }
                         },

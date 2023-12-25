@@ -2,6 +2,7 @@ import 'package:amacom_app/src/presentation/state/situations/new_situation_provi
 import 'package:amacom_app/src/presentation/views/situations/widgets/new_situation_p1.dart';
 import 'package:amacom_app/src/presentation/views/situations/widgets/new_situation_p2.dart';
 import 'package:amacom_app/src/presentation/views/situations/widgets/new_situation_p3.dart';
+import 'package:amacom_app/src/presentation/views/situations/widgets/new_situation_p4.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,11 +14,14 @@ class NewSituationForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return [
-      const NewSituationPart1(),
-      const NewSituationPart2(),
+      NewSituationPart1(
+        formKey: ref.watch(newSituationForm1Key),
+      ),
+      NewSituationPart2(
+        formKey: ref.watch(newSituationForm2Key),
+      ),
       const NewSituationPart3(),
-      const NewSituationPart3(),
-      const NewSituationPart3(),
+      const NewSituationP4(),
     ][ref.watch(newSituationIndexProvider)];
   }
 }

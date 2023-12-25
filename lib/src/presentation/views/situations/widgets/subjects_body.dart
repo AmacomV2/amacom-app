@@ -1,3 +1,4 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/presentation/state/subjects/subjects_list_provider.dart';
 import 'package:amacom_app/src/presentation/views/situations/widgets/subjects_list.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
@@ -50,13 +51,14 @@ class _SubjectsBodyState extends ConsumerState<SubjectsBody> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final subjects = ref.watch(subjectsProvider);
+    final appLocalizations = AppLocalizations.of(context);
 
     return ColumnWithPadding(
       mainAxisAlignment:
           subjects == null ? MainAxisAlignment.center : MainAxisAlignment.start,
       children: [
         Text(
-          'Escoge temas con los que asocies tu situación: ',
+          '${appLocalizations?.relatedTopicsMessage}',
           style: theme.textTheme.bodyLarge?.copyWith(),
           textAlign: TextAlign.justify,
         ),

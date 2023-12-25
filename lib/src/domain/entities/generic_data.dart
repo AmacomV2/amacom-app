@@ -7,6 +7,7 @@ class GenericData {
     required this.id,
     required this.name,
     this.description,
+    this.imageUrl,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -16,6 +17,7 @@ class GenericData {
         id: json['id'],
         name: json['name'],
         description: json['description'],
+        imageUrl: json['imageUrl'],
         createdAt: DateTime.tryParse(json['createdAt'] ?? ''),
         updatedAt: DateTime.tryParse(json['updatedAt'] ?? ''),
       );
@@ -27,6 +29,7 @@ class GenericData {
         id: json?['id'],
         name: json?['name'],
         description: json?['description'],
+        imageUrl: json['imageUrl'],
         createdAt: DateTime.tryParse(json?['createdAt'] ?? ''),
         updatedAt: DateTime.tryParse(json?['updatedAt'] ?? ''),
       );
@@ -43,6 +46,9 @@ class GenericData {
 
   /// Entity optional description
   String? description;
+
+  /// Entity optional image
+  String? imageUrl;
 
   /// Entity creationDate
   DateTime? createdAt;
