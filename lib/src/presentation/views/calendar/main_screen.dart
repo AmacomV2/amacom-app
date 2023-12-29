@@ -43,6 +43,11 @@ class _MyHomePageState extends State<CalendarScreen> {
                               MonthAppointmentDisplayMode.appointment,
                           showAgenda: true,
                         ),
+                        allowedViews: const [
+                          CalendarView.day,
+                          CalendarView.week,
+                          CalendarView.month,
+                        ],
                       ),
                     ),
                     const BottomNavBarSpacer(),
