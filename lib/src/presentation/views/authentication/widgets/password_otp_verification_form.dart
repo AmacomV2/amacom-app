@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/data/repositories/password_recovering_repository.dart';
 import 'package:amacom_app/src/presentation/state/authentication/code_validation_provider.dart';
 import 'package:amacom_app/src/presentation/state/authentication/password_recovering_providers.dart';
 import 'package:amacom_app/src/presentation/views/authentication/widgets/authentication_widgets.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
-import 'package:amacom_app/src/utils/constant/app_messages.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Password OTP verification form
 ///
@@ -22,12 +22,12 @@ class PasswordOTPVerificationForm extends ConsumerWidget {
   final VoidCallback onSuccess;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final appLocalizations = AppLocalizations.of(context);
     return ScrollColumnExpandable(
       padding: EdgeInsets.zero,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         OTPVerificationMessage(
-          sms: false,
           destination: ref.watch(passRecoveringEmailProvider),
         ),
         const SafeSpacer(
@@ -46,15 +46,15 @@ class PasswordOTPVerificationForm extends ConsumerWidget {
                       email: ref.read(passRecoveringEmailProvider) ?? '',
                       code: ref.watch(codeValidationProvider) ?? '',
                     );
-            if (resp?.error == false) {
+            if (resp?.ok == true) {
               AppDialogs.showCustomSnackBar(
-                AppMessages.verificationCodeVerified,
+                appLocalizations?.codeValidated ?? '',
                 icon: Icons.check_circle_outline_rounded,
               );
               onSuccess.call();
             } else {
               AppDialogs.genericConfirmationDialog(
-                title: resp?.message ?? AppMessages.verificationCodeError,
+                title: appLocalizations?.codeValidationError ?? '',
               );
             }
           },
@@ -62,19 +62,19 @@ class PasswordOTPVerificationForm extends ConsumerWidget {
             final resp = await ref
                 .read(passwordRecoveringRepoProvider)
                 .sendCode(ref.read(passRecoveringEmailProvider) ?? '');
-            if (resp?.error == false) {
+            if (resp?.ok == true) {
               AppDialogs.showCustomSnackBar(
-                AppMessages.verificationCodeSent,
+                appLocalizations?.codeSent ?? '',
                 icon: Icons.check_circle_outline_rounded,
               );
             } else {
               AppDialogs.genericConfirmationDialog(
-                title: resp?.message ?? AppMessages.verificationCodeError,
+                title: appLocalizations?.codeSendingError ?? '',
               );
             }
           },
         ),
-        const BottomSpacer(),
+        const SafeSpacer(),
       ],
     );
   }

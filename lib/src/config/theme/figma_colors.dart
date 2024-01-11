@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// Class to get directly app Colors used on design
 class FigmaColors {
   /// Background color
-  static const Color background = Color(0xffF3F5F9);
+  static const Color background = Color.fromARGB(255, 241, 241, 241);
 
   /// Secondary color variant
   static const Color secondary_50 = Color(0xfffbfbfb);

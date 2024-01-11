@@ -1,3 +1,4 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/config/theme/theme.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_asset_icon.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_body.dart';
@@ -19,14 +20,15 @@ class Support extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final responsive = GlobalLocator.responsiveDesign;
+    final appLocalizations = AppLocalizations.of(context);
     return CustomScaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const CustomAppBar(
-            title: 'AmacomApp',
+          CustomAppBar2(
+            title: appLocalizations?.support,
+            subtitle: appLocalizations?.supportText,
             padding: true,
-            centerTitle: true,
           ),
           Expanded(
             child: Padding(
@@ -35,24 +37,14 @@ class Support extends StatelessWidget {
                 child: ScrollColumnExpandable(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SafeSpacer(),
-                    const Text(
-                      textAlign: TextAlign.center,
-                      '¿Requieres de alguna ayuda o tienes alguna sugerencia?',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const _InfoItem(
+                        _InfoItem(
                           icon: Icons.mail_outline,
-                          title: 'Escríbenos',
+                          title: appLocalizations?.writeToUs ?? '',
                           variant: true,
-                          subtitle: [
+                          subtitle: const [
                             {
                               'title': 'Contacto@AmacomApp.com.co',
                             }
@@ -61,21 +53,26 @@ class Support extends StatelessWidget {
                         const Divider(),
                         _InfoItem(
                           icon: Icons.privacy_tip_outlined,
-                          title: 'Términos y políticas de privacidad',
+                          title: appLocalizations?.termsAndConditions ?? '',
                           subtitle: const [],
                           options: [
                             {
-                              'title': 'Políticas de privacidad',
-                              'onTap': () => Navigation.goTo(
-                                    CustomAppRouter.privacyPolitics,
-                                  ),
-                            },
-                            {
-                              'title': 'Términos y condiciones',
+                              'title': appLocalizations?.privacyPolicy,
                               'onTap': () => Navigation.goTo(
                                     CustomAppRouter.networkResource,
                                     extra: {
-                                      'title': 'Términos y condiciones',
+                                      'title': appLocalizations?.privacyPolicy,
+                                      'url': AppUrlResources.termsAndConditions,
+                                    },
+                                  ),
+                            },
+                            {
+                              'title': appLocalizations?.termsAndConditions,
+                              'onTap': () => Navigation.goTo(
+                                    CustomAppRouter.networkResource,
+                                    extra: {
+                                      'title':
+                                          appLocalizations?.termsAndConditions,
                                       'url': AppUrlResources.termsAndConditions,
                                     },
                                   ),
@@ -83,10 +80,10 @@ class Support extends StatelessWidget {
                           ],
                         ),
                         const Divider(),
-                        const _InfoItem(
+                        _InfoItem(
                           icon: Icons.web_outlined,
-                          title: 'Encontramos en',
-                          subtitle: [
+                          title: appLocalizations?.findUsIn ?? '',
+                          subtitle: const [
                             {
                               'title': 'www.AmacomApp.com.co',
                               'url': 'https://www.AmacomApp.com.co',
@@ -95,10 +92,10 @@ class Support extends StatelessWidget {
                           ],
                         ),
                         const Divider(),
-                        const _InfoItem(
+                        _InfoItem(
                           icon: Icons.tag,
-                          title: 'Redes sociales',
-                          subtitle: [
+                          title: appLocalizations?.socialNetwork ?? '',
+                          subtitle: const [
                             {
                               'title': 'Instagram',
                               'url': 'https://www.instagram.com',
@@ -119,7 +116,7 @@ class Support extends StatelessWidget {
                     CustomButtonWithState(
                       adaptiveTextColor: false,
                       onTap: () {},
-                      text: 'Borrar cuenta',
+                      text: appLocalizations?.deleteAccount ?? '',
                       // svgPicture: SvgPngToIcon(assetName: 'trash_outline'),
                       svgPicture: const CustomAssetIcon(
                         path: 'assets/svg/icons/trash_outline.svg',

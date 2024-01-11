@@ -47,7 +47,7 @@ class OnBoardingPage4 extends StatelessWidget {
           width: responsive.maxWidthValue(200),
           onTap: () {
             Navigation.goTo(
-              Routes.login,
+              CustomAppRouter.login,
               replacement: true,
             );
           },

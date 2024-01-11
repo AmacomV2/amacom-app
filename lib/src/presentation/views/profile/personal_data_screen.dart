@@ -1,3 +1,4 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/presentation/views/profile/widgets/personal_data_form.dart';
 import 'package:amacom_app/src/presentation/views/profile/widgets/user_image.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_body.dart';
@@ -15,37 +16,29 @@ class PersonalDataScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final responsive = GlobalLocator.responsiveDesign;
+    final appLocalizations = AppLocalizations.of(context);
     return CustomScaffold(
-      body: Column(
+      body: ColumnWithPadding(
         children: [
-          const CustomAppBar(
-            title: 'Datos personales',
-            centerTitle: true,
-            padding: true,
-            includeBottomSpacer: false,
-          ),
-          const SafeSpacer(
-            height: 19,
+          CustomAppBar2(
+            title: appLocalizations?.personalData ?? '',
+            subtitle: appLocalizations?.personalDataText ?? '',
           ),
           UserImage(
-            height: responsive.maxHeightValue(124),
-            width: responsive.maxHeightValue(124),
+            height: responsive.maxHeightValue(140),
+            width: responsive.maxHeightValue(140),
             showEditIcon: true,
           ),
-          const SafeSpacer(
-            height: 35,
-          ),
-          Expanded(
-            child: Padding(
-              padding: responsive.appHInnerPadding,
-              child: const CustomBody(
-                child: PersonalDataForm(),
-              ),
+          const SafeSpacer(),
+          const Expanded(
+            child: CustomBody(
+              padding: EdgeInsets.zero,
+              child: PersonalDataForm(),
             ),
           ),
           CustomButtonWithState(
             onTap: () {},
-            text: 'Editar perfil',
+            text: appLocalizations?.edit ?? '',
             margin: responsive.appHorizontalPadding.copyWith(
               top: responsive.maxHeightValue(16),
             ),

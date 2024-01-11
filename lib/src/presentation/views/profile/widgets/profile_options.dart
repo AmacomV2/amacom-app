@@ -57,7 +57,7 @@ class ProfileOptions extends StatelessWidget {
                   removeUntil: true,
                 );
               },
-              text: 'Cerrar sesión',
+              text: appLocalizations?.logout ?? '',
               // svgPicture: SvgPngToIcon(assetName: 'log_out_outline'),
               svgPicture: const CustomAssetIcon(
                 path: 'assets/svg/icons/log_out_outline.svg',

@@ -43,7 +43,6 @@ class EmailVerificationScreen extends ConsumerWidget {
           ),
           const SafeSpacer(),
           OTPVerificationMessage(
-            sms: false,
             destination: email,
           ),
           const SafeSpacer(
@@ -57,7 +56,7 @@ class EmailVerificationScreen extends ConsumerWidget {
               final res = await ref
                   .read(codeValidationRepo)
                   .reSendEmailVerificationCode();
-              if (res?.error ?? false) {
+              if (!(res?.ok ?? true)) {
                 AppDialogs.genericConfirmationDialog(
                   title: res?.message ??
                       'Ha ocurrido un error al enviar un nuevo código de verificación',
@@ -73,7 +72,7 @@ class EmailVerificationScreen extends ConsumerWidget {
               final res = await ref
                   .read(codeValidationRepo)
                   .verifyEmail(code: ref.read(codeValidationProvider) ?? '');
-              if (res?.error ?? false) {
+              if (!(res?.ok ?? false)) {
                 AppDialogs.genericConfirmationDialog(
                   title: res?.message ??
                       'Ha ocurrido un error al validar tu código, inténtalo nuevamente.',

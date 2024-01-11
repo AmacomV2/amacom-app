@@ -13,7 +13,7 @@ class SituationsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CustomScaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: AddSituationsButton(),
+      // floatingActionButton: AddSituationsButton(),
       body: ColumnWithPadding(
         children: [
           SituationsHeader(),

@@ -1,4 +1,5 @@
 import 'package:amacom_app/src/presentation/state/authentication/code_validation_provider.dart';
+import 'package:amacom_app/src/utils/constant/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,21 +13,39 @@ class OTPVerificationForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    return _CustomOTPTextField(
-      pinLength: 4,
-      onChanged: (value) {
-        ref
-            .read(codeValidationProvider.notifier)
-            .update((state) => state = value);
-      },
-      onCompleted: (value) {},
-      showUnderline: false,
-      textStyle: theme.textTheme.headlineMedium,
-      fieldWidth: 70,
-      decoration: const InputDecoration(
-        counter: SizedBox(),
-        hintMaxLines: null,
-        border: OutlineInputBorder(),
+    final border = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppSizes.genericBorderRadius),
+      borderSide: BorderSide(
+        color: theme.primaryColor,
+      ),
+    );
+    return Theme(
+      data: theme.copyWith(
+        inputDecorationTheme: theme.inputDecorationTheme.copyWith(
+          enabledBorder: border,
+          errorBorder: border,
+          focusedBorder: border,
+        ),
+      ),
+      child: _CustomOTPTextField(
+        pinLength: 4,
+        onChanged: (value) {
+          ref
+              .read(codeValidationProvider.notifier)
+              .update((state) => state = value);
+        },
+        onCompleted: (value) {},
+        showUnderline: false,
+        textStyle: theme.textTheme.headlineMedium,
+        fieldWidth: 70,
+        decoration: InputDecoration(
+          hintMaxLines: null,
+          border: border,
+          counter: const Offstage(),
+          contentPadding: const EdgeInsets.symmetric(
+            vertical: 10,
+          ),
+        ),
       ),
     );
   }
@@ -50,7 +69,7 @@ class OTPPasswordResetForm extends StatelessWidget {
           textStyle: theme.textTheme.headlineMedium,
           fieldWidth: 65,
           decoration: const InputDecoration(
-            counter: SizedBox(),
+            counter: Offstage(),
             hintMaxLines: null,
             border: OutlineInputBorder(),
           ),
@@ -173,7 +192,9 @@ class _CustomOTPTextFieldState extends State<_CustomOTPTextField> {
       children: List.generate(list.length, (index) {
         return Container(
           width: widget.fieldWidth,
-          margin: const EdgeInsets.symmetric(horizontal: 6),
+          margin: const EdgeInsets.symmetric(
+            horizontal: 6,
+          ),
           decoration: BoxDecoration(
             borderRadius: radius(),
           ),

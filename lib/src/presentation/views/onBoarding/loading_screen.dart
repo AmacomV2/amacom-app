@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:amacom_app/src/config/theme/theme.dart';
-import 'package:amacom_app/src/domain/entities/user.dart';
+import 'package:amacom_app/src/domain/entities/person.dart';
 import 'package:amacom_app/src/presentation/state/authentication/user_provider.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Loading screen
 class LoadingScreen extends ConsumerWidget {
@@ -16,9 +16,9 @@ class LoadingScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final responsive = ResponsiveDesign(context);
-
+    final colors = Theme.of(context).colorScheme;
     final screen = Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: colors.primary,
       body: OverflowBox(
         maxHeight: 9999,
         maxWidth: 9999,
@@ -63,7 +63,7 @@ class LoadingScreen extends ConsumerWidget {
               alignment: Alignment.center,
               child: Image.asset(
                 'assets/logos/hands.png',
-                height: responsive.maxHeightValue(80),
+                height: responsive.maxHeightValue(120),
               ),
             ),
           ],
@@ -71,7 +71,7 @@ class LoadingScreen extends ConsumerWidget {
       ),
     );
     return ref.watch(userProvider).when(
-      data: (User data) {
+      data: (Person data) {
         Future.delayed(
           Duration.zero,
           () {

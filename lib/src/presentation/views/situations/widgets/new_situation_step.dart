@@ -1,3 +1,4 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/presentation/state/situations/new_situation_provider.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
@@ -18,11 +19,14 @@ class NewSituationStepper extends ConsumerWidget {
     final activeStep = ref.watch(newSituationIndexProvider);
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
+    final appLocalizations = AppLocalizations.of(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: EasyStepper(
         activeStep: activeStep,
         stepShape: StepShape.circle,
+        enableStepTapping: false,
         borderThickness: 2,
         padding: EdgeInsets.symmetric(
           horizontal: responsive.maxWidthValue(AppSizes.bodyDefaultHPadding),
@@ -48,7 +52,7 @@ class NewSituationStepper extends ConsumerWidget {
               ),
             ),
             customTitle: Text(
-              'Describe tu\n situación',
+              '${appLocalizations?.situationDescriptionStepper}',
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyLarge?.copyWith(
                 fontSize: activeStep == 0 ? 16 : 15,
@@ -72,7 +76,7 @@ class NewSituationStepper extends ConsumerWidget {
               ),
             ),
             customTitle: Text(
-              'Como te\n sientes',
+              '${appLocalizations?.howDoYouFeelStepper}',
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyLarge?.copyWith(
                 fontSize: activeStep == 1 ? 16 : 15,
@@ -96,7 +100,7 @@ class NewSituationStepper extends ConsumerWidget {
               ),
             ),
             customTitle: Text(
-              'Signos de\n alarma',
+              '${appLocalizations?.alarmSignsStepper}',
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyLarge?.copyWith(
                 fontSize: activeStep == 2 ? 16 : 15,
@@ -120,7 +124,7 @@ class NewSituationStepper extends ConsumerWidget {
               ),
             ),
             customTitle: Text(
-              'Reporta tu\n situación',
+              '${appLocalizations?.reportYourSituationStepper}',
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyLarge?.copyWith(
                 fontSize: activeStep == 3 ? 16 : 15,

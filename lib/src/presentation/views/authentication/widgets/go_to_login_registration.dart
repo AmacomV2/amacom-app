@@ -1,3 +1,4 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -10,12 +11,14 @@ class GoToLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context);
+
     return _GoTo(
-      text1: '¿Ya tienes una cuenta?',
-      text2: ' Iniciar sesión',
+      text1: appLocalizations?.alreadyHaveAnAccount ?? '',
+      text2: appLocalizations?.logIn ?? '',
       onTap: () {
         Navigation.goTo(
-          Routes.login,
+          CustomAppRouter.login,
         );
       },
     );
@@ -29,15 +32,17 @@ class GoToRegistration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context);
+
     return _GoTo(
-      text1: '¿No tienes una cuenta?',
-      text2: ' Registrarme',
+      text1: appLocalizations?.doNotHaveAnAccount ?? '',
+      text2: appLocalizations?.signUp ?? '',
       onTap: () {
         if (context.canPop()) {
           context.pop();
         } else {
           context.pushReplacementNamed(
-            Routes.registration,
+            CustomAppRouter.registration,
           );
         }
       },

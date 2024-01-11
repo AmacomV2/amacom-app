@@ -1,9 +1,9 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:amacom_app/src/data/dataSources/api_data_source.dart';
 import 'package:amacom_app/src/domain/entities/baseResponse/base_response.dart';
 import 'package:amacom_app/src/domain/entities/request_data.dart';
 import 'package:amacom_app/src/domain/entities/session.dart';
 import 'package:amacom_app/src/domain/repositories/code_validation_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Code Validations Repo
 ///
@@ -41,7 +41,7 @@ class CodeValidationRepository implements ICodeValidationRepository {
     } catch (e) {
       data = BaseResponse.fromJson(result, (_) {});
     }
-    if (data.error) {
+    if (!data.ok) {
       throw Exception(data.message);
     } else {
       return data;
@@ -50,13 +50,12 @@ class CodeValidationRepository implements ICodeValidationRepository {
 
   @override
   Future<BaseResponse?> verifyPhone({required String code}) {
-    // TODO: implement verifyPhone
     throw UnimplementedError();
   }
 
   @override
-  Future<BaseResponse?> reSendEmailVerificationCode() async{
-   final requestData = RequestData(
+  Future<BaseResponse?> reSendEmailVerificationCode() async {
+    final requestData = RequestData(
       path: '/codes/resendEmail',
       method: Method.get,
     );
@@ -74,7 +73,7 @@ class CodeValidationRepository implements ICodeValidationRepository {
     } catch (e) {
       data = BaseResponse.fromJson(result, (_) {});
     }
-    if (data.error) {
+    if (!data.ok) {
       throw Exception(data.message);
     } else {
       return data;

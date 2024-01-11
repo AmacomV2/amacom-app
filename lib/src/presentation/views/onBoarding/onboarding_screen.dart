@@ -1,9 +1,9 @@
-import 'package:amacom_app/src/presentation/widgets/custom_body.dart';
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/presentation/views/onBoarding/widgets/onboarding_widgets.dart';
+import 'package:amacom_app/src/presentation/widgets/custom_body.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/durations.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
 
 /// Screen shown on first time open app
 class OnBoardingScreen extends StatefulWidget {
@@ -38,7 +38,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     final responsive = GlobalLocator.responsiveDesign;
     final colors = Theme.of(context).colorScheme;
     return CustomScaffold(
-      backgroundColor: colors.onPrimaryContainer,
+      backgroundColor: colors.primary,
       body: Column(
         children: [
           const HeaderSpacer(),
@@ -59,7 +59,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       border: true,
                       onTap: () {
                         Navigation.goTo(
-                          Routes.login,
+                          CustomAppRouter.login,
                           replacement: true,
                         );
                       },
@@ -87,8 +87,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     children: [
                       ValueListenableBuilder(
                         valueListenable: _currentPage,
-                        builder: (BuildContext context, int value, Widget? child) {
-                          return OnBoardingProgressIndicator(
+                        builder:
+                            (BuildContext context, int value, Widget? child) {
+                          return PageProgressIndicator(
                             key: UniqueKey(),
                             pageController: _pageController,
                             totalPages: pages.length,
@@ -118,7 +119,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         );
                       } else {
                         Navigation.goTo(
-                          Routes.login,
+                          CustomAppRouter.login,
                           replacement: true,
                         );
                       }

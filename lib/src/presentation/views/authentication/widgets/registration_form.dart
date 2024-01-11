@@ -1,166 +1,132 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:amacom_app/src/data/repositories/user_repository.dart';
-import 'package:amacom_app/src/domain/dtos/user_register_dto.dart';
-import 'package:amacom_app/src/presentation/state/authentication/registration_form_providers.dart';
-import 'package:amacom_app/src/presentation/views/authentication/widgets/terms_and_conditions.dart';
+import 'package:amacom_app/src/config/settings.dart';
+import 'package:amacom_app/src/presentation/state/forms/forms_data_providers.dart';
+import 'package:amacom_app/src/presentation/state/registration/registration_form_providers.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Registration form
-class RegistrationForm extends ConsumerStatefulWidget {
-  /// Constructor
-  const RegistrationForm({super.key});
+class RegistrationForm extends ConsumerWidget {
+  ///
+  const RegistrationForm({
+    super.key,
+    required this.formKey,
+  });
+
+  /// Form key
+  final GlobalKey<FormState> formKey;
 
   @override
-  ConsumerState<RegistrationForm> createState() => _RegistrationFormState();
-}
-
-class _RegistrationFormState extends ConsumerState<RegistrationForm> {
-  final _formKey = GlobalKey<FormState>();
-
-  final _nameController = TextEditingController();
-  final _lastNameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  @override
-  void initState() {
-    _nameController.addListener(() {
-      ref.read(regNameProvider.notifier).update(
-            (state) => state = _nameController.text,
-          );
-    });
-    _emailController.addListener(() {
-      ref.read(regEmailProvider.notifier).update(
-            (state) => state = _emailController.text,
-          );
-    });
-    _lastNameController.addListener(() {
-      ref.read(regLastNameProvider.notifier).update(
-            (state) => state = _lastNameController.text,
-          );
-    });
-    _phoneController.addListener(() {
-      ref.read(regPhoneProvider.notifier).update(
-            (state) => state = _phoneController.text,
-          );
-    });
-    _passwordController.addListener(() {
-      ref.read(regPasswordProvider.notifier).update(
-            (state) => state = _passwordController.text,
-          );
-    });
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const inputsSeparator = SafeSpacer(
       height: 20,
     );
+    final appLocalizations = AppLocalizations.of(context);
+
     ref.watch(regPasswordProvider);
     return Form(
-      key: _formKey,
+      key: formKey,
       child: ScrollColumnExpandable(
-        padding: EdgeInsets.zero,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SafeSpacer(
             height: 16,
           ),
           CustomTextFormField(
-            controller: _nameController,
-            hintText: 'Escribe aquí',
-            labelText: 'Nombres',
+            onChanged: (value) => ref.read(regNameProvider.notifier).update(
+                  (state) => state = value,
+                ),
+            hintText:
+                '${appLocalizations?.writeHereYour}${appLocalizations?.name.toLowerCase()}',
+            labelText: appLocalizations?.name ?? '',
             showRequiredIndicator: true,
-            validator: (value) {
-              if ((value ?? '').isEmpty) return 'Este campo es requerido';
-              return null;
-            },
+            validator: AppValidations.notEmptyFieldValidation,
           ),
           inputsSeparator,
           CustomTextFormField(
-            controller: _lastNameController,
-            hintText: 'Escribe aquí',
-            labelText: 'Apellidos',
+            onChanged: (value) => ref.read(regLastNameProvider.notifier).update(
+                  (state) => state = value,
+                ),
+            hintText:
+                '${appLocalizations?.writeHereYour}${appLocalizations?.lastName.toLowerCase()}',
+            labelText: appLocalizations?.lastName ?? '',
             showRequiredIndicator: true,
-            validator: (value) {
-              if ((value ?? '').isEmpty) return 'Este campo es requerido';
-              return null;
-            },
+            validator: AppValidations.notEmptyFieldValidation,
           ),
           inputsSeparator,
+          ref.watch(documentTypesProvider).when(
+                data: (data) {
+                  return CustomDropDownFrom(
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    validator: AppValidations.notEmptyFieldValidation,
+                    hintText:
+                        '${appLocalizations?.selectA}${appLocalizations?.documentType.toLowerCase()}',
+                    labelText: appLocalizations?.documentType ?? '',
+                    showRequiredIndicator: true,
+                    items: data
+                        .map(
+                          (e) => DropdownMenuItem(
+                            value: e.id,
+                            child: Text(e.description ?? e.name),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) => ref
+                        .read(regDocumentTypeProvider.notifier)
+                        .update((state) => value),
+                    // validator: AppValidations.notEmptyFieldValidation,
+                  );
+                },
+                error: (error, stackTrace) {
+                  GlobalLocator.appLogger.e(error);
+                  return CustomErrorWidget(error: error);
+                },
+                loading: () => const SizedCustomProgressIndicator2(),
+              ),
+          inputsSeparator,
           CustomTextFormField(
-            controller: _emailController,
-            hintText: 'Escribe tu correo electrónico',
-            labelText: 'Correo electrónico',
+            onChanged: (value) =>
+                ref.read(regDocumentNoProvider.notifier).update(
+                      (state) => state = value,
+                    ),
+            hintText:
+                '${appLocalizations?.writeHereYour}${appLocalizations?.document.toLowerCase()}',
+            labelText: appLocalizations?.document ?? '',
+            showRequiredIndicator: true,
             textCapitalization: TextCapitalization.none,
-            showRequiredIndicator: true,
-            validator: AppValidations.validateEmail,
+            keyboardType: TextInputType.number,
+            validator: AppValidations.notEmptyFieldValidation,
           ),
           inputsSeparator,
-          CustomPasswordFormField(
-            controller: _passwordController,
-            hintText: 'Escribe tu contraseña',
-            labelText: 'Contraseña',
-            showRequiredIndicator: true,
-            validator: AppValidations.validatePassword,
-          ),
-          inputsSeparator,
-          CustomPasswordFormField(
-            hintText: 'Escribe de nuevo tu contraseña',
-            labelText: 'Confirma tu contraseña',
-            showRequiredIndicator: true,
-            validator: (value) {
-              if (value != _passwordController.text) {
-                return 'Las contraseñas no coinciden';
-              }
-              return null;
-            },
-          ),
-          const SafeSpacer(
-            height: 16,
-          ),
-          TermsAndConditions(
-            onChanged: (value) {
-              ref.read(regTermsAndConditionsProvider.notifier).update(
-                    (state) => state = value ?? false,
+          ref.watch(gendersProvider).when(
+                data: (data) {
+                  return CustomDropDownFrom(
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    hintText:
+                        '${appLocalizations?.selectA}${appLocalizations?.gender.toLowerCase()}',
+                    labelText: appLocalizations?.gender ?? '',
+                    showRequiredIndicator: true,
+                    items: data
+                        .map(
+                          (e) => DropdownMenuItem(
+                            value: e.id,
+                            child: Text(e.description ?? e.name),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) => ref
+                        .read(regGenderProvider.notifier)
+                        .update((state) => value),
+                    validator: AppValidations.notEmptyFieldValidation,
                   );
-            },
-          ),
-          const SafeSpacer(
-            height: 40,
-          ),
-          CustomButtonWithState(
-            adaptiveTextColor: true,
-            enabled: ref.watch(regTermsAndConditionsProvider),
-            text: 'Continuar',
-            onTap: () async {
-              if (_formKey.currentState?.validate() ?? false) {
-                try {
-                  await ref.read(userRepository).userRegister(
-                        UserRegisterDTO(
-                          email: ref.read(regEmailProvider) ?? '',
-                          lastName: ref.read(regLastNameProvider) ?? '',
-                          firstName: ref.read(regNameProvider) ?? '',
-                          password: ref.read(regPasswordProvider) ?? '',
-                        ),
-                      );
-                  Navigation.goTo(
-                    CustomAppRouter.emailVerification,
-                    extra: {
-                      'email': ref.read(regEmailProvider),
-                    },
-                    removeUntil: true,
-                  );
-                } catch (e) {
-                  AppDialogs.genericConfirmationDialog(title: e.toString());
-                }
-              }
-            },
-          ),
+                },
+                error: (error, stackTrace) {
+                  GlobalLocator.appLogger.e(error);
+                  return CustomErrorWidget(error: error);
+                },
+                loading: () => const SizedCustomProgressIndicator2(),
+              ),
           const SafeSpacer(),
         ],
       ),

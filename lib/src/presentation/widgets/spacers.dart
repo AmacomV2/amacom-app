@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
 
 /// Bottom spacer
 ///
 /// Creates an empty box
 class BottomSpacer extends StatelessWidget {
   /// Constructor
-  const BottomSpacer({super.key, this.height = 30});
+  const BottomSpacer({super.key, this.height = 24});
+
   ///
   final double height;
   @override
@@ -17,6 +18,7 @@ class BottomSpacer extends StatelessWidget {
     );
   }
 }
+
 /// Bottom navBar spacer
 ///
 /// Creates an empty box with height of the actual 60% BottomNBavigationBar of app
@@ -38,7 +40,10 @@ class BottomNavBarSpacer extends StatelessWidget {
 /// Creates an empty box
 class SafeBottomSpacer extends StatelessWidget {
   /// Constructor
-  const SafeBottomSpacer({super.key, this.height = 14,});
+  const SafeBottomSpacer({
+    super.key,
+    this.height = 24,
+  });
 
   /// Element safe height
   final double height;
@@ -59,7 +64,7 @@ class SafeSpacer extends StatelessWidget {
   /// Constructor
   const SafeSpacer({
     super.key,
-    this.height = 24,
+    this.height = 20,
   });
 
   /// Optional custom height (in px)
@@ -118,7 +123,7 @@ class HeaderSpacer extends StatelessWidget {
 
 /// ExtendedBodyBottomSpacer
 ///
-/// Creates an empty box, use on scaffolds with ExtendedBody=true 
+/// Creates an empty box, use on scaffolds with ExtendedBody=true
 class ExtendedBodyBottomSpacer extends StatelessWidget {
   /// Constructor
   const ExtendedBodyBottomSpacer({
@@ -137,4 +142,3 @@ class ExtendedBodyBottomSpacer extends StatelessWidget {
     );
   }
 }
-

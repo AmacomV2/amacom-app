@@ -40,12 +40,13 @@ class _UrlResourceState extends State<UrlResource> {
     super.initState();
     final resourceType = ResourceTypeHelper.getType(widget.recourseUrl);
     if (resourceType == ResourceType.VIDEO) {
-      _controller = VideoPlayerController.network(widget.recourseUrl)
-        ..initialize().then(
-          (_) {
-            setState(() {}); //when your thumbnail will show.
-          },
-        );
+      _controller =
+          VideoPlayerController.networkUrl(Uri.parse(widget.recourseUrl))
+            ..initialize().then(
+              (_) {
+                setState(() {}); //when your thumbnail will show.
+              },
+            );
       _controller?.setVolume(1.0);
     }
   }
@@ -152,13 +153,9 @@ class NetworkResourceView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: double.infinity,
-            child: CustomAppBar(
-              centerTitle: true,
-              title: title,
-              onBack: () => Navigator.of(context).pop(),
-            ),
+          CustomAppBar2(
+            title: title,
+            onBack: () => Navigator.of(context).pop(),
           ),
           if ((url ?? arguments['url']) != null)
             Expanded(

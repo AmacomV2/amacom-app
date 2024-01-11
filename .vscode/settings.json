@@ -1,7 +1,9 @@
 {
   "cSpell.words": [
     "amacom",
+    "Animatable",
     "apng",
+    "autofocus",
     "avchd",
     "Bezier",
     "concat",
@@ -13,11 +15,16 @@
     "Goldplay",
     "jfif",
     "lerp",
+    "nullable",
+    "pageable",
+    "Pageable",
     "pjpeg",
     "RGBO",
     "riverpod",
     "rmvb",
+    "unfocus",
     "uuid",
+    "vsync",
     "webm",
     "webp"
   ],
@@ -29,5 +36,11 @@
   // Eliminar de la observación de archivos
   "files.watcherExclude": {
     "**/.fvm": true
-  }
+  },
+  "conventionalCommits.scopes": [
+    "Auth and Profile",
+    "Logbooks",
+    "Situations",
+    "Calendar"
+  ]
 }

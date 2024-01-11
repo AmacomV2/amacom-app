@@ -14,6 +14,12 @@ class AppSizes {
   /// Commonly used buttons height
   static double buttonsHeight = 50;
 
+  /// Commonly used buttons height
+  static double buttonsWidth = 230;
+
+  /// Appbar icons size
+  static double appBarIcons = 30;
+
   /// App NavBar height
   static double navBarHeight = 100;
 
@@ -27,13 +33,13 @@ class AppSizes {
   static double genericDialogsBorderRadius = 28;
 
   /// Generic padding apply on body
-  static double bodyDefaultHPadding = 16;
+  static double bodyDefaultHPadding = 20;
 
   /// Generic padding apply on body
-  static double bodyDefaultHInnerPadding = 10;
+  static double bodyDefaultHInnerPadding = 14;
 
   /// Generic padding apply on body
-  static double bodyDefaultVPadding = 24;
+  static double bodyDefaultVPadding = 20;
 
   /// Generic border radius used on buttons and more
   static EdgeInsets get genericButtonPadding =>

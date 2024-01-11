@@ -63,7 +63,7 @@ class CustomScaffold extends StatelessWidget {
     );
     return Scaffold(
       appBar: appBar,
-      backgroundColor: backgroundColor,
+      backgroundColor: backgroundColor ?? scaffoldBackground,
       extendBody: extendBody,
       body: body,
       bottomNavigationBar: bottomNavigationBar,

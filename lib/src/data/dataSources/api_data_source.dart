@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:amacom_app/src/domain/entities/request_data.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ua_client_hints/ua_client_hints.dart';
 
@@ -14,7 +14,7 @@ class ApiDataSource {
   /// Api request constructor
   ApiDataSource() {
     _http.options.baseUrl =
-          const String.fromEnvironment('HOST', defaultValue: '');
+        const String.fromEnvironment('HOST', defaultValue: '');
   }
 
   /// Headers
@@ -37,7 +37,7 @@ class ApiDataSource {
     if (withAuthToken) {
       try {
         const storage = FlutterSecureStorage();
-        final token = await storage.read(key: 'access_token') ?? '';
+        final token = await storage.read(key: 'accessToken') ?? '';
         if (token.isNotEmpty) {
           _headers['Authorization'] = 'Bearer $token';
         }
@@ -63,17 +63,17 @@ class ApiDataSource {
 
   static Map<String, dynamic> _resolveInternalError(dynamic e) {
     return {
-      'success': false,
+      'ok': false,
       'message': '${AppMessages.internalError}$e',
       'error': true,
       'data': [],
     };
   }
 
-  static Map<String, dynamic> _resolveServerErrorCode(DioError e) {
+  static Map<String, dynamic> _resolveServerErrorCode(DioException e) {
     return {
       'message': '${e.response?.data['message'] ?? e.message}',
-      'error': true,
+      'ok': false,
       'data': {},
     };
   }
@@ -89,7 +89,7 @@ class ApiDataSource {
     } else {
       toast(AppMessages.noInternetConnection);
       return {
-        'error': true,
+        'ok': false,
         'message': AppMessages.noInternetConnection,
         'data': [],
       };
@@ -101,25 +101,39 @@ class ApiDataSource {
     try {
       switch (requestData.method) {
         case Method.get:
-          data = await get(requestData.path);
+          data = await get(
+            requestData.path,
+            queryParameters: requestData.queryParameters,
+          );
           break;
         case Method.post:
-          data = await post(requestData.path, requestData.body);
+          data = await post(
+            requestData.path,
+            requestData.body,
+            queryParameters: requestData.queryParameters,
+          );
           break;
         case Method.put:
-          data = await put(requestData.path, requestData.body);
+          data = await put(
+            requestData.path,
+            requestData.body,
+            queryParameters: requestData.queryParameters,
+          );
           break;
         case Method.delete:
-          data = await delete(requestData.path);
+          data = await delete(
+            requestData.path,
+            queryParameters: requestData.queryParameters,
+          );
           break;
         default:
           return {
-            'error': true,
+            'ok': false,
             'message': 'El método de comunicación http no fue encontrado.',
             'data': [],
           };
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       data = _resolveServerErrorCode(e);
     } on Exception catch (e) {
       data = _resolveInternalError(e);
@@ -143,7 +157,8 @@ class ApiDataSource {
             queryParameters: queryParameters,
           );
           return response.data;
-        } on DioError {
+        } on DioException catch (e) {
+          GlobalLocator.appLogger.e(e);
           rethrow;
         } on Exception catch (e) {
           return _resolveInternalError(e);
@@ -170,7 +185,8 @@ class ApiDataSource {
             queryParameters: queryParameters,
           );
           return response.data;
-        } on DioError {
+        } on DioException catch (e) {
+          _logger.e(e.message);
           rethrow;
         } on Exception catch (e) {
           return _resolveInternalError(e);
@@ -213,7 +229,7 @@ class ApiDataSource {
             data: formData,
           );
           return response.data;
-        } on DioError {
+        } on DioException {
           rethrow;
         } on Exception catch (e) {
           return _resolveInternalError(e);
@@ -240,7 +256,7 @@ class ApiDataSource {
             queryParameters: queryParameters,
           );
           return response.data;
-        } on DioError {
+        } on DioException {
           rethrow;
         } on Exception catch (e) {
           _logger.e(endpoint, e);
@@ -265,7 +281,7 @@ class ApiDataSource {
             queryParameters: queryParameters,
           );
           return response.data;
-        } on DioError {
+        } on DioException {
           rethrow;
         } on Exception catch (e) {
           return _resolveInternalError(e);
@@ -286,7 +302,7 @@ class RetryOnConnectionChangeInterceptor extends Interceptor {
   final Dio dio;
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) async {
+  void onError(DioException err, ErrorInterceptorHandler handler) async {
     if (_shouldRetryOnHttpException(err)) {
       try {
         handler.resolve(
@@ -302,7 +318,7 @@ class RetryOnConnectionChangeInterceptor extends Interceptor {
     }
   }
 
-  bool _shouldRetryOnHttpException(DioError err) {
+  bool _shouldRetryOnHttpException(DioException err) {
     return err.response?.statusCode == 401;
   }
 }
@@ -322,13 +338,13 @@ class DioHttpRequestRetirer {
   /// Request retry method
   Future<Response> requestRetry(RequestOptions requestOptions) async {
     const storage = FlutterSecureStorage();
-    final refreshToken = await storage.read(key: 'refresh_token') ?? '';
+    final refreshToken = await storage.read(key: 'refreshToken') ?? '';
     if (refreshToken.isNotEmpty) {
       try {
         final result = await dio.request(
           _refreshPath,
           cancelToken: requestOptions.cancelToken,
-          data: {'refresh_token': refreshToken},
+          data: {'refreshToken': refreshToken},
           onReceiveProgress: requestOptions.onReceiveProgress,
           onSendProgress: requestOptions.onSendProgress,
           queryParameters: requestOptions.queryParameters,
@@ -352,12 +368,12 @@ class DioHttpRequestRetirer {
         if (!(result.data['error'] ?? true)) {
           GlobalLocator.appLogger.d('User session refreshed.');
           storage.write(
-            key: 'access_token',
+            key: 'accessToken',
             value: result.data['data']?['accessToken'],
           );
           storage.write(
-            key: 'refresh_token',
-            value: result.data['data']?['refresh_token'],
+            key: 'refreshToken',
+            value: result.data['data']?['refreshToken'],
           );
           if ((result.data['data']?['accessToken'] ?? '')
               .toString()
@@ -366,7 +382,7 @@ class DioHttpRequestRetirer {
                 'Bearer ${result.data['data']?['accessToken']}';
           }
         }
-      return await dio.request(
+        return await dio.request(
           requestOptions.path,
           cancelToken: requestOptions.cancelToken,
           data: requestOptions.data,
@@ -393,11 +409,11 @@ class DioHttpRequestRetirer {
       } catch (e) {
         GlobalLocator.appLogger.d(e.toString());
         storage.write(
-          key: 'access_token',
+          key: 'accessToken',
           value: '',
         );
         storage.write(
-          key: 'refresh_token',
+          key: 'refreshToken',
           value: '',
         );
         return Response(requestOptions: requestOptions);

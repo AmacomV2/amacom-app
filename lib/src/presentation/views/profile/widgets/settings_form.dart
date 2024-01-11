@@ -37,11 +37,7 @@ class SettingsForm extends StatelessWidget {
                   headerPadding: EdgeInsets.zero,
                   items: [
                     SettingItemWidget(
-                      onTap: () async {
-                        await AppDialogs.genericDialog(
-                          widget: const Column(),
-                        );
-                      },
+                      onTap: () async {},
                       title: appLocalizations!.language,
                       titleTextStyle: theme.textTheme.bodyLarge,
                       leading: const FaIcon(

@@ -1,7 +1,8 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/data/repositories/password_recovering_repository.dart';
+import 'package:amacom_app/src/presentation/state/authentication/code_validation_provider.dart';
 import 'package:amacom_app/src/presentation/state/authentication/password_recovering_providers.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
-import 'package:amacom_app/src/utils/constant/constants.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,6 +39,8 @@ class _NewPasswordFormState extends ConsumerState<NewPasswordForm> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context);
+
     return Form(
       key: _formKey,
       child: ScrollColumnExpandable(
@@ -46,19 +49,19 @@ class _NewPasswordFormState extends ConsumerState<NewPasswordForm> {
         children: [
           CustomPasswordFormField(
             controller: _passwordController,
-            hintText: 'Escribe tu contraseña',
-            labelText: 'Contraseña',
+            hintText: appLocalizations?.passwordHint ?? '',
+            labelText: appLocalizations?.password ?? '',
             validator: AppValidations.notEmptyFieldValidation,
           ),
           const SafeSpacer(
             height: 20,
           ),
           CustomPasswordFormField(
-            hintText: 'Escribe de nuevo tu contraseña',
-            labelText: 'Confirma tu contraseña',
+            hintText: appLocalizations?.confirmPassword ?? '',
+            labelText: appLocalizations?.passwordHintVar ?? '',
             validator: (value) {
               if (value != _passwordController.text) {
-                return 'Las contraseñas no coinciden';
+                return appLocalizations?.passwordNotEqual ?? '';
               }
               return null;
             },
@@ -71,7 +74,7 @@ class _NewPasswordFormState extends ConsumerState<NewPasswordForm> {
             enabled:
                 (ref.watch(passRecoveringPasswordProvider) ?? '').isNotEmpty,
             adaptiveTextColor: true,
-            text: 'Restablecer contraseña',
+            text: appLocalizations?.resetPassword ?? '',
             onTap: () async {
               if (_formKey.currentState?.validate() ?? false) {
                 final resp = await ref
@@ -79,22 +82,23 @@ class _NewPasswordFormState extends ConsumerState<NewPasswordForm> {
                     .setNewPassword(
                       email: ref.read(passRecoveringEmailProvider) ?? '',
                       password: ref.read(passRecoveringPasswordProvider) ?? '',
+                      code: ref.read(codeValidationProvider) ?? '',
                     );
-                if (resp?.error == false) {
+                if (resp?.ok == true) {
                   AppDialogs.showCustomSnackBar(
-                    AppMessages.passwordChangeSuccess,
+                    appLocalizations?.passwordChanged ?? '',
                     icon: Icons.check_circle_outline_rounded,
                   );
                   widget.onSuccess.call();
                 } else {
                   AppDialogs.genericConfirmationDialog(
-                    title: resp?.message ?? AppMessages.passwordChangeError,
+                    title: appLocalizations?.passwordChangeError ?? '',
                   );
                 }
               }
             },
           ),
-          const BottomSpacer(),
+          const SafeSpacer(),
         ],
       ),
     );

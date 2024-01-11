@@ -1,14 +1,19 @@
-import 'package:amacom_app/src/utils/constant/constants.dart';
+import 'package:amacom_app/src/config/settings.dart';
+import 'package:amacom_app/src/utils/utils/global_locator.dart';
 
 /// App validation functions
 class AppValidations {
   /// Validate if a string is an e-mail and if ends in .co or .com
-  static String? validateEmail(String? email) {
+  static String? validateEmail(
+    String? email,
+  ) {
+    final appLocalizations =
+        AppLocalizations.of(GlobalLocator.appNavigator.currentContext!);
     bool emailValid = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+\.[a-zA-Z]+",
     ).hasMatch(email ?? '');
     if (!emailValid) {
-      return 'Dirección de correo electrónico no válida';
+      return appLocalizations?.wrongEmail ?? '';
     }
     return null;
   }
@@ -31,39 +36,44 @@ class AppValidations {
   }
 
   /// Validate if a given string contains at least 1 letter, 1 number and len 6-8.
-  static String? validatePassword(String? password) {
+  static String? validatePassword(
+    String? password, {
+    AppLocalizations? appLocalizations,
+  }) {
     if (password?.isEmpty ?? true) {
-      return 'Debes ingresar una contraseña';
+      return appLocalizations?.fieldRequired;
     } else {
       bool hasUppercase = password?.contains(RegExp(r'[A-Z]')) ?? false;
       bool hasDigits = password?.contains(RegExp(r'[0-9]')) ?? false;
       bool hasLowercase = password?.contains(RegExp(r'[a-z]')) ?? false;
-      bool hasMinLength = (password?.length ?? 0) >= 8;
+      bool hasMinLength = (password?.length ?? 0) >= 6;
       if (!hasMinLength) {
         // if (!hasMinLength) {
-        return 'La contraseña debe tener al menos 8 caracteres';
+        return appLocalizations?.passwordMinLen;
       }
       if (!hasDigits) {
-        return 'La contraseña debe contener al menos un dígito.';
+        return appLocalizations?.passwordContainDigit;
       }
       if (!(hasUppercase || hasLowercase)) {
-        return 'La contraseña debe contener al menos una mayúscula y una minúscula.';
+        return appLocalizations?.passwordCharsCap;
       }
     }
     return null;
   }
 
   /// Checks if field is not empty
-  static String? notEmptyFieldValidation(Object? value) {
+  static String? notEmptyFieldValidation(Object? value, {String? message}) {
+    final appLocalizations =
+        AppLocalizations.of(GlobalLocator.appNavigator.currentContext!);
     if (value is String?) {
       if (value == null || value.isEmpty) {
-        return AppMessages.fieldRequired;
+        return message ?? appLocalizations?.fieldRequired;
       }
       return null;
     }
     // ignore: unnecessary_null_comparison
     if (value == null) {
-      return AppMessages.fieldRequired;
+      return message ?? appLocalizations?.fieldRequired;
     }
     return null;
   }

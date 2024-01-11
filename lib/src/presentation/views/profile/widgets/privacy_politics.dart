@@ -1,3 +1,4 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/config/theme/theme.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
@@ -14,13 +15,13 @@ class PrivacyPolitics extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final responsive = GlobalLocator.responsiveDesign;
+    final appLocalizations = AppLocalizations.of(context);
     return CustomScaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const CustomAppBar(
-            title: 'Políticas de privacidad',
-            centerTitle: true,
+          CustomAppBar2(
+            title: appLocalizations?.privacyPolicy,
             padding: true,
           ),
           Expanded(

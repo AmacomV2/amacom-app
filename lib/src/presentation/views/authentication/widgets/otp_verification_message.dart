@@ -1,3 +1,4 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:flutter/material.dart';
 
 /// Widget to show OTP verification message on OTP verification screen
@@ -5,12 +6,8 @@ class OTPVerificationMessage extends StatelessWidget {
   /// Widget constructor
   const OTPVerificationMessage({
     super.key,
-    this.sms = false,
     this.destination,
   });
-
-  /// To know if OTP verification is going thought sms
-  final bool sms;
 
   /// Email direction
   final String? destination;
@@ -21,15 +18,14 @@ class OTPVerificationMessage extends StatelessWidget {
     final textStyle = theme.textTheme.bodyLarge?.copyWith(
       fontWeight: FontWeight.w500,
     );
+    final appLocalizations = AppLocalizations.of(context);
 
     return RichText(
-      textAlign: TextAlign.center,
+      textAlign: TextAlign.left,
       text: TextSpan(
         children: [
           TextSpan(
-            text: sms
-                ? 'Por favor ingresa el código de 4 dígitos enviado al siguiente número de teléfono '
-                : 'Por favor ingresa el código de 4 dígitos enviado al siguiente correo electrónico ',
+            text: appLocalizations?.enterCodeText ?? '',
             style: textStyle,
           ),
           TextSpan(

@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
+import 'package:flutter/material.dart';
 
 /// Buttons used on OTP screen
 class OTPButtons extends StatelessWidget {
@@ -23,6 +24,7 @@ class OTPButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final appLocalizations = AppLocalizations.of(context);
     return Row(
       children: [
         Expanded(
@@ -30,7 +32,7 @@ class OTPButtons extends StatelessWidget {
             border: true,
             color: colorScheme.inversePrimary,
             onTap: reSend,
-            text: 'Reenviar código',
+            text: appLocalizations?.reSendCode ?? '',
           ),
         ),
         const HorizontalSpacer(
@@ -40,7 +42,7 @@ class OTPButtons extends StatelessWidget {
           child: CustomButtonWithState(
             enabled: enableNext,
             onTap: send,
-            text: 'Enviar',
+            text: appLocalizations?.send ?? '',
           ),
         ),
       ],

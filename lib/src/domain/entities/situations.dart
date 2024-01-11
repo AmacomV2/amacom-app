@@ -1,55 +1,38 @@
-import 'dart:convert';
-
-import 'package:amacom_app/src/utils/utils/global_locator.dart';
+import 'package:amacom_app/src/domain/entities/diagnosis.dart';
+import 'package:amacom_app/src/utils/utils/utils.dart';
 
 /// Class to manage situations data
 class SituationEntity {
-  /// Parse an entity instance from a Json Map
-  factory SituationEntity.fromJson(Map json) => SituationEntity(
-        id: json['id'],
-        personId: json['person_id'],
-        createdBy: json['created_by'],
-        subjectId: json['subject_id'],
-        description: json['description'],
-        firstThought: json['first_thought'],
-        behavior: json['behavior'],
-        affectationDegree: json['affectation_degree'],
-        createTime: DateTime.parse(json['create_time']),
-        updateTime: DateTime.parse(json['update_time']),
-        nursingAssessment: json['nursing_assessment'],
-      );
-
   ///
   SituationEntity({
     required this.id,
     required this.personId,
-    required this.createdBy,
+    required this.createdById,
     required this.subjectId,
+    this.currentDiagnosis,
     required this.description,
     required this.firstThought,
     required this.behavior,
     required this.affectationDegree,
-    required this.createTime,
-    required this.updateTime,
-    required this.nursingAssessment,
+    this.nursingAssessment,
+    required this.createdAt,
+    this.updatedAt,
   });
 
-  ///
-  factory SituationEntity.fromRawJson(String str) =>
-      SituationEntity.fromJson(json.decode(str));
-
-  /// Parse a list of entities from a Json List<Map>
-  static List<SituationEntity> fromJsonList(List data) {
-    final List<SituationEntity> result = [];
-    for (var element in data) {
-      try {
-        result.add(SituationEntity.fromJson(element as Map));
-      } catch (e) {
-        GlobalLocator.appLogger.e(e);
-      }
-    }
-    return result;
-  }
+  /// from Map (json) constructor
+  factory SituationEntity.fromJson(dynamic json) => SituationEntity(
+        id: json['id'],
+        personId: json['personId'],
+        createdById: json['createdById'],
+        subjectId: json['subjectId'],
+        description: json['description'],
+        firstThought: json['firstThought'],
+        behavior: json['behavior'],
+        affectationDegree: json['affectationDegree'],
+        createdAt: DateTime.parse(json['createdAt']),
+        updatedAt: DateTime.tryParse(json['updatedAt'] ?? ''),
+        currentDiagnosis: Diagnosis.tryFromJson(json['currentDiagnosis']),
+      );
 
   ///
   String id;
@@ -58,10 +41,13 @@ class SituationEntity {
   String personId;
 
   ///
-  String createdBy;
+  String createdById;
 
   ///
   String subjectId;
+
+  ///
+  Diagnosis? currentDiagnosis;
 
   ///
   String description;
@@ -76,11 +62,30 @@ class SituationEntity {
   int affectationDegree;
 
   ///
-  DateTime createTime;
+  dynamic nursingAssessment;
 
   ///
-  DateTime updateTime;
+  DateTime createdAt;
 
   ///
-  String nursingAssessment;
+  DateTime? updatedAt;
+
+  /// Parse a list of entities from a Json List<Map>
+  static List<SituationEntity> fromJsonList(dynamic data) {
+    final List<SituationEntity> result = [];
+
+    try {
+      for (var element in (data as List)) {
+        try {
+          result.add(SituationEntity.fromJson(element as Map));
+        } catch (e) {
+          GlobalLocator.appLogger.e(e);
+        }
+      }
+    } catch (e) {
+      GlobalLocator.appLogger.e(e);
+    }
+
+    return result;
+  }
 }

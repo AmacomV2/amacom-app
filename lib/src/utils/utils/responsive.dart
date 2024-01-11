@@ -95,6 +95,11 @@ class ResponsiveDesign {
     return h;
   }
 
+  /// Height value
+  double buttonsHeight({double height = 70}) {
+    return maxHeightValue(70);
+  }
+
   /// Horizontal view fraction
   double viewHFractionWPadding(double size) {
     double realWidth = screenWidth - (2 * width(_genericHPadding));

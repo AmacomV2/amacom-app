@@ -5,18 +5,24 @@ class UserRegisterDTO {
   UserRegisterDTO({
     this.id,
     required this.email,
-    required this.firstName,
+    required this.name,
     required this.lastName,
     required this.password,
-    this.phone,
-    this.termsAndConditions = true,
+    this.occupation,
+    this.privacyPolicy = true,
+    required this.document,
+    required this.birthDate,
+    this.civilStatusId,
+    required this.genderId,
+    required this.documentTypeId,
+    this.address,
   });
 
   /// User UUID
   String? id;
 
-  /// User firstName
-  final String firstName;
+  /// User name
+  final String name;
 
   /// User lastName
   final String lastName;
@@ -27,20 +33,38 @@ class UserRegisterDTO {
   /// User password
   final String password;
 
-  /// User phone
-  final String? phone;
+  /// User password
+  final String document;
+
+  /// User password
+  final DateTime? birthDate;
+
+  /// User occupation
+  final String? occupation;
+
+  /// User occupation
+  final String? civilStatusId;
+
+  /// User occupation
+  final String genderId;
+
+  /// User occupation
+  final String documentTypeId;
+
+  /// User occupation
+  final String? address;
 
   /// Bool to know if user accepts terms and conditions of app
-  final bool termsAndConditions;
+  final bool privacyPolicy;
 
   /// Parse a [UserRegisterDTO] object into a Map
   Map<String, dynamic> toJson() => {
-        'id': id,
         'email': email.toLowerCase(),
         'password': password,
-        'first_name': firstName,
-        'last_name': lastName,
-        'phone': phone,
-        'terms_and_conditions': termsAndConditions,
+        'name': name,
+        'lastName': lastName,
+        'occupation': occupation,
+        'address': occupation,
+        'privacyPolicy': privacyPolicy,
       };
 }

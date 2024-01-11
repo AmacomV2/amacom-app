@@ -132,11 +132,11 @@ ThemeData globalTheme() {
       menuStyle: MenuStyle(
         padding: const MaterialStatePropertyAll<EdgeInsets>(
           EdgeInsets.symmetric(
-            horizontal: 20,
+            horizontal: 16,
+            vertical: 14,
           ),
         ),
-        backgroundColor:
-            const MaterialStatePropertyAll<Color>(FigmaColors.secondary_200),
+        backgroundColor: const MaterialStatePropertyAll<Color>(Colors.white),
         shape: MaterialStatePropertyAll<OutlinedBorder>(
           RoundedRectangleBorder(
             side: const BorderSide(
@@ -167,21 +167,21 @@ ThemeData globalTheme() {
   }
 
   InputDecorationTheme inputDecorationTheme(InputDecorationTheme theme) {
-    final border = OutlineInputBorder(
+    final border = UnderlineInputBorder(
       borderRadius: BorderRadius.circular(20),
       borderSide: const BorderSide(
         color: FigmaColors.primary_300,
-        width: 0.5,
+        width: 0.3,
       ),
     );
-    final focusedBorder = OutlineInputBorder(
+    final focusedBorder = UnderlineInputBorder(
       borderRadius: BorderRadius.circular(20),
       borderSide: const BorderSide(
         color: FigmaColors.primary_300,
-        width: 1,
+        width: 0.3,
       ),
     );
-    final errorBorder = OutlineInputBorder(
+    final errorBorder = UnderlineInputBorder(
       borderRadius: BorderRadius.circular(20),
       borderSide: const BorderSide(
         color: Color(0xffaa3030),
@@ -197,8 +197,9 @@ ThemeData globalTheme() {
       outlineBorder: outlineBorder,
       contentPadding: const EdgeInsets.symmetric(
         horizontal: 16,
-        vertical: 12,
+        vertical: 14,
       ),
+      alignLabelWithHint: true,
       labelStyle: theme.labelStyle?.copyWith(
         fontFamily: 'Goldplay',
         fontWeight: FontWeight.w500,
