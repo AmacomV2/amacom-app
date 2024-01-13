@@ -92,7 +92,7 @@ class SubSubjectsList extends ConsumerWidget {
               ),
             );
           },
-          error: (error, stackTrace) => ErrorWidget(error),
+          error: (error, stackTrace) => const EmptyListWidget(),
           loading: () => const SizedCustomProgressIndicator2(),
         );
   }

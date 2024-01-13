@@ -17,7 +17,7 @@ class GenericData {
         id: json['id'],
         name: json['name'],
         description: json['description'],
-        imageUrl: json['imageUrl'],
+        imageUrl: json['imageUrl'] ?? json['imageURL'],
         createdAt: DateTime.tryParse(json['createdAt'] ?? ''),
         updatedAt: DateTime.tryParse(json['updatedAt'] ?? ''),
       );

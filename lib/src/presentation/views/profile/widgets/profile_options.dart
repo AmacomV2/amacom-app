@@ -1,6 +1,6 @@
-import 'package:amacom_app/src/config/menu/profile_menu_items.dart';
 import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/data/repositories/user_repository.dart';
+import 'package:amacom_app/src/presentation/views/profile/widgets/profile_menu_items.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_asset_icon.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';

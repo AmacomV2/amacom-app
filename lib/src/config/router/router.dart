@@ -181,11 +181,6 @@ class CustomAppRouter {
             builder: (context, state) => const PersonalDataScreen(),
           ),
           GoRoute(
-            path: '/petData',
-            name: '/petData',
-            builder: (context, state) => const PetDataForm(),
-          ),
-          GoRoute(
             path: '/changePassword',
             name: '/changePassword',
             builder: (context, state) => const ChangePasswordByForm(),

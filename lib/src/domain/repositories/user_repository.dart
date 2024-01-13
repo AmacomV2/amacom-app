@@ -1,3 +1,4 @@
+import 'package:amacom_app/src/domain/dtos/person_dto.dart';
 import 'package:amacom_app/src/domain/dtos/user_login_dto.dart';
 import 'package:amacom_app/src/domain/dtos/user_register_dto.dart';
 import 'package:amacom_app/src/domain/entities/person.dart';
@@ -11,6 +12,9 @@ abstract class IUserRepository {
 
   /// Perform user registration, return a user object ID
   Future<Session?> userRegister(UserRegisterDTO userData);
+
+  /// Perform user data update
+  Future<bool?> updateUserData(PersonEditDTO personData);
 
   /// Perform user registration, return a user object ID
   Future<void> setSessionData(Session session);

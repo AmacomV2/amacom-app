@@ -40,6 +40,16 @@ extension DateOnlyCompare on DateTime {
   }
 
   /// check if dateBefore<=date<dateAfter,
+  bool isBetWeenDateTime(DateTime before, DateTime after) {
+    if (isSameDay(before) && isSameDay(after)) {
+      if (hour >= before.hour && hour <= after.hour) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /// check if dateBefore<=date<dateAfter,
   bool isBetWeenDates(DateTime before, DateTime after) {
     return isAfterDay(
           before,
@@ -73,6 +83,12 @@ extension DateToText on DateTime {
   ///
   String timeToText() {
     final formatter = DateFormat('jm');
+    return formatter.format(this).capitalize();
+  }
+
+  ///
+  String onlyDate() {
+    final formatter = DateFormat('yyyy-MM-dd');
     return formatter.format(this).capitalize();
   }
 }

@@ -2,6 +2,7 @@ import 'package:amacom_app/src/config/theme/theme.dart';
 import 'package:amacom_app/src/domain/entities/entities.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 ///
@@ -43,6 +44,19 @@ class FeelingCard extends StatelessWidget {
           ),
           child: Row(
             children: [
+              const HorizontalSpacer(
+                width: 8,
+              ),
+              data?.imageUrl == null
+                  ? const Icon(
+                      Icons.image_not_supported_outlined,
+                      size: 28,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: data?.imageUrl ?? '',
+                      height: 20,
+                    ),
+              const HorizontalSpacer(),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +69,7 @@ class FeelingCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${data?.description}',
+                      data?.description ?? '',
                       maxLines: 4,
                       style: theme.textTheme.bodyLarge,
                     ),

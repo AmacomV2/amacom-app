@@ -1,7 +1,7 @@
 import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/presentation/state/authentication/user_provider.dart';
-import 'package:amacom_app/src/presentation/views/homeScreen/widgets/stores_widget.dart';
+import 'package:amacom_app/src/presentation/views/homeScreen/widgets/calendar_widget.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';

@@ -18,6 +18,9 @@ class EmptyListWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        const SafeSpacer(
+          height: 16,
+        ),
         Image.asset(
           'assets/images/not-found.png',
           width: responsive.maxWidthValue(70),
@@ -33,7 +36,7 @@ class EmptyListWidget extends StatelessWidget {
           ),
         ),
         const SafeSpacer(
-          height: 36,
+          height: 24,
         ),
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:amacom_app/src/data/dataSources/api_data_source.dart';
+import 'package:amacom_app/src/domain/dtos/person_dto.dart';
 import 'package:amacom_app/src/domain/dtos/user_login_dto.dart';
 import 'package:amacom_app/src/domain/dtos/user_register_dto.dart';
 import 'package:amacom_app/src/domain/entities/baseResponse/base_response.dart';
@@ -149,6 +150,26 @@ class UserRepository implements IUserRepository {
     } else {
       return data.data;
     }
+  }
+
+  @override
+  Future<bool?> updateUserData(PersonEditDTO personData) async {
+    final requestData = RequestData(
+      path: '/person/update',
+      method: Method.put,
+      body: personData.toJson(),
+    );
+    final result = await api.request(
+      requestData: requestData,
+      withAuthToken: true,
+    );
+    BaseResponse data;
+    try {
+      data = BaseResponse.fromJson(result, Person.fromJson);
+    } catch (e) {
+      data = BaseResponse.fromJson(result, (_) {});
+    }
+    return data.ok;
   }
 }
 

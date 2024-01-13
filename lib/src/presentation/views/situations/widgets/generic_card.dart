@@ -1,4 +1,5 @@
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
+import 'package:amacom_app/src/presentation/widgets/spacers.dart';
 import 'package:amacom_app/src/utils/constant/app_constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -116,12 +117,18 @@ class FeelingCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  const SafeSpacer(
+                    height: 1,
+                  ),
                   image != null
                       ? CachedNetworkImage(
                           imageUrl: image!,
                           height: 38,
                         )
-                      : const Icon(Icons.insert_photo_outlined),
+                      : const Icon(
+                          Icons.image_not_supported_outlined,
+                          size: 30,
+                        ),
                   Row(
                     children: [
                       Expanded(

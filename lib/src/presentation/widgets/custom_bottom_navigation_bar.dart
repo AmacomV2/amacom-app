@@ -114,7 +114,7 @@ class _OptionItem extends ConsumerWidget {
       behavior: HitTestBehavior.translucent,
       child: Container(
         padding: const EdgeInsets.all(0.1),
-        width: 70,
+        width: 72,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [

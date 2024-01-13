@@ -44,7 +44,7 @@ class Person {
         address: json['address'],
         occupation: json['occupation'],
         birthDay: DateTime.parse(json['birthDate']),
-        consentText: json['consentText'],
+        consentText: json['consentText'] == true,
         privacyPolicy: json['privacyPolicy'],
         evaluationCompleted: json['evaluationCompleted'],
         imageUrl: json['imageUrl'] ?? '',

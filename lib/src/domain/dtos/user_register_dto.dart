@@ -64,6 +64,12 @@ class UserRegisterDTO {
         'name': name,
         'lastName': lastName,
         'occupation': occupation,
+        'documentNo': document,
+        'documentTypeId': documentTypeId,
+        'civilStatusId': civilStatusId,
+        'genderId': genderId,
+        'evaluationCompleted': false,
+        'birthDate': birthDate?.toIso8601String(),
         'address': occupation,
         'privacyPolicy': privacyPolicy,
       };
