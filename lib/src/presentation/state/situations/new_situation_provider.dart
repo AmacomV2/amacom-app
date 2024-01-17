@@ -17,9 +17,6 @@ final situationFirstThoughtProvider = StateProvider<String?>((ref) => null);
 /// New situation behavior provider
 final situationBehaviorProvider = StateProvider<String?>((ref) => null);
 
-/// New situation subjects provider
-final situationSubjectProvider = StateProvider<SubjectEntity?>((ref) => null);
-
 /// New situation feelings provider
 final situationFeelingsProvider = StateProvider<List<GenericData>>((ref) => []);
 

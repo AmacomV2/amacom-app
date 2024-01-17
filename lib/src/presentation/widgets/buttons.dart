@@ -202,81 +202,83 @@ class _CustomButtonWithStateState extends State<CustomButtonWithState> {
     final theme = Theme.of(context);
     final textStyle = theme.textTheme.labelMedium;
     final responsive = ResponsiveDesign(context);
-    return Padding(
-      padding: widget.margin ?? EdgeInsets.zero,
-      child: InkWell(
-        onTap: () async {
-          if (widget.enabled && !loading) {
-            setState(() {
-              loading = true;
-            });
-            try {
-              await widget.onTap();
-            } catch (e) {
-              AppDialogs.genericConfirmationDialog(title: e.toString());
+    return Material(
+      child: Padding(
+        padding: widget.margin ?? EdgeInsets.zero,
+        child: InkWell(
+          onTap: () async {
+            if (widget.enabled && !loading) {
+              setState(() {
+                loading = true;
+              });
+              try {
+                await widget.onTap();
+              } catch (e) {
+                AppDialogs.genericConfirmationDialog(title: e.toString());
+              }
+              setState(() {
+                loading = false;
+              });
             }
-            setState(() {
-              loading = false;
-            });
-          }
-        },
-        borderRadius: BorderRadius.circular(AppSizes.genericBorderRadius),
-        child: Container(
-          width: widget.width ?? AppSizes.buttonsWidth,
-          height: widget.height ?? responsive.buttonsHeight(),
-          decoration: BoxDecoration(
-            color: widget.enabled
-                ? (widget.color ?? theme.colorScheme.primary)
-                : FigmaColors.secondary_300,
-            borderRadius: BorderRadius.circular(AppSizes.genericBorderRadius),
-            border: widget.border
-                ? Border.all(
-                    color: widget.borderColor ?? FigmaColors.primary_200,
-                    width: 1,
-                    strokeAlign: 1,
-                  )
-                : null,
-          ),
-          padding: widget.padding ?? AppSizes.genericButtonPadding,
-          alignment: Alignment.center,
-          child: loading
-              ? SizedCustomProgressIndicator(
-                  size: 19,
-                  color: FigmaColors.getFontColorForBackground(
-                    widget.color ?? theme.colorScheme.primary,
-                  ),
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // if (svgPicture != null) Text('svgPicture'),
-                    //validate if svgPicture doesn't exist
-
-                    // (svgPicture != null &&
-                    //         svgPicture?.iconFromSVG != null &&
-                    //         svgPicture?.iconFromPNG != null)
-                    //     ? svgPicture?.iconFromSVG ?? false
-                    //     : svgPicture?.iconFromPNG ?? false
-                    //         ? svgPicture?.iconFromPNG ?? false
-                    //         : null,
-                    // (svgPicture != null)
-                    //     ? const SizedBox(
-                    //         width: 10,
-                    //       )
-                    //     : const SizedBox(),
-                    Text(
-                      widget.text,
-                      style: textStyle?.copyWith(
-                        color: widget.adaptiveTextColor
-                            ? FigmaColors.getFontColorForBackground(
-                                widget.color ?? theme.colorScheme.primary,
-                              )
-                            : widget.textColor,
-                      ),
+          },
+          borderRadius: BorderRadius.circular(AppSizes.genericBorderRadius),
+          child: Container(
+            width: widget.width ?? AppSizes.buttonsWidth,
+            height: widget.height ?? responsive.buttonsHeight(),
+            decoration: BoxDecoration(
+              color: widget.enabled
+                  ? (widget.color ?? theme.colorScheme.primary)
+                  : FigmaColors.secondary_300,
+              borderRadius: BorderRadius.circular(AppSizes.genericBorderRadius),
+              border: widget.border
+                  ? Border.all(
+                      color: widget.borderColor ?? FigmaColors.primary_200,
+                      width: 1,
+                      strokeAlign: 1,
+                    )
+                  : null,
+            ),
+            padding: widget.padding ?? AppSizes.genericButtonPadding,
+            alignment: Alignment.center,
+            child: loading
+                ? SizedCustomProgressIndicator(
+                    size: 19,
+                    color: FigmaColors.getFontColorForBackground(
+                      widget.color ?? theme.colorScheme.primary,
                     ),
-                  ],
-                ),
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // if (svgPicture != null) Text('svgPicture'),
+                      //validate if svgPicture doesn't exist
+
+                      // (svgPicture != null &&
+                      //         svgPicture?.iconFromSVG != null &&
+                      //         svgPicture?.iconFromPNG != null)
+                      //     ? svgPicture?.iconFromSVG ?? false
+                      //     : svgPicture?.iconFromPNG ?? false
+                      //         ? svgPicture?.iconFromPNG ?? false
+                      //         : null,
+                      // (svgPicture != null)
+                      //     ? const SizedBox(
+                      //         width: 10,
+                      //       )
+                      //     : const SizedBox(),
+                      Text(
+                        widget.text,
+                        style: textStyle?.copyWith(
+                          color: widget.adaptiveTextColor
+                              ? FigmaColors.getFontColorForBackground(
+                                  widget.color ?? theme.colorScheme.primary,
+                                )
+                              : widget.textColor,
+                        ),
+                      ),
+                    ],
+                  ),
+          ),
         ),
       ),
     );

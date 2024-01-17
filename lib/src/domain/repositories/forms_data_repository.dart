@@ -10,4 +10,7 @@ abstract class IFormsDataRepository {
 
   /// Get civil statuses
   Future<List<GenericData>> genders();
+
+  /// Get civil statuses
+  Future<List<GenericData>> eventTypes();
 }

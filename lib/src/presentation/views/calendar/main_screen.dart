@@ -1,7 +1,7 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/domain/entities/entities.dart';
 import 'package:amacom_app/src/presentation/views/calendar/widgets.dart/widgets.dart';
-import 'package:amacom_app/src/presentation/widgets/custom_scaffold.dart';
-import 'package:amacom_app/src/presentation/widgets/spacers.dart';
+import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/global_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,20 +15,31 @@ class CalendarScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final responsive = GlobalLocator.responsiveDesign;
+    final appLocalizations = AppLocalizations.of(context);
+
     return CustomScaffold(
       body: SizedBox(
         height: responsive.screenHeight,
-        child: const Column(
+        child: ColumnWithPadding(
+          padding: responsive.horizontalPadding(10),
           children: [
-            HeaderSpacer(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Calendar(),
-                    BottomNavBarSpacer(),
-                  ],
+            CustomAppBar(
+              includeBackArrow: false,
+              title: appLocalizations?.agenda,
+              centerTitle: true,
+              titleIcon: const ImageIcon(
+                AssetImage(
+                  'assets/icon/calendar.png',
                 ),
+                size: 22,
+              ),
+            ),
+            const Expanded(
+              child: Column(
+                children: [
+                  Expanded(child: Calendar()),
+                  BottomNavBarSpacer(),
+                ],
               ),
             ),
           ],

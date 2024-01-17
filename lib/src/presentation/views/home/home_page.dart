@@ -1,5 +1,6 @@
 import 'package:amacom_app/src/presentation/state/home/navigation_bar_provider.dart';
 import 'package:amacom_app/src/presentation/views/calendar/main_screen.dart';
+import 'package:amacom_app/src/presentation/views/resources/main_screen.dart';
 import 'package:amacom_app/src/presentation/views/screens.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_bottom_navigation_bar.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_scaffold.dart';
@@ -28,7 +29,7 @@ class HomePage extends ConsumerWidget {
         body = const SituationsScreen();
         break;
       case NavigationBarSelection.RESOURCES:
-        body = const ProfileScreen();
+        body = const ResourcesScreen();
         break;
     }
     return CustomScaffold(

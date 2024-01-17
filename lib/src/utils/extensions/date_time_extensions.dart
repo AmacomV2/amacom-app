@@ -91,4 +91,10 @@ extension DateToText on DateTime {
     final formatter = DateFormat('yyyy-MM-dd');
     return formatter.format(this).capitalize();
   }
+
+  ///
+  String toYMDHMS() {
+    final formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
+    return formatter.format(this).capitalize();
+  }
 }

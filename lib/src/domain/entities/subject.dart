@@ -12,6 +12,7 @@ class SubjectEntity {
     this.parentId,
     this.associatedResultId,
     required this.name,
+    this.description,
     this.validityIndicator,
     required this.createdAt,
     required this.updatedAt,
@@ -21,6 +22,7 @@ class SubjectEntity {
   factory SubjectEntity.fromJson(dynamic json) => SubjectEntity(
         id: json['id'],
         name: json['name'],
+        description: json['description'],
         associatedResultId: json['associatedResultId'],
         validityIndicator: json['validityIndicator'],
         parentId: json['parentId'],
@@ -33,6 +35,9 @@ class SubjectEntity {
 
   ///
   String? parentId;
+
+  ///
+  String? description;
 
   ///
   String? associatedResultId;

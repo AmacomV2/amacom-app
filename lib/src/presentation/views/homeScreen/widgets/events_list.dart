@@ -67,7 +67,7 @@ class EventsListHome extends StatelessWidget {
                     ),
                     const HorizontalSpacer(),
                     Text(
-                      '${e.from.timeToText().replaceAll("am", "").replaceAll("pm", "")}-${e.to.timeToText()}',
+                      '${e.from.timeToText().replaceAll("am", "").replaceAll("pm", "")}- ${e.to.timeToText()}',
                       style: textTheme.bodyLarge?.copyWith(
                         color:
                             FigmaColors.getFontColorForBackground(e.background),

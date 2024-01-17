@@ -19,3 +19,9 @@ final civilStatusesProvider =
     FutureProvider.autoDispose<List<GenericData>>((ref) async {
   return await ref.read(formsDataRepository).civilStatuses();
 });
+
+/// Event types list provider
+final eventTypesProvider =
+    FutureProvider.autoDispose<List<GenericData>>((ref) async {
+  return await ref.read(formsDataRepository).eventTypes();
+});

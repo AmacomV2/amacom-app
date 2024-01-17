@@ -1,8 +1,8 @@
 import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
-import 'package:amacom_app/src/presentation/state/situations/new_situation_provider.dart';
+import 'package:amacom_app/src/presentation/state/subjects/subject_selection.dart';
 import 'package:amacom_app/src/presentation/views/situations/widgets/selected_subjects.dart';
-import 'package:amacom_app/src/presentation/views/situations/widgets/subjects_body.dart';
+import 'package:amacom_app/src/presentation/views/subjects/widgets/subjects_body.dart';
 import 'package:amacom_app/src/presentation/widgets/buttons.dart';
 import 'package:amacom_app/src/presentation/widgets/spacers.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
@@ -19,7 +19,7 @@ class SelectSubject extends ConsumerWidget {
     final theme = Theme.of(context);
     final responsive = GlobalLocator.responsiveDesign;
     final appLocalizations = AppLocalizations.of(context);
-    final selected = ref.watch(situationSubjectProvider);
+    final selected = ref.watch(selectedSubject);
     return Column(
       children: [
         Text(

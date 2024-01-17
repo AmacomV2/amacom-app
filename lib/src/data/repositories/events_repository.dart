@@ -19,7 +19,7 @@ class EventsRepository implements IEventsRepository {
     required DateTime to,
   }) async {
     final requestData = RequestData(
-      path: '/event/personEvents?from=${from.onlyDate()}&to=${to.onlyDate()}',
+      path: '/event/personEvents',
       method: Method.get,
       queryParameters: {
         'from': from.onlyDate(),
@@ -45,9 +45,28 @@ class EventsRepository implements IEventsRepository {
   }
 
   @override
-  Future<Event> createEvent(EventDto eventData) {
-    // TODO: implement createEvent
-    throw UnimplementedError();
+  Future<Event> createEvent(EventDto eventData) async {
+    final requestData = RequestData(
+      path: '/event/create',
+      method: Method.post,
+      body: eventData.toJson(),
+    );
+    final result = await api.request(
+      requestData: requestData,
+      withAuthToken: true,
+    );
+    BaseResponse data;
+    try {
+      data =
+          BaseResponse.fromJson(result, (json) => Event.fromJson(json as Map));
+    } catch (e) {
+      data = BaseResponse.fromJson(result, (_) {});
+    }
+    if (!data.ok) {
+      throw Exception(data.message);
+    } else {
+      return data.data;
+    }
   }
 
   @override

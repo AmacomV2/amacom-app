@@ -1,6 +1,6 @@
 import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/presentation/state/subjects/subjects_list_provider.dart';
-import 'package:amacom_app/src/presentation/views/situations/widgets/subjects_list.dart';
+import 'package:amacom_app/src/presentation/views/subjects/widgets/subjects_list.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +8,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 ///
 class SubjectsBody extends ConsumerStatefulWidget {
   ///
-  const SubjectsBody({super.key});
+  const SubjectsBody({super.key, this.title});
+
+  ///
+  final String? title;
 
   @override
   ConsumerState<SubjectsBody> createState() => _SubjectsBodyState();

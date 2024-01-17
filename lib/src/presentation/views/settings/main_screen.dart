@@ -49,6 +49,9 @@ class SettingsForm extends ConsumerWidget {
                         await AppDialogs.genericDialog(
                           buttonText: appLocalizations.accept,
                           widget: ChangeLocaleWidget(state: localeSelection),
+                          onTap: () {
+                            Navigation.goBack();
+                          },
                         );
                         if (ref.read(localeSelection).languageCode !=
                             appLocalizations.localeName) {

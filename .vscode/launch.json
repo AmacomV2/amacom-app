@@ -13,7 +13,7 @@
                 "HOST=",
             ],
             "args": [
-                "--dart-define=HOST=http://192.168.18.6:8080/api",
+                "--dart-define=HOST=http://192.168.1.106:8080/api",
             ],
             "env": {
                 "HOST": "",
@@ -26,10 +26,10 @@
             "flutterMode": "profile",
             "toolArgs": [
                 "--dart-define",
-                "HOST=http://192.168.18.6:8080/api",
+                "HOST=http://192.168.1.106:8080/api",
             ],
             "args": [
-                "--dart-define=HOST=http://192.168.18.6:8080/api",
+                "--dart-define=HOST=http://192.168.1.106:8080/api",
             ],
             "env": {
                 "HOST": "",
@@ -42,10 +42,10 @@
             "flutterMode": "release",
             "toolArgs": [
                 "--dart-define",
-                "HOST=http://192.168.18.6:8080/api"
+                "HOST=http://192.168.1.106:8080/api"
             ],
             "args": [
-                "--dart-define=HOST=http://192.168.18.6:8080/api",
+                "--dart-define=HOST=http://192.168.1.106:8080/api",
             ],
             "env": {
                 "HOST": "",

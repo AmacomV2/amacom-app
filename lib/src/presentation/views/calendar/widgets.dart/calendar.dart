@@ -1,6 +1,10 @@
+import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/data/repositories/events_repository.dart';
+import 'package:amacom_app/src/domain/dtos/event_dto.dart';
 import 'package:amacom_app/src/domain/entities/entities.dart';
 import 'package:amacom_app/src/presentation/state/events/calendar_view.dart';
+import 'package:amacom_app/src/presentation/state/events/new_event.dart';
+import 'package:amacom_app/src/presentation/views/calendar/widgets.dart/new_event.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,11 +23,23 @@ class _CalendarState extends ConsumerState<Calendar> {
   final responsive = GlobalLocator.responsiveDesign;
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context);
+
+    final textTheme = Theme.of(context).textTheme;
     return SizedBox(
-      height: responsive.maxHeightValue(800),
+      height: double.infinity,
       child: SfCalendar(
         allowDragAndDrop: true,
         view: CalendarView.day,
+        todayTextStyle: textTheme.bodyMedium?.copyWith(
+          color: Colors.white,
+        ),
+        headerStyle: CalendarHeaderStyle(
+          textStyle: textTheme.bodyLarge?.copyWith(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         dataSource: EventDataSource(ref.watch(calendarEventsProvider)),
         // by default the month appointment display mode set as Indicator, we can
         // change the display mode as appointment using the appointment display
@@ -32,9 +48,12 @@ class _CalendarState extends ConsumerState<Calendar> {
           appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
         ),
         showDatePickerButton: true,
-        onSelectionChanged: (selection) {},
-        onTap: (calendarTapDetails) {
-          if (calendarTapDetails.appointments?.isNotEmpty ?? false) {}
+
+        onTap: (calendarTapDetails) async {
+          if (calendarTapDetails.appointments?.isNotEmpty ?? false) {
+          } else {
+            await _newEvent(calendarTapDetails.date!, appLocalizations);
+          }
         },
         onViewChanged: (viewDetails) async {
           final events = await ref.read(eventsRepository).getEvents(
@@ -49,6 +68,26 @@ class _CalendarState extends ConsumerState<Calendar> {
           CalendarView.month,
         ],
       ),
+    );
+  }
+
+  Future<void> _newEvent(
+    DateTime from,
+    AppLocalizations? appLocalizations,
+  ) async {
+    ref.read(eventCreationProvider.notifier).update(
+          (state) => EventDto(
+            eventName: '',
+            from: from,
+            eventTypeId: null,
+            isAllDay: false,
+          ),
+        );
+    await AppDialogs.genericDialog(
+      buttonText: appLocalizations?.save ?? '',
+      padding: EdgeInsets.zero,
+      includeButton: false,
+      widget: const NewEvent(),
     );
   }
 }
@@ -75,7 +114,7 @@ class EventDataSource extends CalendarDataSource {
 
   @override
   String getSubject(int index) {
-    return _getEventData(index).eventName;
+    return '${_getEventData(index).eventName}\n${_getEventData(index).description ?? ""}';
   }
 
   @override

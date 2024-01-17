@@ -106,28 +106,33 @@ class AppDialogs {
     required Widget widget,
     VoidCallback? onTap,
     String buttonText = 'Aceptar',
+    bool includeButton = true,
+
+    /// Padding to use on widget
+    EdgeInsets? padding,
   }) async {
     final responsiveD = _responsiveDesign;
     return genericDialogBase(
       widget: Center(
         child: Container(
-          width: responsiveD.maxWidthValue(350),
+          width: responsiveD.maxWidthValue(340),
           margin: responsiveD.appHorizontalPadding,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: FigmaColors.background,
             borderRadius:
                 BorderRadius.circular(AppSizes.genericDialogsBorderRadius),
           ),
           child: ColumnWithPadding(
-            padding: responsiveD.appDialogsPadding,
+            padding: padding ?? responsiveD.appDialogsPadding,
             children: [
               widget,
               const SafeSpacer(),
-              GenericRoundedButton(
-                width: double.infinity,
-                onTap: onTap ?? () => navigatorKey.currentState?.pop(),
-                text: buttonText,
-              ),
+              if (includeButton)
+                CustomButtonWithState(
+                  width: double.infinity,
+                  onTap: onTap ?? () => navigatorKey.currentState?.pop(),
+                  text: buttonText,
+                ),
             ],
           ),
         ),

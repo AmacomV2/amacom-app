@@ -90,6 +90,32 @@ class FormsDataRepository implements IFormsDataRepository {
       return data.data;
     }
   }
+
+  @override
+  Future<List<GenericData>> eventTypes() async {
+    final requestData = RequestData(
+      path: '/eventType/getAll',
+      method: Method.get,
+    );
+    final result = await api.request(
+      requestData: requestData,
+      withAuthToken: true,
+    );
+    BaseResponse data;
+    try {
+      data = BaseResponse.fromJson(
+        result,
+        (json) => GenericData.fromJsonList(json),
+      );
+    } catch (e) {
+      data = BaseResponse.fromJson(result, (_) {});
+    }
+    if (!data.ok) {
+      throw Exception(data.message);
+    } else {
+      return data.data;
+    }
+  }
 }
 
 /// Forms data repository riverpod instance

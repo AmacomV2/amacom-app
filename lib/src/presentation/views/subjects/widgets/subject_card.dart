@@ -1,6 +1,6 @@
 import 'package:amacom_app/src/domain/entities/entities.dart';
-import 'package:amacom_app/src/presentation/state/situations/new_situation_provider.dart';
-import 'package:amacom_app/src/presentation/views/situations/widgets/sub_subjects_list.dart';
+import 'package:amacom_app/src/presentation/state/subjects/subject_selection.dart';
+import 'package:amacom_app/src/presentation/views/subjects/widgets/sub_subjects_list.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,11 +43,21 @@ class _SubjectCardState extends ConsumerState<SubjectCard> {
             child: Row(
               children: [
                 Expanded(
-                  child: Text(
-                    '${widget.data?.name}',
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${widget.data?.name}',
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      if (widget.data?.description != null)
+                        Text(
+                          '${widget.data?.description}',
+                          style: theme.textTheme.bodyLarge?.copyWith(),
+                        ),
+                    ],
                   ),
                 ),
                 AnimatedContainer(
@@ -70,9 +80,7 @@ class _SubjectCardState extends ConsumerState<SubjectCard> {
           SubSubjectsList(
             parentId: parentId!,
             onSelected: (subject) {
-              ref
-                  .read(situationSubjectProvider.notifier)
-                  .update((state) => subject);
+              ref.read(selectedSubject.notifier).update((state) => subject);
             },
           ),
       ],

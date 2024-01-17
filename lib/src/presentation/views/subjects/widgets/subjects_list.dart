@@ -1,6 +1,6 @@
 import 'package:amacom_app/src/domain/entities/entities.dart';
 import 'package:amacom_app/src/presentation/state/subjects/subjects_list_provider.dart';
-import 'package:amacom_app/src/presentation/views/situations/widgets/subject_card.dart';
+import 'package:amacom_app/src/presentation/views/subjects/widgets/subject_card.dart';
 import 'package:amacom_app/src/utils/constant/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

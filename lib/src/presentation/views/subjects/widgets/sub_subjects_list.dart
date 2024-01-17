@@ -1,6 +1,6 @@
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/domain/entities/entities.dart';
-import 'package:amacom_app/src/presentation/state/situations/new_situation_provider.dart';
+import 'package:amacom_app/src/presentation/state/subjects/subject_selection.dart';
 import 'package:amacom_app/src/presentation/state/subjects/subjects_list_provider.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/app_constants.dart';
@@ -25,7 +25,7 @@ class SubSubjectsList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    SubjectEntity? selected = ref.watch(situationSubjectProvider);
+    SubjectEntity? selected = ref.watch(selectedSubject);
 
     return ref.watch(subjectsProviderFamily(parentId)).when(
           data: (data) {
@@ -71,10 +71,25 @@ class SubSubjectsList extends ConsumerWidget {
                             child: Row(
                               children: [
                                 Expanded(
-                                  child: Text(
-                                    e.name,
-                                    maxLines: 3,
-                                    style: theme.textTheme.bodyLarge,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        e.name,
+                                        maxLines: 3,
+                                        style:
+                                            theme.textTheme.bodyLarge?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      if (e.description != null)
+                                        Text(
+                                          e.description ?? '',
+                                          maxLines: 3,
+                                          style: theme.textTheme.bodyLarge,
+                                        ),
+                                    ],
                                   ),
                                 ),
                                 CustomCheckBox(

@@ -4,6 +4,7 @@ import 'package:amacom_app/src/data/repositories/situation_repository.dart';
 import 'package:amacom_app/src/domain/dtos/new_situation_dto.dart';
 import 'package:amacom_app/src/presentation/state/situations/new_situation_provider.dart';
 import 'package:amacom_app/src/presentation/state/situations/situations_list_provider.dart';
+import 'package:amacom_app/src/presentation/state/subjects/subject_selection.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class NewSituationButton extends ConsumerWidget {
               description: ref.read(situationFirstThoughtProvider) ?? '',
               behavior: ref.read(situationFirstThoughtProvider) ?? '',
               affectationDegree: ref.read(affectationDegreeProvider)!,
-              subject: ref.read(situationSubjectProvider)!,
+              subject: ref.read(selectedSubject)!,
               feelings:
                   ref.read(situationFeelingsProvider).map((e) => e.id).toList(),
               babyAlarmSigns: ref
@@ -96,7 +97,7 @@ class NewSituationButton extends ConsumerWidget {
   bool _validateForm1(WidgetRef ref, AppLocalizations? appLocalizations) {
     if (ref.read(newSituationForm1Key).currentState?.validate() == true) {
       if (ref.read(affectationDegreeProvider) != null) {
-        if (ref.read(situationSubjectProvider) != null) {
+        if (ref.read(selectedSubject) != null) {
           return true;
         } else {
           AppDialogs.showCustomSnackBar(
@@ -121,7 +122,7 @@ class NewSituationButton extends ConsumerWidget {
     ref.invalidate(situationFirstThoughtProvider);
     ref.invalidate(situationBehaviorProvider);
     ref.invalidate(situationFeelingsProvider);
-    ref.invalidate(situationSubjectProvider);
+    ref.invalidate(selectedSubject);
     ref.invalidate(babySituationAlarmSignsProvider);
     ref.invalidate(motherSituationAlarmSignsProvider);
     ref.invalidate(affectationDegreeProvider);

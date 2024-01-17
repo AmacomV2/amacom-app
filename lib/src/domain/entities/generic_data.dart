@@ -1,4 +1,6 @@
+import 'package:amacom_app/src/utils/extensions/color_hex_extension.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/material.dart';
 
 /// Class used to manage generic data
 class GenericData {
@@ -8,6 +10,7 @@ class GenericData {
     required this.name,
     this.description,
     this.imageUrl,
+    this.color,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -17,8 +20,9 @@ class GenericData {
         id: json['id'],
         name: json['name'],
         description: json['description'],
+        color: json['color'] != null ? HexColor.fromHex(json['color']) : null,
         imageUrl: json['imageUrl'] ?? json['imageURL'],
-        createdAt: DateTime.tryParse(json['createdAt'] ?? ''),
+        createdAt: DateTime.parse(json['createdAt'] ?? ''),
         updatedAt: DateTime.tryParse(json['updatedAt'] ?? ''),
       );
 
@@ -30,7 +34,8 @@ class GenericData {
         name: json?['name'],
         description: json?['description'],
         imageUrl: json['imageUrl'],
-        createdAt: DateTime.tryParse(json?['createdAt'] ?? ''),
+        color: json['color'] != null ? HexColor.fromHex(json['color']) : null,
+        createdAt: DateTime.parse(json?['createdAt'] ?? ''),
         updatedAt: DateTime.tryParse(json?['updatedAt'] ?? ''),
       );
     } catch (e) {
@@ -51,7 +56,10 @@ class GenericData {
   String? imageUrl;
 
   /// Entity creationDate
-  DateTime? createdAt;
+  DateTime createdAt;
+
+  /// Entity optional property
+  Color? color;
 
   /// Entity updatedDate
   DateTime? updatedAt;

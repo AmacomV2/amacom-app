@@ -3,7 +3,6 @@ import 'package:amacom_app/src/presentation/state/situations/situations_list_pro
 import 'package:amacom_app/src/presentation/views/situations/widgets/search_situations.dart';
 import 'package:amacom_app/src/presentation/widgets/app_bars.dart';
 import 'package:amacom_app/src/presentation/widgets/icon_buttons.dart';
-import 'package:amacom_app/src/presentation/widgets/spacers.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -40,7 +39,6 @@ class SituationsHeader extends ConsumerWidget {
             onTap: () => Navigation.goTo(CustomAppRouter.newSituation),
           ),
         ),
-        const SafeSpacer(),
         SearchSituations(),
       ],
     );
