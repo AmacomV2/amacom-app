@@ -79,7 +79,7 @@ class EventsListHome extends StatelessWidget {
             }
           }
           return Container();
-        }).toList(),
+        }),
       ],
     );
   }

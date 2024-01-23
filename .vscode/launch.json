@@ -13,7 +13,7 @@
                 "HOST=",
             ],
             "args": [
-                "--dart-define=HOST=http://192.168.1.106:8080/api",
+                "--dart-define=HOST=http://amacom.eastus2.cloudapp.azure.com/api",
             ],
             "env": {
                 "HOST": "",
@@ -26,10 +26,10 @@
             "flutterMode": "profile",
             "toolArgs": [
                 "--dart-define",
-                "HOST=http://192.168.1.106:8080/api",
+                "HOST=http://amacom.eastus2.cloudapp.azure.com/api",
             ],
             "args": [
-                "--dart-define=HOST=http://192.168.1.106:8080/api",
+                "--dart-define=HOST=http://amacom.eastus2.cloudapp.azure.com/api",
             ],
             "env": {
                 "HOST": "",
@@ -42,10 +42,10 @@
             "flutterMode": "release",
             "toolArgs": [
                 "--dart-define",
-                "HOST=http://192.168.1.106:8080/api"
+                "HOST=http://amacom.eastus2.cloudapp.azure.com/api"
             ],
             "args": [
-                "--dart-define=HOST=http://192.168.1.106:8080/api",
+                "--dart-define=HOST=http://amacom.eastus2.cloudapp.azure.com/api",
             ],
             "env": {
                 "HOST": "",

@@ -4,6 +4,7 @@ import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 /// Represents a menu item in the user profile.
 class ProfileMenuItem {
@@ -60,6 +61,17 @@ List<ProfileMenuItem> appMenuItems(AppLocalizations? appLocalizations) {
         color: FigmaColors.primary_50,
         height: 24,
         width: 24,
+      ),
+    ),
+
+    /// The menu item for privacy policy.
+    ProfileMenuItem(
+      title: appLocalizations?.achievements ?? 'Logros',
+      link: CustomAppRouter.logbooks,
+      icon: const FaIcon(
+        FontAwesomeIcons.trophy,
+        color: FigmaColors.primary_50,
+        size: 20,
       ),
     ),
 

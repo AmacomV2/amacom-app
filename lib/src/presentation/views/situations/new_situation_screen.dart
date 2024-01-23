@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 ///
 class NewSituationScreen extends StatelessWidget {
   ///
-  const NewSituationScreen({Key? key}) : super(key: key);
+  const NewSituationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

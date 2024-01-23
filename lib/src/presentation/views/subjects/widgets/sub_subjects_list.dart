@@ -102,7 +102,7 @@ class SubSubjectsList extends ConsumerWidget {
                         ),
                       );
                     },
-                  ).toList(),
+                  ),
                 ],
               ),
             );

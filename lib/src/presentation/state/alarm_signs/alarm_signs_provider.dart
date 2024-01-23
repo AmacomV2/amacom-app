@@ -1,5 +1,4 @@
 import 'package:amacom_app/src/data/repositories/alarm_signs_repository.dart';
-import 'package:amacom_app/src/domain/entities/alarm_sign.dart';
 import 'package:amacom_app/src/domain/entities/entities.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

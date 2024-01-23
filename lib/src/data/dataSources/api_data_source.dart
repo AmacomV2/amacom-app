@@ -259,7 +259,8 @@ class ApiDataSource {
         } on DioException {
           rethrow;
         } on Exception catch (e) {
-          _logger.e(endpoint, e);
+          _logger.i(endpoint);
+          _logger.e(e);
           return _resolveInternalError(e);
         }
       },

@@ -62,15 +62,20 @@ class _UrlResourceState extends State<UrlResource> {
     final resourceType = ResourceTypeHelper.getType(widget.recourseUrl);
     final responsive = ResponsiveDesign(context);
     if (resourceType == ResourceType.IMAGE) {
-      return CachedNetworkImage(
-        imageUrl: widget.recourseUrl,
-        memCacheWidth: responsive.screenWidth.toInt(),
-        fit: widget.fit ?? BoxFit.cover,
-        progressIndicatorBuilder: (context, url, progress) =>
-            CustomCircularProgressIndicator(
-          strokeWidth: 3,
-          headRadius: 3.5,
-          value: progress.progress,
+      return InteractiveViewer(
+        panEnabled: false, // Set it to false
+        boundaryMargin: const EdgeInsets.all(80),
+        minScale: 0.5,
+        maxScale: 2,
+        child: CachedNetworkImage(
+          imageUrl: widget.recourseUrl,
+          memCacheWidth: responsive.screenWidth.toInt(),
+          fit: widget.fit ?? BoxFit.cover,
+          progressIndicatorBuilder: (context, url, progress) =>
+              const SizedCustomProgressIndicator2(
+            strokeWidth: 3,
+            headRadius: 3.5,
+          ),
         ),
       );
     }
@@ -135,6 +140,7 @@ class NetworkResourceView extends StatelessWidget {
     super.key,
     this.url,
     this.title,
+    this.subtitle,
   });
 
   /// Resource url
@@ -142,6 +148,9 @@ class NetworkResourceView extends StatelessWidget {
 
   /// Optional title
   final String? title;
+
+  /// Optional title
+  final String? subtitle;
 
   @override
   Widget build(BuildContext context) {
@@ -155,6 +164,7 @@ class NetworkResourceView extends StatelessWidget {
         children: [
           CustomAppBar2(
             title: title,
+            subtitle: subtitle,
             onBack: () => Navigator.of(context).pop(),
           ),
           if ((url ?? arguments['url']) != null)

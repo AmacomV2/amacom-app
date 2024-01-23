@@ -10,7 +10,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 /// The hove page which hosts the calendar
 class CalendarScreen extends ConsumerWidget {
   /// Creates the home page to display teh calendar widget.
-  const CalendarScreen({Key? key}) : super(key: key);
+  const CalendarScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -87,9 +87,8 @@ class _CustomOTPTextField extends StatefulWidget {
     this.textStyle,
     this.onChanged,
     this.onCompleted,
-    Key? key,
     this.pinLength = 4,
-  }) : super(key: key);
+  });
   final int pinLength;
   final Function(String)? onChanged;
   final Function(String)? onCompleted;

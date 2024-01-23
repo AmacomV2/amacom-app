@@ -116,21 +116,19 @@ class NewEvent extends ConsumerWidget {
                             );
                             eventDataNotifier.update(
                               (state) {
-                                final temp = state.from.copyWith(
-                                  hour: pickedTime?.hour,
-                                  minute: pickedTime?.minute,
-                                );
-                                temp.toUtc();
-                                DateTime to;
-                                if (temp.hour == 24) {
-                                  to =
-                                      DateTime(temp.year, temp.month, temp.day);
-                                  to.add(const Duration(days: 1));
-                                } else {
-                                  to = temp;
+                                int? minute = pickedTime?.minute;
+                                int? hour = pickedTime?.hour;
+                                if (pickedTime?.period == DayPeriod.pm &&
+                                    hour == 12) {
+                                  minute = 59;
+                                  hour = 23;
                                 }
+                                final temp = state.from.copyWith(
+                                  hour: hour,
+                                  minute: minute,
+                                );
                                 return state.copyWith(
-                                  to: to,
+                                  to: temp,
                                 );
                               },
                             );

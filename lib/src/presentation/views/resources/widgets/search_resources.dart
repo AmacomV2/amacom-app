@@ -29,7 +29,6 @@ class SearchResources extends ConsumerWidget {
             },
             suffixIcon: IconButton(
               onPressed: () {
-                _controller.text = '';
                 providerNotifier.update((state) => state = '');
               },
               icon: const Icon(Icons.clear_rounded),

@@ -1,5 +1,4 @@
 import 'package:amacom_app/src/data/dataSources/api_data_source.dart';
-import 'package:amacom_app/src/domain/entities/alarm_sign.dart';
 import 'package:amacom_app/src/domain/entities/entities.dart';
 import 'package:amacom_app/src/domain/repositories/alarm_signs_repository.dart';
 import 'package:amacom_app/src/utils/utils/global_locator.dart';

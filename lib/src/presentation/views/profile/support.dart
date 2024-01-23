@@ -189,15 +189,13 @@ class _InfoItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ...subtitle
-                    .map(
-                      (e) => _CustomUrlTextButton(
-                        title: e['title'],
-                        url: e['url'],
-                        icon: e['icon'],
-                      ).paddingBottom(subtitle.length > 1 ? 15 : 0),
-                    )
-                    .toList(),
+                ...subtitle.map(
+                  (e) => _CustomUrlTextButton(
+                    title: e['title'],
+                    url: e['url'],
+                    icon: e['icon'],
+                  ).paddingBottom(subtitle.length > 1 ? 15 : 0),
+                ),
               ],
             ),
           ),
@@ -212,14 +210,12 @@ class _InfoItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ...options
-                    .map(
-                      (e) => _CustomNavigationTextButton(
-                        title: e['title'],
-                        onTap: e['onTap'],
-                      ).paddingBottom(options.length > 1 ? 15 : 0),
-                    )
-                    .toList(),
+                ...options.map(
+                  (e) => _CustomNavigationTextButton(
+                    title: e['title'],
+                    onTap: e['onTap'],
+                  ).paddingBottom(options.length > 1 ? 15 : 0),
+                ),
               ],
             ),
           ),

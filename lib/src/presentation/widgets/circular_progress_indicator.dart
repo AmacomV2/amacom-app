@@ -9,14 +9,12 @@ import 'package:get_it/get_it.dart';
 class SizedCustomProgressIndicator extends StatelessWidget {
   /// Constructor
   const SizedCustomProgressIndicator({
-    Key? key,
+    super.key,
     this.size = 25,
     this.headRadius = 2.5,
     this.strokeWidth = 2,
     this.color,
-  }) : super(
-          key: key,
-        );
+  });
 
   /// Widget size (h and w)
   final double size;
@@ -50,14 +48,12 @@ class SizedCustomProgressIndicator extends StatelessWidget {
 class SizedCustomProgressIndicator2 extends StatelessWidget {
   /// Constructor
   const SizedCustomProgressIndicator2({
-    Key? key,
+    super.key,
     this.size = 25,
     this.headRadius = 2.5,
     this.strokeWidth = 2,
     this.color,
-  }) : super(
-          key: key,
-        );
+  });
 
   /// Widget size (h and w)
   final double size;

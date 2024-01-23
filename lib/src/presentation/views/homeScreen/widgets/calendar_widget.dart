@@ -1,6 +1,9 @@
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
+import 'package:amacom_app/src/domain/entities/diagnosis.dart';
+import 'package:amacom_app/src/domain/entities/entities.dart';
 import 'package:amacom_app/src/presentation/state/events/calendar_view.dart';
 import 'package:amacom_app/src/presentation/views/homeScreen/widgets/events_list.dart';
+import 'package:amacom_app/src/presentation/views/situations/widgets/situation_card.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:flutter/material.dart';
@@ -77,6 +80,28 @@ class _StoresState extends ConsumerState<Stores> {
           ),
         ),
         const SafeSpacer(),
+        SituationCard(
+          index: 0,
+          onTap: () {},
+          data: SituationEntity(
+            id: '',
+            personId: '',
+            createdById: '',
+            subjectId: '',
+            description: 'Test description',
+            firstThought:
+                'This field should contain the first thought on a situation.',
+            behavior: 'Should contain situation behavior',
+            affectationDegree: 5,
+            createdAt: DateTime.now(),
+            currentDiagnosis: Diagnosis(
+              id: '',
+              personSituationId: '',
+              consultationAlert: 'URGENT',
+              consultationStatus: 'IN_PROGRESS',
+            ),
+          ),
+        ),
       ],
     );
   }

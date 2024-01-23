@@ -16,10 +16,7 @@ class SelectedFeelings extends ConsumerWidget {
       runSpacing: 10,
       alignment: WrapAlignment.spaceBetween,
       children: [
-        ...ref
-            .watch(situationFeelingsProvider)
-            .reversed
-            .map(
+        ...ref.watch(situationFeelingsProvider).reversed.map(
               (e) => FeelingCard(
                 text: e.name,
                 image: e.imageUrl,
@@ -33,8 +30,7 @@ class SelectedFeelings extends ConsumerWidget {
                       .update((state) => temp);
                 },
               ),
-            )
-            .toList(),
+            ),
       ],
     );
   }

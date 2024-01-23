@@ -53,6 +53,52 @@ class ResourcesRepository implements IResourcesRepository {
       return data.data;
     }
   }
+
+  @override
+  Future<Pageable<List<SupportMaterialFile>>?> getFiles({
+    int page = 0,
+    required String query,
+    String? supportMaterialId,
+  }) async {
+    final requestData = RequestData(
+      path: '/supportMaterialFiles/consulta',
+      method: Method.get,
+      queryParameters: {
+        'page': page,
+        'query': query,
+        'idSupportMaterial': supportMaterialId,
+      },
+    );
+    final result = await api.request(
+      requestData: requestData,
+      withAuthToken: true,
+    );
+    BaseResponse data;
+    if (!result.containsKey('data')) {
+      result['data'] = result;
+      result['message'] = '';
+      result['ok'] = result['ok'] ?? true;
+    }
+    try {
+      data = BaseResponse.fromJson(result, (json) {
+        try {
+          return Pageable<List<SupportMaterialFile>>.fromJson(
+            json as Map<String, dynamic>,
+            SupportMaterialFile.fromJsonList,
+          );
+        } catch (e) {
+          GlobalLocator.appLogger.e(e);
+        }
+      });
+    } catch (e) {
+      data = BaseResponse.fromJson(result, (_) {});
+    }
+    if (!data.ok) {
+      throw Exception(data.message);
+    } else {
+      return data.data;
+    }
+  }
 }
 
 /// Resources repository riverpod instance

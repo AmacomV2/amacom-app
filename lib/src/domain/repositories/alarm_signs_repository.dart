@@ -1,4 +1,3 @@
-import 'package:amacom_app/src/domain/entities/alarm_sign.dart';
 import 'package:amacom_app/src/domain/entities/entities.dart';
 
 /// AlarmSigns repository interface

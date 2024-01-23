@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /// New situation header widget
 class NewSituationHeader extends ConsumerWidget {
   ///
-  const NewSituationHeader({Key? key}) : super(key: key);
+  const NewSituationHeader({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

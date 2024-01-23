@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 ///
 class SituationsHeader extends ConsumerWidget {
   ///
-  const SituationsHeader({Key? key}) : super(key: key);
+  const SituationsHeader({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

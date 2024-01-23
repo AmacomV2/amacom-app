@@ -155,7 +155,7 @@ class UserRepository implements IUserRepository {
   @override
   Future<bool?> updateUserData(PersonEditDTO personData) async {
     final requestData = RequestData(
-      path: '/person/update',
+      path: '/person',
       method: Method.put,
       body: personData.toJson(),
     );

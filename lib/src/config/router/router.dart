@@ -85,6 +85,9 @@ class CustomAppRouter {
   /// Represents the route name for logbooks screen.
   static const String logbooks = '/logbooks';
 
+  /// Represents the route name for resourceDetail screen.
+  static const String resourceDetail = '/resourceDetail';
+
   /// Represents the route name for logbook creation screen.
   static const String logbookCreation = '/logbookCreation';
 
@@ -105,6 +108,11 @@ class CustomAppRouter {
             path: '/registration',
             name: '/registration',
             builder: (context, state) => const RegistrationScreen(),
+          ),
+          GoRoute(
+            path: resourceDetail,
+            name: resourceDetail,
+            builder: (context, state) => const ResourceFilesScreen(),
           ),
           GoRoute(
             path: '/login',
@@ -150,13 +158,16 @@ class CustomAppRouter {
             builder: (context, state) {
               String url = '';
               String? title;
+              String? subtitle;
               try {
                 url = (state.extra as Map)['url'];
                 title = (state.extra as Map)['title'];
+                subtitle = (state.extra as Map)['subtitle'];
               } catch (_) {}
               return NetworkResourceView(
                 url: url,
                 title: title,
+                subtitle: subtitle,
               );
             },
           ),

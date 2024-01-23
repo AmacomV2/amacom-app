@@ -13,10 +13,7 @@ class SelectedAlarmSignsBaby extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        ...ref
-            .watch(babySituationAlarmSignsProvider)
-            .reversed
-            .map(
+        ...ref.watch(babySituationAlarmSignsProvider).reversed.map(
               (e) => GenericDismissibleCard(
                 text: e.name,
                 onTap: () {
@@ -29,8 +26,7 @@ class SelectedAlarmSignsBaby extends ConsumerWidget {
                       .update((state) => temp);
                 },
               ),
-            )
-            .toList(),
+            ),
       ],
     );
   }
@@ -45,10 +41,7 @@ class SelectedAlarmSignsMother extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        ...ref
-            .watch(motherSituationAlarmSignsProvider)
-            .reversed
-            .map(
+        ...ref.watch(motherSituationAlarmSignsProvider).reversed.map(
               (e) => GenericDismissibleCard(
                 text: e.name,
                 onTap: () {
@@ -61,8 +54,7 @@ class SelectedAlarmSignsMother extends ConsumerWidget {
                       .update((state) => temp);
                 },
               ),
-            )
-            .toList(),
+            ),
       ],
     );
   }

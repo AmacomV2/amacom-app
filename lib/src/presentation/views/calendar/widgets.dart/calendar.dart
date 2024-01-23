@@ -24,7 +24,7 @@ class _CalendarState extends ConsumerState<Calendar> {
   @override
   Widget build(BuildContext context) {
     final appLocalizations = AppLocalizations.of(context);
-
+    final eventsList = ref.watch(calendarEventsProvider);
     final textTheme = Theme.of(context).textTheme;
     return SizedBox(
       height: double.infinity,
@@ -40,7 +40,7 @@ class _CalendarState extends ConsumerState<Calendar> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        dataSource: EventDataSource(ref.watch(calendarEventsProvider)),
+        dataSource: EventDataSource(eventsList),
         // by default the month appointment display mode set as Indicator, we can
         // change the display mode as appointment using the appointment display
         // mode property

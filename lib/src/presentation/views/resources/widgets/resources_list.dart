@@ -3,6 +3,7 @@ import 'package:amacom_app/src/presentation/state/resources/resources_fetch.dart
 import 'package:amacom_app/src/presentation/state/resources/selected_resource.dart';
 import 'package:amacom_app/src/presentation/views/resources/widgets/resource_card.dart';
 import 'package:amacom_app/src/utils/constant/app_constants.dart';
+import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -34,7 +35,6 @@ class _ResourcesListState extends ConsumerState<ResourcesList> {
       RefreshController(initialRefresh: false);
 
   void _onRefresh() async {
-    // monitor network fetch
     var _ = ref.refresh(resourcesProvider);
     ref.read(resourcesPageProvider.notifier).update((state) => 0);
     _refreshController.refreshCompleted();
@@ -66,8 +66,7 @@ class _ResourcesListState extends ConsumerState<ResourcesList> {
               ref
                   .read(selectedResourceProvider.notifier)
                   .update((state) => resource);
-              // Navigation.goTo(CustomAppRouter.resourceDetail);
-              FocusScope.of(context).unfocus();
+              Navigation.goTo(CustomAppRouter.resourceDetail);
             },
           );
           if (index == 0 || (resource?.createdAt.year ?? 0) < lastYear) {

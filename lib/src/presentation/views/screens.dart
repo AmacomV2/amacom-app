@@ -6,6 +6,7 @@ export 'package:amacom_app/src/presentation/views/logbooks/logbook_detail.dart';
 export 'package:amacom_app/src/presentation/views/logbooks/main_screen.dart';
 export 'package:amacom_app/src/presentation/views/onBoarding/onboarding.dart';
 export 'package:amacom_app/src/presentation/views/profile/profile.dart';
+export 'package:amacom_app/src/presentation/views/resources/resources.dart';
 export 'package:amacom_app/src/presentation/views/settings/main_screen.dart';
 export 'package:amacom_app/src/presentation/views/situations/situations.dart';
 export 'package:amacom_app/src/presentation/widgets/url_resources.dart';

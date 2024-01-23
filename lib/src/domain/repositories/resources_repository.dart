@@ -8,4 +8,11 @@ abstract class IResourcesRepository {
     required String query,
     String? subjectId,
   });
+
+  /// Perform Resources search and fetch
+  Future<Pageable<List<SupportMaterialFile>>?> getFiles({
+    int page = 0,
+    required String query,
+    String? supportMaterialId,
+  });
 }

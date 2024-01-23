@@ -86,6 +86,18 @@ class ResourceTypeHelper {
     return ResourceType.UNKNOWN;
   }
 
+  ///
+  static String getTypeImage(ResourceType type) {
+    switch (type) {
+      case ResourceType.PDF:
+        return 'assets/icon/pdf.png';
+      case ResourceType.VIDEO:
+        return 'assets/icon/video.png';
+      default:
+        return 'assets/icon/document.png';
+    }
+  }
+
   /// Return resource type
   static ResourceType getType(String url) {
     try {
