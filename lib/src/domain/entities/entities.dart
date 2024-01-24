@@ -1,3 +1,4 @@
+export 'package:amacom_app/src/domain/entities/achievement.dart';
 export 'package:amacom_app/src/domain/entities/alarm_sign.dart';
 export 'package:amacom_app/src/domain/entities/baseResponse/base_response.dart';
 export 'package:amacom_app/src/domain/entities/event.dart';
@@ -6,6 +7,7 @@ export 'package:amacom_app/src/domain/entities/logbook.dart';
 export 'package:amacom_app/src/domain/entities/navigation_bar_selection.dart';
 export 'package:amacom_app/src/domain/entities/pageable/pageable.dart';
 export 'package:amacom_app/src/domain/entities/person.dart';
+export 'package:amacom_app/src/domain/entities/person_achievement.dart';
 export 'package:amacom_app/src/domain/entities/request_data.dart';
 export 'package:amacom_app/src/domain/entities/session.dart';
 export 'package:amacom_app/src/domain/entities/situations.dart';

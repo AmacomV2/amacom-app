@@ -2,6 +2,7 @@ import 'package:amacom_app/src/domain/entities/entities.dart';
 import 'package:amacom_app/src/presentation/state/subjects/subject_selection.dart';
 import 'package:amacom_app/src/presentation/views/subjects/widgets/sub_subjects_list.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
+import 'package:amacom_app/src/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -47,7 +48,7 @@ class _SubjectCardState extends ConsumerState<SubjectCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${widget.data?.name}',
+                        '${widget.data?.name}'.capitalize(),
                         style: theme.textTheme.bodyLarge?.copyWith(
                           fontWeight: FontWeight.w600,
                         ),
@@ -55,7 +56,9 @@ class _SubjectCardState extends ConsumerState<SubjectCard> {
                       if (widget.data?.description != null)
                         Text(
                           '${widget.data?.description}',
-                          style: theme.textTheme.bodyLarge?.copyWith(),
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            fontSize: 15,
+                          ),
                         ),
                     ],
                   ),

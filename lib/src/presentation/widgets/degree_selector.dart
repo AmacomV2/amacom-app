@@ -2,6 +2,7 @@ import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/presentation/widgets/spacers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 ///
 class DegreeSelector extends ConsumerWidget {
@@ -56,6 +57,84 @@ class DegreeSelector extends ConsumerWidget {
               Text('${index + 1}'),
             ],
           );
+        },
+      ),
+    );
+  }
+}
+
+///
+class DegreeSelectorReverse extends StatefulWidget {
+  ///
+  const DegreeSelectorReverse({
+    super.key,
+    required this.onChanged,
+    this.maxValue = 3,
+    this.initialValue = 0,
+  });
+
+  /// Widget state
+  final Function(int) onChanged;
+
+  /// Max value selection
+  final int maxValue;
+
+  /// Max value selection
+  final int initialValue;
+
+  @override
+  State<DegreeSelectorReverse> createState() => _DegreeSelectorReverseState();
+}
+
+class _DegreeSelectorReverseState extends State<DegreeSelectorReverse> {
+  int currentValue = 0;
+
+  @override
+  void initState() {
+    currentValue = widget.initialValue;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: List.generate(
+        widget.maxValue,
+        (index) {
+          Color? color;
+          if (index < widget.maxValue / 2) {
+            color = Color.lerp(
+              FigmaColors.warning_600,
+              FigmaColors.success_400,
+              ((index) / widget.maxValue) + 0.4,
+            );
+          } else {
+            color = Color.lerp(
+              FigmaColors.danger_400,
+              FigmaColors.warning_600,
+              ((index) / (widget.maxValue / 2)) - 0.2,
+            );
+          }
+          return Column(
+            children: [
+              _Element(
+                state: currentValue >= index + 1,
+                color: color!,
+                onTap: () {
+                  if (currentValue != index + 1) {
+                    widget.onChanged(index + 1);
+                  }
+                  currentValue = index + 1;
+                  setState(() {});
+                },
+              ),
+              const SafeSpacer(
+                height: 2,
+              ),
+              Text('${index + 1}'),
+            ],
+          ).paddingRight(10);
         },
       ),
     );

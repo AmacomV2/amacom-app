@@ -61,8 +61,11 @@ class _SubjectsBodyState extends ConsumerState<SubjectsBody> {
           subjects == null ? MainAxisAlignment.center : MainAxisAlignment.start,
       children: [
         Text(
-          '${appLocalizations?.relatedTopicsMessage}',
-          style: theme.textTheme.bodyLarge?.copyWith(),
+          widget.title ?? '${appLocalizations?.relatedTopicsMessage}',
+          style: theme.textTheme.bodyLarge?.copyWith(
+            color: theme.primaryColor,
+            fontSize: 18,
+          ),
           textAlign: TextAlign.justify,
         ),
         const SafeSpacer(

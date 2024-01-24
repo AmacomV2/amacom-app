@@ -67,7 +67,7 @@ List<ProfileMenuItem> appMenuItems(AppLocalizations? appLocalizations) {
     /// The menu item for privacy policy.
     ProfileMenuItem(
       title: appLocalizations?.achievements ?? 'Logros',
-      link: CustomAppRouter.logbooks,
+      link: CustomAppRouter.achievements,
       icon: const FaIcon(
         FontAwesomeIcons.trophy,
         color: FigmaColors.primary_50,

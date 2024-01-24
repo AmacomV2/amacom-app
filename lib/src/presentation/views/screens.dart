@@ -1,3 +1,4 @@
+export 'package:amacom_app/src/presentation/views/achievements/achievements.dart';
 export 'package:amacom_app/src/presentation/views/authentication/authentication.dart';
 export 'package:amacom_app/src/presentation/views/home/home_page.dart';
 export 'package:amacom_app/src/presentation/views/homeScreen/home_screen.dart';
