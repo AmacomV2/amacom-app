@@ -2,6 +2,7 @@ import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/config/theme/theme.dart';
 import 'package:amacom_app/src/data/repositories/situation_repository.dart';
 import 'package:amacom_app/src/domain/dtos/new_situation_dto.dart';
+import 'package:amacom_app/src/presentation/state/alarm_signs/alarm_signs_provider.dart';
 import 'package:amacom_app/src/presentation/state/situations/new_situation_provider.dart';
 import 'package:amacom_app/src/presentation/state/situations/situations_list_provider.dart';
 import 'package:amacom_app/src/presentation/state/subjects/subject_selection.dart';
@@ -53,6 +54,13 @@ class NewSituationButton extends ConsumerWidget {
             }
             break;
           case 3:
+            if (_validateForm4(ref, appLocalizations)) {
+              ref
+                  .read(newSituationIndexProvider.notifier)
+                  .update((state) => state + 1);
+            }
+            break;
+          case 4:
             final situationDTO = NewSituationDTO(
               firstThought: ref.read(situationFirstThoughtProvider) ?? '',
               description: ref.read(situationFirstThoughtProvider) ?? '',
@@ -144,19 +152,26 @@ class NewSituationButton extends ConsumerWidget {
   }
 
   bool _validateForm3(WidgetRef ref, AppLocalizations? appLocalizations) {
-    if (ref.read(babySituationAlarmSignsProvider).isNotEmpty) {
-      if (ref.read(motherSituationAlarmSignsProvider).isNotEmpty) {
-        return true;
-      } else {
-        AppDialogs.showCustomSnackBar(
-          '${appLocalizations?.youMustChooseAtLeastOne} ${appLocalizations?.motherAlarmSign.toLowerCase()}.',
-          color: FigmaColors.danger_700,
-          icon: Icons.warning_rounded,
-        );
-      }
+    ref.invalidate(alarmSignProvider);
+    if (ref.read(motherSituationAlarmSignsProvider).isNotEmpty) {
+      return true;
     } else {
       AppDialogs.showCustomSnackBar(
-        '${appLocalizations?.youMustChooseAtLeastOne} ${appLocalizations?.babyAlarmSign.toLowerCase()}.',
+        '${appLocalizations?.youMustChooseAtLeastOne} ${appLocalizations?.motherAlarmSign.toLowerCase()}.',
+        color: FigmaColors.danger_700,
+        icon: Icons.warning_rounded,
+      );
+    }
+    return false;
+  }
+
+  bool _validateForm4(WidgetRef ref, AppLocalizations? appLocalizations) {
+    ref.invalidate(alarmSignProvider);
+    if (ref.read(babySituationAlarmSignsProvider).isNotEmpty) {
+      return true;
+    } else {
+      AppDialogs.showCustomSnackBar(
+        '${appLocalizations?.youMustChooseAtLeastOne} ${appLocalizations?.motherAlarmSign.toLowerCase()}.',
         color: FigmaColors.danger_700,
         icon: Icons.warning_rounded,
       );

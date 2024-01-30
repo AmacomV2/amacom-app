@@ -3,6 +3,7 @@ import 'package:amacom_app/src/presentation/state/situations/situation_provider.
 import 'package:amacom_app/src/presentation/state/situations/situations_list_provider.dart';
 import 'package:amacom_app/src/presentation/views/situations/widgets/situation_card.dart';
 import 'package:amacom_app/src/utils/constant/app_constants.dart';
+import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -66,8 +67,7 @@ class _SituationsListState extends ConsumerState<SituationsList> {
               ref
                   .read(selectedSituationProvider.notifier)
                   .update((state) => situation);
-              // Navigation.goTo(CustomAppRouter.situationDetail);
-              FocusScope.of(context).unfocus();
+              Navigation.goTo(CustomAppRouter.situationDetail);
             },
           );
           if (index == 0 || (situation?.createdAt.year ?? 0) < lastYear) {

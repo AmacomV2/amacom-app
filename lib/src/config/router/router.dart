@@ -39,6 +39,9 @@ class CustomAppRouter {
   /// Represents the route path for the new situation screen.
   static const String newSituation = '/newSituation';
 
+  /// Represents the route path for the new situation screen.
+  static const String situationDetail = '/situationDetail';
+
   /// Represents the route path for the personal information screen.
   static const String personalInformation = '/personalInformation';
 
@@ -114,6 +117,11 @@ class CustomAppRouter {
             path: achievements,
             name: achievements,
             builder: (context, state) => const PersonAchievementsScreen(),
+          ),
+          GoRoute(
+            path: situationDetail,
+            name: situationDetail,
+            builder: (context, state) => const SituationDetailScreen(),
           ),
           GoRoute(
             path: achievementsRanking,

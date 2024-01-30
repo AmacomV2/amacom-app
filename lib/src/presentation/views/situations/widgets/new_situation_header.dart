@@ -1,4 +1,5 @@
 import 'package:amacom_app/src/config/settings.dart';
+import 'package:amacom_app/src/presentation/state/alarm_signs/alarm_signs_provider.dart';
 import 'package:amacom_app/src/presentation/state/situations/new_situation_provider.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
@@ -27,6 +28,9 @@ class NewSituationHeader extends ConsumerWidget {
             if (indexProvider == 0) {
               Navigation.goBack();
             } else {
+              if (indexProvider > 1) {
+                ref.invalidate(alarmSignProvider);
+              }
               indexProviderNotifier.update((state) => indexProvider - 1);
             }
           },

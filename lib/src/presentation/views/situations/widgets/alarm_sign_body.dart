@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/presentation/state/alarm_signs/alarm_signs_provider.dart';
 import 'package:amacom_app/src/presentation/views/situations/widgets/alarm_sign_list.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
@@ -62,24 +61,12 @@ class _AlarmSignsBodyState extends ConsumerState<AlarmSignsBody> {
   @override
   Widget build(BuildContext context) {
     final alarmSign = ref.watch(alarmSignProvider);
-    final theme = Theme.of(context);
-    final appLocalizations = AppLocalizations.of(context);
 
-    return ColumnWithPadding(
+    return Column(
       mainAxisAlignment: alarmSign == null
           ? MainAxisAlignment.center
           : MainAxisAlignment.start,
       children: [
-        Text(
-          widget.type == AlarmSignType.MOTHER
-              ? '${appLocalizations?.motherAlarmSignsMessage}'
-              : '${appLocalizations?.babyAlarmSignsMessage}',
-          style: theme.textTheme.bodyLarge?.copyWith(),
-          textAlign: TextAlign.justify,
-        ),
-        const SafeSpacer(
-          height: 10,
-        ),
         if (alarmSign != null)
           Expanded(
             child: (alarmSign.content?.isNotEmpty == true)

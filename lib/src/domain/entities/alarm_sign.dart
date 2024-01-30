@@ -20,7 +20,7 @@ class AlarmSignEntity {
         name: json['name'],
         description: json['description'],
         imageUrl: json['imageUrl'],
-        status: json['status'],
+        status: json['status'] == true,
         type: json['type'],
         createdAt: DateTime.parse(json['createdAt']),
         updatedAt: DateTime.parse(json['updatedAt']),
@@ -39,7 +39,7 @@ class AlarmSignEntity {
   String? imageUrl;
 
   ///
-  String? status;
+  bool? status;
 
   ///
   String type;

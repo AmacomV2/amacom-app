@@ -114,7 +114,7 @@ class NewSituationStepper extends ConsumerWidget {
               child: FaIcon(
                 activeStep > 3
                     ? FontAwesomeIcons.check
-                    : FontAwesomeIcons.paperPlane,
+                    : FontAwesomeIcons.babyCarriage,
                 size: activeStep == 3 ? 16 : 15,
                 color: activeStep == 3
                     ? colors.primary
@@ -124,11 +124,35 @@ class NewSituationStepper extends ConsumerWidget {
               ),
             ),
             customTitle: Text(
-              '${appLocalizations?.reportYourSituationStepper}',
+              '${appLocalizations?.alarmSignsStepper}',
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyLarge?.copyWith(
                 fontSize: activeStep == 3 ? 16 : 15,
                 color: activeStep == 3 ? colors.primary : null,
+              ),
+            ),
+          ),
+          EasyStep(
+            customStep: Opacity(
+              opacity: activeStep >= 0 ? 1 : 0.3,
+              child: FaIcon(
+                activeStep > 4
+                    ? FontAwesomeIcons.check
+                    : FontAwesomeIcons.paperPlane,
+                size: activeStep == 4 ? 16 : 15,
+                color: activeStep == 4
+                    ? colors.primary
+                    : activeStep < 4
+                        ? colors.secondary.withOpacity(0.5)
+                        : Colors.white,
+              ),
+            ),
+            customTitle: Text(
+              '${appLocalizations?.reportYourSituationStepper}',
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodyLarge?.copyWith(
+                fontSize: activeStep == 4 ? 16 : 15,
+                color: activeStep == 4 ? colors.primary : null,
               ),
             ),
           ),

@@ -4,6 +4,7 @@ import 'package:amacom_app/src/presentation/views/situations/widgets/new_situati
 import 'package:amacom_app/src/presentation/views/situations/widgets/new_situation_p2.dart';
 import 'package:amacom_app/src/presentation/views/situations/widgets/new_situation_p3.dart';
 import 'package:amacom_app/src/presentation/views/situations/widgets/new_situation_p4.dart';
+import 'package:amacom_app/src/presentation/views/situations/widgets/new_situation_p5.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,7 +24,8 @@ class NewSituationForm extends ConsumerWidget {
         formKey: ref.watch(newSituationForm2Key),
       ),
       const NewSituationPart3(),
-      const NewSituationP4(),
+      const NewSituationPart4(),
+      const NewSituationPart5(),
     ][ref.watch(newSituationIndexProvider)];
   }
 }

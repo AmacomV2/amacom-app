@@ -96,6 +96,7 @@
   "name": "Name",
   "newEvent": "New event",
   "editEvent": "Edit event",
+  "diagnosis": "Diagnosis",
   "newPassword": "New password",
   "newRecord": "New record",
   "newRecordText": "Fill the fields to create a new record.",
