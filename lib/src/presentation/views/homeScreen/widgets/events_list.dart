@@ -20,11 +20,26 @@ class EventsListHome extends StatelessWidget {
     final responsive = GlobalLocator.responsiveDesign;
 
     final textTheme = Theme.of(context).textTheme;
+    final currentDay = now.subtract(
+      Duration(
+        hours: now.hour,
+        minutes: now.minute,
+        seconds: now.second,
+      ),
+    );
     return Column(
       children: [
         ...events.map((e) {
-          if (e.from.isAfter(now.subtract(const Duration(hours: 1)))) {
-            if (e.to.isBefore(now.add(const Duration(hours: 5)))) {
+          if (e.from.isAfter(
+            now.subtract(
+              Duration(
+                hours: now.hour,
+                minutes: now.minute,
+                seconds: now.second,
+              ),
+            ),
+          )) {
+            if (e.to.isBefore(currentDay.add(const Duration(days: 1)))) {
               return Container(
                 width: double.infinity,
                 decoration: BoxDecoration(

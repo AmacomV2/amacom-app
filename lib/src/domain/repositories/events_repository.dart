@@ -13,7 +13,7 @@ abstract class IEventsRepository {
   Future<Event> createEvent(EventDto eventData);
 
   /// Perform Event updating
-  Future<Event> updateEvent(EventDto eventData);
+  Future<Event> updateEvent(Event eventData);
 
   /// Perform Event delete
   Future<bool> deleteEvent(String id);

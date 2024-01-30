@@ -4,6 +4,8 @@ import 'package:amacom_app/src/domain/dtos/event_dto.dart';
 import 'package:amacom_app/src/domain/entities/entities.dart';
 import 'package:amacom_app/src/presentation/state/events/calendar_view.dart';
 import 'package:amacom_app/src/presentation/state/events/new_event.dart';
+import 'package:amacom_app/src/presentation/state/events/selected_event.dart';
+import 'package:amacom_app/src/presentation/views/calendar/widgets.dart/edit_event.dart';
 import 'package:amacom_app/src/presentation/views/calendar/widgets.dart/new_event.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +28,7 @@ class _CalendarState extends ConsumerState<Calendar> {
     final appLocalizations = AppLocalizations.of(context);
     final eventsList = ref.watch(calendarEventsProvider);
     final textTheme = Theme.of(context).textTheme;
+    ref.watch(selectedEventProvider);
     return SizedBox(
       height: double.infinity,
       child: SfCalendar(
@@ -51,6 +54,10 @@ class _CalendarState extends ConsumerState<Calendar> {
 
         onTap: (calendarTapDetails) async {
           if (calendarTapDetails.appointments?.isNotEmpty ?? false) {
+            await _editEvent(
+              appLocalizations: appLocalizations,
+              event: calendarTapDetails.appointments?.first,
+            );
           } else {
             await _newEvent(calendarTapDetails.date!, appLocalizations);
           }
@@ -88,6 +95,21 @@ class _CalendarState extends ConsumerState<Calendar> {
       padding: EdgeInsets.zero,
       includeButton: false,
       widget: const NewEvent(),
+    );
+  }
+
+  Future<void> _editEvent({
+    required AppLocalizations? appLocalizations,
+    required Event event,
+  }) async {
+    ref.read(selectedEventProvider.notifier).update(
+          (state) => event,
+        );
+    await AppDialogs.genericDialog(
+      buttonText: appLocalizations?.save ?? '',
+      padding: EdgeInsets.zero,
+      includeButton: false,
+      widget: const EditEvent(),
     );
   }
 }

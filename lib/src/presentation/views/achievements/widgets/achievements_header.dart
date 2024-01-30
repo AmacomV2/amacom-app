@@ -1,5 +1,6 @@
 import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/presentation/state/subjects/subject_selection.dart';
+import 'package:amacom_app/src/presentation/views/achievements/widgets/ranking_icon.dart';
 import 'package:amacom_app/src/presentation/views/achievements/widgets/search_achievements.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class AchievementsHeader extends ConsumerWidget {
         CustomAppBar2(
           title: appLocalizations?.achievements ?? '',
           subtitle: appLocalizations?.achievementsText ?? '',
+          action: const IconRanking(),
         ),
         SearchAchievements(),
         const SafeSpacer(

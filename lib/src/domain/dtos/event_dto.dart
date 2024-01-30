@@ -30,7 +30,7 @@ class EventDto {
   /// IsAllDay which is equivalent to isAllDay property of [Appointment].
   bool isAllDay;
 
-  /// Parse a [LogbookDTO] object into a Map
+  /// Parse a [EventDto] object into a Map
   Map<String, dynamic> toJson() => {
         'name': eventName.capitalize(),
         'description': description?.capitalize(),
@@ -51,6 +51,7 @@ class EventDto {
   }) {
     return EventDto(
       eventName: eventName ?? this.eventName,
+      description: description ?? this.description,
       from: from ?? this.from,
       to: to ?? this.to,
       eventTypeId: eventTypeId ?? this.eventTypeId,

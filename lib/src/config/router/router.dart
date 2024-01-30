@@ -73,8 +73,11 @@ class CustomAppRouter {
   /// Represents the route path for the support screen.
   static const String support = '/support';
 
-  /// Represents the route path for the support screen.
+  /// Represents the route path for the achievements screen.
   static const String achievements = '/achievements';
+
+  /// Represents the route path for the achievements ranking screen.
+  static const String achievementsRanking = '/achievementsRanking';
 
   /// Represents the route path for the privacy policy screen.
   static const String privacyPolitics = '/privacyPolitics';
@@ -111,6 +114,11 @@ class CustomAppRouter {
             path: achievements,
             name: achievements,
             builder: (context, state) => const PersonAchievementsScreen(),
+          ),
+          GoRoute(
+            path: achievementsRanking,
+            name: achievementsRanking,
+            builder: (context, state) => const AchievementRankingScreen(),
           ),
           GoRoute(
             path: '/registration',

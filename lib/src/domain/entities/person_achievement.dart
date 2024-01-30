@@ -31,7 +31,7 @@ class PersonAchievement {
   String id;
 
   ///
-  String score;
+  int score;
 
   ///
   String personId;
@@ -51,11 +51,11 @@ class PersonAchievement {
   /// Get numeric score value
   int getScore() {
     switch (score) {
-      case 'UNO':
+      case 1:
         return 1;
-      case 'DOS':
+      case 2:
         return 2;
-      case 'TRES':
+      case 3:
         return 3;
       default:
         return 0;

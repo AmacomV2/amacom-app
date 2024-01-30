@@ -11,6 +11,7 @@ class DegreeSelector extends ConsumerWidget {
     super.key,
     required this.stateProvider,
     this.maxValue = 10,
+    this.enabled = true,
   });
 
   /// Widget state
@@ -19,45 +20,51 @@ class DegreeSelector extends ConsumerWidget {
   /// Max value selection
   final int maxValue;
 
+  ///
+  final bool enabled;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: List.generate(
-        maxValue,
-        (index) {
-          Color? color;
-          if (index < maxValue / 2) {
-            color = Color.lerp(
-              FigmaColors.success_400,
-              FigmaColors.warning_600,
-              ((index) / maxValue) + 0.4,
+    return AbsorbPointer(
+      absorbing: !enabled,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: List.generate(
+          maxValue,
+          (index) {
+            Color? color;
+            if (index < maxValue / 2) {
+              color = Color.lerp(
+                FigmaColors.success_400,
+                FigmaColors.warning_600,
+                ((index) / maxValue) + 0.4,
+              );
+            } else {
+              color = Color.lerp(
+                FigmaColors.warning_600,
+                FigmaColors.danger_400,
+                ((index) / (maxValue / 2)) - 0.2,
+              );
+            }
+            return Column(
+              children: [
+                _Element(
+                  state: (ref.watch(stateProvider) ?? -1) >= index,
+                  color: color!,
+                  onTap: () {
+                    ref.read(stateProvider.notifier).update(
+                          (state) => state = index,
+                        );
+                  },
+                ),
+                const SafeSpacer(
+                  height: 5,
+                ),
+                Text('${index + 1}'),
+              ],
             );
-          } else {
-            color = Color.lerp(
-              FigmaColors.warning_600,
-              FigmaColors.danger_400,
-              ((index) / (maxValue / 2)) - 0.2,
-            );
-          }
-          return Column(
-            children: [
-              _Element(
-                state: (ref.watch(stateProvider) ?? -1) >= index,
-                color: color!,
-                onTap: () {
-                  ref.read(stateProvider.notifier).update(
-                        (state) => state = index,
-                      );
-                },
-              ),
-              const SafeSpacer(
-                height: 5,
-              ),
-              Text('${index + 1}'),
-            ],
-          );
-        },
+          },
+        ),
       ),
     );
   }
@@ -103,19 +110,12 @@ class _DegreeSelectorReverseState extends State<DegreeSelectorReverse> {
         widget.maxValue,
         (index) {
           Color? color;
-          if (index < widget.maxValue / 2) {
-            color = Color.lerp(
-              FigmaColors.warning_600,
-              FigmaColors.success_400,
-              ((index) / widget.maxValue) + 0.4,
-            );
-          } else {
-            color = Color.lerp(
-              FigmaColors.danger_400,
-              FigmaColors.warning_600,
-              ((index) / (widget.maxValue / 2)) - 0.2,
-            );
-          }
+          color = Color.lerp(
+            FigmaColors.warning_600,
+            FigmaColors.success_400,
+            ((index) / widget.maxValue) + 0.1,
+          );
+
           return Column(
             children: [
               _Element(

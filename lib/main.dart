@@ -23,7 +23,10 @@ void main() async {
 
   runApp(
     const ProviderScope(
-      child: KeyboardDismissOnTap(dismissOnCapturedTaps: true, child: MyApp()),
+      child: KeyboardDismissOnTap(
+        dismissOnCapturedTaps: true,
+        child: MyApp(),
+      ),
     ),
   );
 }

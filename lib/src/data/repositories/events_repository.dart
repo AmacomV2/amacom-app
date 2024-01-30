@@ -70,15 +70,51 @@ class EventsRepository implements IEventsRepository {
   }
 
   @override
-  Future<bool> deleteEvent(String id) {
-    // TODO: implement deleteEvent
-    throw UnimplementedError();
+  Future<bool> deleteEvent(String id) async {
+    final requestData = RequestData(
+      path: '/event/$id',
+      method: Method.delete,
+    );
+    final result = await api.request(
+      requestData: requestData,
+      withAuthToken: true,
+    );
+    BaseResponse data;
+    try {
+      data = BaseResponse.fromJson(result, (json) => json);
+    } catch (e) {
+      data = BaseResponse.fromJson(result, (_) {});
+    }
+    if (!data.ok) {
+      throw Exception(data.message);
+    } else {
+      return data.ok;
+    }
   }
 
   @override
-  Future<Event> updateEvent(EventDto eventData) {
-    // TODO: implement updateEvent
-    throw UnimplementedError();
+  Future<Event> updateEvent(Event eventData) async {
+    final requestData = RequestData(
+      path: '/event',
+      method: Method.put,
+      body: eventData.toJson(),
+    );
+    final result = await api.request(
+      requestData: requestData,
+      withAuthToken: true,
+    );
+    BaseResponse data;
+    try {
+      data =
+          BaseResponse.fromJson(result, (json) => Event.fromJson(json as Map));
+    } catch (e) {
+      data = BaseResponse.fromJson(result, (_) {});
+    }
+    if (!data.ok) {
+      throw Exception(data.message);
+    } else {
+      return data.data;
+    }
   }
 }
 

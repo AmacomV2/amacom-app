@@ -96,6 +96,94 @@ class AchievementsRepository implements IAchievementsRepository {
       return data.data;
     }
   }
+
+  @override
+  Future<PersonRanking> getAchievementsRanking({
+    required String personId,
+  }) async {
+    final requestData = RequestData(
+      path: '/personAchievement/personRanking',
+      method: Method.get,
+      queryParameters: {
+        'personId': personId,
+      },
+    );
+    final result = await api.request(
+      requestData: requestData,
+      withAuthToken: true,
+    );
+    BaseResponse data;
+    try {
+      data =
+          BaseResponse.fromJson(result, (json) => PersonRanking.fromJson(json));
+    } catch (e) {
+      data = BaseResponse.fromJson(result, (_) {});
+    }
+    if (!data.ok) {
+      throw Exception(data.message);
+    } else {
+      return data.data;
+    }
+  }
+
+  @override
+  Future<RankingData> getRankings() async {
+    final requestData = RequestData(
+      path: '/reward/getAll',
+      method: Method.get,
+    );
+    final result = await api.request(
+      requestData: requestData,
+      withAuthToken: true,
+    );
+    BaseResponse data;
+    try {
+      data =
+          BaseResponse.fromJson(result, (json) => RankingData.fromJson(json));
+    } catch (e) {
+      data = BaseResponse.fromJson(result, (_) {});
+    }
+    if (!data.ok) {
+      throw Exception(data.message);
+    } else {
+      return data.data;
+    }
+  }
+
+  @override
+  Future<PersonAchievement> savePersonAchievement({
+    int score = 0,
+    required String achievementId,
+    required String personId,
+  }) async {
+    final requestData = RequestData(
+      path: '/personAchievement/save',
+      method: Method.post,
+      body: {
+        'idAchievement': achievementId,
+        'personId': personId,
+        'score': score,
+      },
+    );
+    final result = await api.request(
+      requestData: requestData,
+      withAuthToken: true,
+    );
+    BaseResponse data;
+    try {
+      data = BaseResponse.fromJson(
+        result,
+        (json) => PersonAchievement.fromJson(json as Map),
+      );
+    } catch (e) {
+      data = BaseResponse.fromJson(result, (_) {});
+    }
+    if (!data.ok) {
+      throw Exception(data.message);
+    } else {
+      return data.data;
+    }
+  }
 }
 
 /// User repository riverpod instance

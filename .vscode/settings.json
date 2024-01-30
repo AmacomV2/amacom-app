@@ -26,7 +26,8 @@
     "uuid",
     "vsync",
     "webm",
-    "webp"
+    "webp",
+    "YMDHMS"
   ],
   "dart.flutterSdkPath": ".fvm/flutter_sdk",
   //Eliminar archivos .fvm de búsqueda

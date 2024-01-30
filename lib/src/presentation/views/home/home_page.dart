@@ -1,6 +1,7 @@
 import 'package:amacom_app/src/presentation/state/authentication/user_provider.dart';
 import 'package:amacom_app/src/presentation/state/home/navigation_bar_provider.dart';
 import 'package:amacom_app/src/presentation/views/calendar/main_screen.dart';
+import 'package:amacom_app/src/presentation/views/home/widgets/internet_conection_check.dart';
 import 'package:amacom_app/src/presentation/views/screens.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_bottom_navigation_bar.dart';
 import 'package:amacom_app/src/presentation/widgets/custom_scaffold.dart';
@@ -37,6 +38,9 @@ class HomePage extends ConsumerWidget {
       body: body,
       extendBody: true,
       bottomNavigationBar: const CustomBottomNavigationBar(),
+      floatingActionButton: const ConnectionAlert(),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterFloat,
     );
   }
 }

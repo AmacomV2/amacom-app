@@ -8,6 +8,8 @@ export 'package:amacom_app/src/domain/entities/navigation_bar_selection.dart';
 export 'package:amacom_app/src/domain/entities/pageable/pageable.dart';
 export 'package:amacom_app/src/domain/entities/person.dart';
 export 'package:amacom_app/src/domain/entities/person_achievement.dart';
+export 'package:amacom_app/src/domain/entities/person_ranking.dart';
+export 'package:amacom_app/src/domain/entities/ranking.dart';
 export 'package:amacom_app/src/domain/entities/request_data.dart';
 export 'package:amacom_app/src/domain/entities/session.dart';
 export 'package:amacom_app/src/domain/entities/situations.dart';

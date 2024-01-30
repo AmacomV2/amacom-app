@@ -1,12 +1,12 @@
 import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/presentation/state/authentication/user_provider.dart';
+import 'package:amacom_app/src/presentation/views/achievements/widgets/ranking_icon.dart';
 import 'package:amacom_app/src/presentation/views/homeScreen/widgets/calendar_widget.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 /// HomeScreen
 ///
@@ -84,38 +84,9 @@ class _NameAndNotification extends ConsumerWidget {
                   return const SizedCustomProgressIndicator();
                 },
               ),
-          const _IconNotification(),
+          const IconRanking(),
         ],
       ),
-    );
-  }
-}
-
-class _IconNotification extends StatelessWidget {
-  const _IconNotification();
-  @override
-  Widget build(BuildContext context) {
-    final responsive = GlobalLocator.responsiveDesign;
-    return Stack(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(10),
-          height: 45,
-          width: 45,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(500),
-          ),
-          child: Badge(
-            backgroundColor: FigmaColors.danger_400,
-            child: SvgPicture.asset(
-              'assets/svg/icons/bell.svg',
-              // ignore: deprecated_member_use
-              color: FigmaColors.primary_400,
-              height: responsive.maxHeightValue(40),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

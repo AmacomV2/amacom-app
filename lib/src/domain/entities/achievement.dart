@@ -51,7 +51,7 @@ class Achievement {
   PersonAchievement toPersonAchievement() {
     return PersonAchievement(
       id: '',
-      score: 'CERO',
+      score: 0,
       personId: '',
       achievement: this,
       idAchievement: id,

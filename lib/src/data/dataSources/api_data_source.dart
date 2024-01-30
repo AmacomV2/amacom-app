@@ -87,6 +87,7 @@ class ApiDataSource {
     if (await isNetworkAvailable()) {
       /// Show toast with no internet connection message
     } else {
+      Fluttertoast.cancel();
       toast(AppMessages.noInternetConnection);
       return {
         'ok': false,

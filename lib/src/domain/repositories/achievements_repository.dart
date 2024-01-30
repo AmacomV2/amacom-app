@@ -16,4 +16,19 @@ abstract class IAchievementsRepository {
     String? subjectId,
     required String personId,
   });
+
+  /// Perform achievement score save
+  Future<PersonAchievement> savePersonAchievement({
+    int score = 0,
+    required String achievementId,
+    required String personId,
+  });
+
+  /// Perform all Achievements search and fetch
+  Future<PersonRanking> getAchievementsRanking({
+    required String personId,
+  });
+
+  /// Perform all Achievements search and fetch
+  Future<RankingData> getRankings();
 }
