@@ -8,6 +8,7 @@ import 'package:amacom_app/src/presentation/state/events/selected_event.dart';
 import 'package:amacom_app/src/presentation/views/calendar/widgets.dart/edit_event.dart';
 import 'package:amacom_app/src/presentation/views/calendar/widgets.dart/new_event.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -33,7 +34,7 @@ class _CalendarState extends ConsumerState<Calendar> {
       height: double.infinity,
       child: SfCalendar(
         allowDragAndDrop: true,
-        view: CalendarView.day,
+        view: kIsWeb ? CalendarView.week : CalendarView.day,
         todayTextStyle: textTheme.bodyMedium?.copyWith(
           color: Colors.white,
         ),
@@ -70,7 +71,7 @@ class _CalendarState extends ConsumerState<Calendar> {
           ref.read(calendarEventsProvider.notifier).update((state) => events);
         },
         allowedViews: const [
-          CalendarView.day,
+          if (!kIsWeb) CalendarView.day,
           CalendarView.week,
           CalendarView.month,
         ],

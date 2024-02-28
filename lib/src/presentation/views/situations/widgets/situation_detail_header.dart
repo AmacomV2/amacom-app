@@ -1,8 +1,10 @@
 import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/presentation/state/situations/situation_provider.dart';
+import 'package:amacom_app/src/presentation/views/situations/widgets/delete_situation.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/app_constants.dart';
+import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
@@ -24,7 +26,21 @@ class SituationDetailHeader extends ConsumerWidget {
           titleIcon:
               CoolDateToText(date: situationData?.createdAt ?? DateTime.now()),
           subtitle: situationData?.description,
+          action: ref.watch(selectedSituationAllDataProvider).when(
+                data: (data) {
+                  if (data?.currentDiagnosis == null) {
+                    return const DeleteSituation();
+                  }
+                  return null;
+                },
+                error: (error, stackTrace) => const SizedBox(),
+                loading: () => const SizedCustomProgressIndicator(),
+              ),
           includeBottomSpacer: false,
+          onBack: () {
+            ref.invalidate(selectedSituationProvider);
+            Navigation.goBack();
+          },
         ),
         const SafeSpacer(
           height: 10,

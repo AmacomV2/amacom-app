@@ -40,7 +40,6 @@ class _LoginFormState extends ConsumerState<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    final responsive = GlobalLocator.responsiveDesign;
     final appLocalizations = AppLocalizations.of(context);
 
     return Form(
@@ -75,7 +74,6 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             height: 20,
           ),
           CustomButtonWithState(
-            height: responsive.maxHeightValue(70),
             width: 230,
             adaptiveTextColor: true,
             enabled: (ref.watch(loginEmailProvider) ?? '').isNotEmpty &&

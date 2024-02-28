@@ -22,10 +22,13 @@ void main() async {
   );
 
   runApp(
-    const ProviderScope(
-      child: KeyboardDismissOnTap(
-        dismissOnCapturedTaps: true,
-        child: MyApp(),
+    ProviderScope(
+      child: Responsive(
+        web: const MyApp(),
+        mobile: const KeyboardDismissOnTap(
+          dismissOnCapturedTaps: true,
+          child: MyApp(),
+        ),
       ),
     ),
   );

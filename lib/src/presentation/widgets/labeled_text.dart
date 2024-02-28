@@ -68,3 +68,45 @@ class _LabeledTextState extends State<LabeledText> {
     );
   }
 }
+
+///
+class LabeledText2 extends StatelessWidget {
+  ///
+  const LabeledText2({super.key, required this.label, required this.text});
+
+  ///
+  final String label;
+
+  ///
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    return ColumnWithPadding(
+      padding: EdgeInsets.zero,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
+          textAlign: TextAlign.left,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 2,
+            left: 8,
+            bottom: 2,
+          ),
+          child: Text(
+            text,
+            maxLines: 10,
+            style: textTheme.bodyLarge,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.left,
+          ),
+        ),
+      ],
+    );
+  }
+}

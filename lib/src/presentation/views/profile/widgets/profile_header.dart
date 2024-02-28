@@ -41,7 +41,7 @@ class ProfileHeader extends ConsumerWidget {
         Stack(
           children: [
             Container(
-              width: responsiveD.screenWidth,
+              width: double.infinity,
               margin: EdgeInsets.only(top: responsiveD.maxHeightValue(53)),
               decoration: BoxDecoration(
                 color: Colors.white,

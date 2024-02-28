@@ -1,4 +1,5 @@
 import 'package:amacom_app/src/domain/entities/diagnosis.dart';
+import 'package:amacom_app/src/domain/entities/entities.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 
 /// Class to manage situations data
@@ -15,6 +16,9 @@ class SituationEntity {
     required this.behavior,
     required this.affectationDegree,
     this.nursingAssessment,
+    this.subjectData,
+    this.feelingsData = const [],
+    this.alarmSignsData = const [],
     required this.createdAt,
     this.updatedAt,
   });
@@ -28,8 +32,12 @@ class SituationEntity {
         description: json['description'],
         firstThought: json['firstThought'],
         behavior: json['behavior'],
+        feelingsData: GenericData.fromJsonList(json['feelingsData'] ?? []),
+        alarmSignsData:
+            AlarmSignEntity.fromJsonList(json['alarmSignsData'] ?? []),
         affectationDegree: json['affectationDegree'],
         createdAt: DateTime.parse(json['createdAt']),
+        subjectData: SubjectEntity.tryFromJson(json['subjectData'] ?? {}),
         updatedAt: DateTime.tryParse(json['updatedAt'] ?? ''),
         currentDiagnosis: Diagnosis.tryFromJson(json['currentDiagnosis']),
       );
@@ -50,6 +58,9 @@ class SituationEntity {
   Diagnosis? currentDiagnosis;
 
   ///
+  SubjectEntity? subjectData;
+
+  ///
   String description;
 
   ///
@@ -68,7 +79,29 @@ class SituationEntity {
   DateTime createdAt;
 
   ///
+  List<GenericData> feelingsData;
+
+  ///
+  List<AlarmSignEntity> alarmSignsData;
+
+  ///
   DateTime? updatedAt;
+
+  ///
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'personId': personId,
+        'createdById': createdById,
+        'subjectId': subjectId,
+        'currentDiagnosis': currentDiagnosis,
+        'description': description,
+        'firstThought': firstThought,
+        'behavior': behavior,
+        'affectationDegree': affectationDegree,
+        'nursingAssessment': nursingAssessment,
+        'createdAt': createdAt,
+        'updatedAt': updatedAt,
+      };
 
   /// Parse a list of entities from a Json List<Map>
   static List<SituationEntity> fromJsonList(dynamic data) {

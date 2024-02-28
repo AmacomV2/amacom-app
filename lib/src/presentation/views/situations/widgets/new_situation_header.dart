@@ -26,6 +26,7 @@ class NewSituationHeader extends ConsumerWidget {
             final indexProviderNotifier =
                 ref.read(newSituationIndexProvider.notifier);
             if (indexProvider == 0) {
+              ref.invalidate(creatingSituationProvider);
               Navigation.goBack();
             } else {
               if (indexProvider > 1) {

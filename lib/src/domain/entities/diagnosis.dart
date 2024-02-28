@@ -23,10 +23,10 @@ class Diagnosis {
     try {
       return Diagnosis(
         id: json['id'],
-        personSituationId: json['personSituationId'],
+        personSituationId: json['personSituationId'] ?? '',
         consultationAlert: json['consultationAlert'],
         consultationStatus: json['consultationStatus'],
-        consultationResult: json['consultationResult'],
+        consultationResult: json['consultationResult'] ?? '',
       );
     } catch (_) {
       return null;

@@ -7,6 +7,7 @@ import 'package:amacom_app/src/presentation/widgets/custom_bottom_navigation_bar
 import 'package:amacom_app/src/presentation/widgets/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 /// The home page widget of the application.
 class HomePage extends ConsumerWidget {
@@ -34,13 +35,23 @@ class HomePage extends ConsumerWidget {
         body = const ResourcesScreen();
         break;
     }
-    return CustomScaffold(
-      body: body,
-      extendBody: true,
-      bottomNavigationBar: const CustomBottomNavigationBar(),
-      floatingActionButton: const ConnectionAlert(),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterFloat,
+    return Responsive(
+      mobile: CustomScaffold(
+        body: body,
+        extendBody: true,
+        bottomNavigationBar: const CustomBottomNavigationBar(),
+        floatingActionButton: const ConnectionAlert(),
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.miniCenterFloat,
+      ),
+      web: CustomScaffold(
+        body: Row(
+          children: [
+            const CustomBottomNavigationBar(),
+            Expanded(child: body),
+          ],
+        ),
+      ),
     );
   }
 }

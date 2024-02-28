@@ -1,9 +1,15 @@
 import 'package:amacom_app/src/data/repositories/events_repository.dart';
 import 'package:amacom_app/src/domain/entities/entities.dart';
+import 'package:amacom_app/src/presentation/state/authentication/user_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Used to ask for calendar dates from.
 final calendarStartDateProvider = StateProvider.autoDispose<DateTime>(
+  (ref) => DateTime.now(),
+);
+
+/// Used to ask for calendar dates from.
+final calendarHomeStartDateProvider = StateProvider.autoDispose<DateTime>(
   (ref) => DateTime.now(),
 );
 
@@ -23,6 +29,19 @@ final calendarEventsFProvider = FutureProvider.autoDispose<List<Event>>(
     return await ref.read(eventsRepository).getEvents(
           from: ref.read(calendarStartDateProvider),
           to: ref.watch(calendarEndDateProvider),
+        );
+  },
+);
+
+/// Used to store current calendar events.
+final calendarHomeEventsFProvider = FutureProvider.autoDispose<List<Event>>(
+  (ref) async {
+    return await ref.read(eventsRepository).getHomeEvents(
+          from: ref.watch(calendarHomeStartDateProvider),
+          personId: ref.read(userProvider).value?.id ?? '',
+          to: ref
+              .read(calendarHomeStartDateProvider)
+              .add(const Duration(days: 365)),
         );
   },
 );

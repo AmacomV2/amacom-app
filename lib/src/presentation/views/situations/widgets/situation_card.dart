@@ -37,6 +37,9 @@ class SituationCard extends StatelessWidget {
           horizontal: responsive.maxWidthValue(4),
           vertical: responsive.maxHeightValue(10),
         ),
+        decoration: const BoxDecoration(
+          color: Colors.transparent,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -64,7 +67,9 @@ class SituationCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius:
                           BorderRadius.circular(AppConstants.cardRadius),
-                      border: Border.all(),
+                      border: Border.all(
+                        width: 0.3,
+                      ),
                     ),
                     height: 50,
                     width: 50,

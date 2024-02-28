@@ -3,6 +3,7 @@ import 'package:amacom_app/src/domain/entities/entities.dart';
 import 'package:amacom_app/src/utils/constant/app_constants.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -40,7 +41,12 @@ class ResourceFileCard extends StatelessWidget {
         child: Stack(
           alignment: AlignmentDirectional.bottomCenter,
           children: [
-            if (type == ResourceType.IMAGE)
+            if (type == ResourceType.IMAGE && kIsWeb)
+              Image.network(
+                data?.path ?? '',
+                height: responsive.maxHeightValue(125),
+              ).paddingBottom(25),
+            if (type == ResourceType.IMAGE && !kIsWeb)
               CachedNetworkImage(
                 imageUrl: data?.path ?? '',
                 height: responsive.maxHeightValue(125),

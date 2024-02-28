@@ -72,4 +72,22 @@ class SubjectEntity {
 
     return result;
   }
+
+  ///
+  static SubjectEntity? tryFromJson(Map json) {
+    try {
+      return SubjectEntity(
+        id: json['id'],
+        name: json['name'],
+        description: json['description'],
+        associatedResultId: json['associatedResultId'],
+        validityIndicator: json['validityIndicator'],
+        parentId: json['parentId'],
+        createdAt: DateTime.parse(json['createdAt']),
+        updatedAt: DateTime.parse(json['updatedAt']),
+      );
+    } catch (e) {
+      return null;
+    }
+  }
 }

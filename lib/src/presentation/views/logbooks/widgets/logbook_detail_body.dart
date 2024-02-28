@@ -3,6 +3,7 @@ import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/app_constants.dart';
 import 'package:amacom_app/src/utils/extensions/extensions.dart';
 import 'package:amacom_app/src/utils/utils/global_locator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 ///
@@ -57,8 +58,8 @@ class LogbookDetailBody extends StatelessWidget {
           'assets/images/mountains.png',
           fit: BoxFit.cover,
           alignment: Alignment.topCenter,
-          width: responsive.screenWidth,
-          height: 100,
+          width: double.infinity,
+          height: kIsWeb ? 150 : 100,
           cacheWidth: responsive.screenWidth.toInt(),
         ),
       ],

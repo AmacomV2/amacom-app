@@ -13,6 +13,7 @@ class AlarmSignCard extends StatelessWidget {
     required this.data,
     required this.isSelected,
     required this.onTap,
+    this.showCheckBox = true,
   });
 
   ///
@@ -20,6 +21,9 @@ class AlarmSignCard extends StatelessWidget {
 
   ///
   final bool isSelected;
+
+  ///
+  final bool showCheckBox;
 
   ///
   final VoidCallback onTap;
@@ -63,10 +67,11 @@ class AlarmSignCard extends StatelessWidget {
                   ],
                 ),
               ),
-              CustomCheckBox(
-                size: 18,
-                selected: isSelected,
-              ),
+              if (showCheckBox)
+                CustomCheckBox(
+                  size: 18,
+                  selected: isSelected,
+                ),
             ],
           ),
         ),

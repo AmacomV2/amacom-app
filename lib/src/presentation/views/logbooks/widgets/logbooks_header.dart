@@ -2,6 +2,7 @@ import 'package:amacom_app/src/config/settings.dart';
 import 'package:amacom_app/src/presentation/views/logbooks/widgets/search.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/global_locator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -17,12 +18,14 @@ class LogbooksHeader extends StatelessWidget {
     final theme = Theme.of(context);
     return SizedBox(
       height: 164 + responsive.height(100),
+      width: double.infinity,
       child: Stack(
         children: [
           Image.asset(
             'assets/images/diary-background.jpg',
-            height: 150 + responsive.height(105),
-            cacheHeight: responsive.safeHeight(280).toInt(),
+            height: kIsWeb ? 150 : (150 + responsive.height(105)),
+            width: double.infinity,
+            cacheHeight: responsive.safeHeight(300).toInt(),
             fit: BoxFit.cover,
           ),
           Blur(

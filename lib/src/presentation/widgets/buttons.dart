@@ -203,6 +203,7 @@ class _CustomButtonWithStateState extends State<CustomButtonWithState> {
     final textStyle = theme.textTheme.labelMedium;
     final responsive = ResponsiveDesign(context);
     return Material(
+      color: theme.scaffoldBackgroundColor,
       child: Padding(
         padding: widget.margin ?? EdgeInsets.zero,
         child: InkWell(

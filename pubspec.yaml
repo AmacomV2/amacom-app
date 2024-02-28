@@ -96,6 +96,7 @@ flutter:
     - assets/png/icons/
     - assets/png/banners/
     - assets/images/
+    - assets/images/web/
     - assets/images/temporal/
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,96 +1,95 @@
-# AmacomApp
+# Mobile APP
 
-A Health App made in Flutter.
+Una aplicación de salud hecha en Flutter.
 
 ![App Modules](./documentation/images/app_amacom_1.png)
 
 ![App Modules](./documentation/images/app_amacom_2.png)
 
 
-## Getting Started
+## Primeros Pasos
 
-This project is a starting point for a Flutter application.
+Este proyecto es un punto de partida para una aplicación Flutter.
 
-A few resources to get you started if this is your first Flutter project:
+Algunos recursos para empezar si este es tu primer proyecto Flutter:
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Si necesitas ayuda para empezar a desarrollar en Flutter, consulta la
+[documentación en línea](https://docs.flutter.dev/), que ofrece tutoriales, ejemplos, orientación sobre desarrollo móvil y una referencia completa de la API.
 
 ---
 
-### 1. Version Information
+### 1. Información de versión
 
 - Flutter Version: 3.10.2
 - FVM Version: 2.4.1
 
-Make sure to use the specified versions of Flutter and FVM to ensure compatibility with this project.
+Asegúrese de utilizar las versiones especificadas de Flutter y FVM para garantizar la compatibilidad con este proyecto.
 
-To set up Flutter with the correct version, you can use FVM (Flutter Version Management). Follow the steps below:
+Para configurar Flutter con la versión correcta, puede utilizar FVM (Flutter Version Management). Siga los pasos que se indican a continuación:
 
-1. Install FVM by running the following command in your terminal:
+1. Instala FVM ejecutando el siguiente comando en tu terminal:
 
    ```bash
    $ dart pub global activate fvm
    ```
 
-2. Initialize FVM in your project by running the following command in your project's root directory:
+2. 2. Inicializa FVM en tu proyecto ejecutando el siguiente comando en el directorio raíz de tu proyecto:
 
    ```bash
    $ fvm init
    ```
 
-3. Set the Flutter version for this project:
+3. 3. Establece la versión de Flutter para este proyecto:
 
    ```bash
    $ fvm use 3.10.2
    ```
 
-Now you have Flutter set up with the correct version for this project using FVM. You can proceed with Flutter development for this app.
+Ahora ya tienes Flutter configurado con la versión correcta para este proyecto usando FVM. Puedes continuar con el desarrollo de Flutter para esta aplicación.
 
-For more information about FVM and its usage, refer to the [FVM documentation](https://fvm.app/).
+Para más información sobre FVM y su uso, consulta la [documentación de FVM](https://fvm.app/).
 
-## 2. Run Application in Development, Release or Profile mode
-
-In order to make app run with any problems you must specify HOST url to send HTTP requests. To do that, you should define in application build environment. If you are using VSCode, add or modify ```.vscode/launch.json``` file and for the desired launch modes add the following lines with your HOST url.
+### 2. Ejecuta la Aplicación en modo Development, Release or Profile
+Para que la aplicación funcione sin problemas debes especificar la url HOST para enviar las peticiones HTTP. Para ello, debes definir en entorno de compilación de la aplicación. Si estás usando VSCode, añade o modifica el archivo ``.vscode/launch.json`` y para los modos de lanzamiento deseados añade las siguientes líneas con tu url HOST.
 
    ```
    {
       "name": "amacom_app",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "{{desired mode}}",
+      "flutterMode": "{{modo deseado}}",
       "toolArgs": [
             "--dart-define",
-            "HOST={{your host url here}}",
+            "HOST={{su url de host aquí}}",
       ],
       "args": [
-            "--dart-define=HOST={{your host url here}}",
+            "--dart-define=HOST={su url de host aquí}}",
       ],
       "env": {
             "HOST": "",
       }
    }
    ```
-With that you can launch the application without any problems in your device or emulator running the following command on the app root directory:
+Con esto ya puedes lanzar la aplicación sin problemas en tu dispositivo o emulador ejecutando el siguiente comando en el directorio raíz de la app:
    ```bash
    $ flutter run
    ```
-Or just launching it directly from VSCode
+O simplemente lanzándola directamente desde VSCode
 
 ![App Modules](./documentation/images/launch_app.png)
 
-## 3. Compile application for distribution
+### 3. Compilar la aplicación para su distribución
 
-Before any operation we must define the HOST url in app compile. If you compile directly from terminal, then you just need to add  ``--dart-define=HOST={{your host url}}`` in your compile command.
+Antes de cualquier operación debemos definir la url del HOST en la compilación de la aplicación. Si compila directamente desde el terminal, sólo tiene que añadir ``--dart-define=HOST={{su url de host}}`` en su comando de compilación.
 
-As example, here is how it should looks like for android apk build:
+Como ejemplo, aquí es cómo debe ser similar para android apk construir:
 
    ```bash
-   $ flutter build apk --release --dart-define=HOST={{your host url}}
+   $ flutter build apk --release --dart-define=HOST={{su url de host}}
    ```
 
-To compile app for deployment in flutter supported platforms you must follow the official guide in flutter [online documentation for deployment](https://docs.flutter.dev/deployment).
+Para compilar la aplicación para su despliegue en plataformas soportadas por flutter debes seguir la guía oficial de flutter [online documentation for deployment](https://docs.flutter.dev/deployment).
+

@@ -9,6 +9,14 @@ abstract class IEventsRepository {
     required DateTime to,
   });
 
+  /// Perform Events search and fetch
+  Future<List<Event>> getHomeEvents({
+    required DateTime from,
+    required DateTime to,
+    required String personId,
+    int size = 5,
+  });
+
   /// Perform Event creation
   Future<Event> createEvent(EventDto eventData);
 

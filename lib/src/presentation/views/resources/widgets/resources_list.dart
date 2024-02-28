@@ -1,4 +1,5 @@
 import 'package:amacom_app/src/domain/entities/entities.dart';
+import 'package:amacom_app/src/presentation/state/resources/resource_files_provider.dart';
 import 'package:amacom_app/src/presentation/state/resources/resources_fetch.dart';
 import 'package:amacom_app/src/presentation/state/resources/selected_resource.dart';
 import 'package:amacom_app/src/presentation/views/resources/widgets/resource_card.dart';
@@ -42,8 +43,6 @@ class _ResourcesListState extends ConsumerState<ResourcesList> {
 
   @override
   Widget build(BuildContext context) {
-    int lastYear = widget.data?.first.createdAt.year ?? 0;
-    final textTheme = Theme.of(context).textTheme;
     return SmartRefresher(
       controller: _refreshController,
       onRefresh: _onRefresh,
@@ -66,29 +65,16 @@ class _ResourcesListState extends ConsumerState<ResourcesList> {
               ref
                   .read(selectedResourceProvider.notifier)
                   .update((state) => resource);
-              Navigation.goTo(CustomAppRouter.resourceDetail);
+              if (Navigation.navigate()) {
+                Navigation.goTo(CustomAppRouter.resourceDetail);
+              } else {
+                ref.invalidate(resourceFilesListFetchProvider);
+                ref.invalidate(resourceFilesProvider);
+                ref.invalidate(resourceFilesPageProvider);
+              }
             },
           );
-          if (index == 0 || (resource?.createdAt.year ?? 0) < lastYear) {
-            lastYear = resource?.createdAt.year ?? 0;
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 4,
-                  ),
-                  child: Text(
-                    '$lastYear',
-                    style: textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                card,
-              ],
-            );
-          }
+
           return card;
         },
       ),

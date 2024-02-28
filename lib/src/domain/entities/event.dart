@@ -11,6 +11,7 @@ class Event {
     required this.from,
     required this.to,
     required this.id,
+    required this.personId,
     this.description,
     required this.background,
     required this.eventTypeId,
@@ -22,6 +23,7 @@ class Event {
         id: json['id'],
         isAllDay: json['allDay'],
         eventName: json['name'],
+        personId: json['personId'],
         description: json['description'],
         eventTypeId: json['eventTypeId'],
         to: DateTime.parse(json['end']),
@@ -37,6 +39,9 @@ class Event {
 
   /// Event description which is equivalent to subject property of [Event].
   String eventTypeId;
+
+  /// Event description which is equivalent to subject property of [Event].
+  String personId;
 
   /// Event id which is equivalent to subject property of [Event].
   String id;
@@ -84,6 +89,7 @@ class Event {
     return Event(
       id: id,
       background: background,
+      personId: personId,
       eventName: eventName ?? this.eventName,
       description: description ?? this.description,
       from: from ?? this.from,
@@ -99,6 +105,7 @@ class Event {
         'name': eventName.capitalize(),
         'description': description?.capitalize(),
         'eventTypeId': eventTypeId,
+        'personId': personId,
         'start': from.toYMDHMS(),
         'end': to.toYMDHMS(),
       };

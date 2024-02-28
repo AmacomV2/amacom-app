@@ -2,6 +2,7 @@ import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
@@ -62,22 +63,29 @@ class _UrlResourceState extends State<UrlResource> {
     final resourceType = ResourceTypeHelper.getType(widget.recourseUrl);
     final responsive = ResponsiveDesign(context);
     if (resourceType == ResourceType.IMAGE) {
-      return InteractiveViewer(
-        panEnabled: false, // Set it to false
-        boundaryMargin: const EdgeInsets.all(80),
-        minScale: 0.5,
-        maxScale: 2,
-        child: CachedNetworkImage(
-          imageUrl: widget.recourseUrl,
-          memCacheWidth: responsive.screenWidth.toInt(),
-          fit: widget.fit ?? BoxFit.cover,
-          progressIndicatorBuilder: (context, url, progress) =>
-              const SizedCustomProgressIndicator2(
-            strokeWidth: 3,
-            headRadius: 3.5,
-          ),
-        ),
-      );
+      return kIsWeb
+          ? Image.network(
+              widget.recourseUrl,
+              cacheWidth: responsive.screenWidth.toInt(),
+              alignment: Alignment.topCenter,
+              fit: widget.fit ?? BoxFit.fitWidth,
+            )
+          : InteractiveViewer(
+              panEnabled: false, // Set it to false
+              boundaryMargin: const EdgeInsets.all(10),
+              minScale: 0.5,
+              maxScale: 2,
+              child: CachedNetworkImage(
+                imageUrl: widget.recourseUrl,
+                memCacheWidth: responsive.screenWidth.toInt(),
+                fit: widget.fit ?? BoxFit.cover,
+                progressIndicatorBuilder: (context, url, progress) =>
+                    const SizedCustomProgressIndicator2(
+                  strokeWidth: 3,
+                  headRadius: 3.5,
+                ),
+              ),
+            );
     }
 
     if (resourceType == ResourceType.PDF) {
@@ -158,7 +166,7 @@ class NetworkResourceView extends StatelessWidget {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
     return Scaffold(
-      body: ColumnWithPadding(
+      body: ScrollColumnExpandable(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -166,11 +174,19 @@ class NetworkResourceView extends StatelessWidget {
             title: title,
             subtitle: subtitle,
             onBack: () => Navigator.of(context).pop(),
+            action: IconButton(
+              onPressed: () => AppUrlResources.launchGivenUrl(url ?? ''),
+              icon: Icon(
+                Icons.launch_rounded,
+                size: AppSizes.appBarIcons,
+              ),
+            ),
           ),
           if ((url ?? arguments['url']) != null)
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   GestureDetector(
                     onTap: () => AppUrlResources.launchGivenUrl(url ?? ''),
@@ -207,9 +223,13 @@ class NetworkResourceView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SafeSpacer(),
+                  const SafeSpacer(
+                    height: 10,
+                  ),
                   Expanded(
-                    child: UrlResource(recourseUrl: url ?? arguments['url']),
+                    child: UrlResource(
+                      recourseUrl: url ?? arguments['url'],
+                    ),
                   ),
                 ],
               ),

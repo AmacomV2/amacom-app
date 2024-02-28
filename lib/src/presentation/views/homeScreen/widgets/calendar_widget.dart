@@ -40,16 +40,13 @@ class _StoresState extends ConsumerState<Stores> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CalendarTimeline(
-          initialDate: ref.watch(calendarStartDateProvider),
+          initialDate: ref.watch(calendarHomeStartDateProvider),
           firstDate: DateTime.now().subtract(const Duration(days: 30)),
           lastDate: DateTime.now().add(const Duration(days: 365)),
           onDateSelected: (date) {
             ref
-                .read(calendarStartDateProvider.notifier)
+                .read(calendarHomeStartDateProvider.notifier)
                 .update((state) => date);
-            ref
-                .read(calendarEndDateProvider.notifier)
-                .update((state) => date.add(const Duration(days: 1)));
           },
           leftMargin: 20,
           showYears: false,
@@ -60,7 +57,7 @@ class _StoresState extends ConsumerState<Stores> {
           // selectableDayPredicate: (date) => date.day != 23,
         ),
         const SafeSpacer(),
-        ref.watch(calendarEventsFProvider).when(
+        ref.watch(calendarHomeEventsFProvider).when(
               data: (data) {
                 if (data.isEmpty) {
                   return const SizedBox();

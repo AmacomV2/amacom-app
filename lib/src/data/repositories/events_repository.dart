@@ -104,9 +104,48 @@ class EventsRepository implements IEventsRepository {
       withAuthToken: true,
     );
     BaseResponse data;
+
     try {
       data =
           BaseResponse.fromJson(result, (json) => Event.fromJson(json as Map));
+    } catch (e) {
+      data = BaseResponse.fromJson(result, (_) {});
+    }
+    if (!data.ok) {
+      throw Exception(data.message);
+    } else {
+      return data.data;
+    }
+  }
+
+  @override
+  Future<List<Event>> getHomeEvents({
+    required DateTime from,
+    required DateTime to,
+    required String personId,
+    int size = 5,
+  }) async {
+    final requestData = RequestData(
+      path: '/event/search',
+      method: Method.get,
+      queryParameters: {
+        'from': from.onlyDate(),
+        'to': to.onlyDate(),
+        'size': size,
+        'personId': personId,
+        'query': '',
+      },
+    );
+    final result = await api.request(
+      requestData: requestData,
+      withAuthToken: true,
+    );
+    BaseResponse data;
+    try {
+      data = BaseResponse.fromJson(
+        result,
+        (json) => Event.fromJsonList((json as Map)['content'] ?? []),
+      );
     } catch (e) {
       data = BaseResponse.fromJson(result, (_) {});
     }

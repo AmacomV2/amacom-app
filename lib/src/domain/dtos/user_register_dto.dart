@@ -7,6 +7,7 @@ class UserRegisterDTO {
     required this.email,
     required this.name,
     required this.lastName,
+    required this.username,
     required this.password,
     this.occupation,
     this.privacyPolicy = true,
@@ -23,6 +24,9 @@ class UserRegisterDTO {
 
   /// User name
   final String name;
+
+  /// User name
+  final String username;
 
   /// User lastName
   final String lastName;
@@ -62,6 +66,7 @@ class UserRegisterDTO {
         'email': email.toLowerCase(),
         'password': password,
         'name': name,
+        'username': username,
         'lastName': lastName,
         'occupation': occupation,
         'documentNo': document,
@@ -72,5 +77,6 @@ class UserRegisterDTO {
         'birthDate': birthDate?.toIso8601String(),
         'address': occupation,
         'privacyPolicy': privacyPolicy,
+        'consentText': privacyPolicy,
       };
 }

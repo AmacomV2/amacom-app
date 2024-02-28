@@ -1,4 +1,5 @@
 import 'package:amacom_app/src/domain/entities/entities.dart';
+import 'package:amacom_app/src/presentation/state/situations/new_situation_provider.dart';
 import 'package:amacom_app/src/presentation/state/situations/situation_provider.dart';
 import 'package:amacom_app/src/presentation/state/situations/situations_list_provider.dart';
 import 'package:amacom_app/src/presentation/views/situations/widgets/situation_card.dart';
@@ -67,7 +68,16 @@ class _SituationsListState extends ConsumerState<SituationsList> {
               ref
                   .read(selectedSituationProvider.notifier)
                   .update((state) => situation);
-              Navigation.goTo(CustomAppRouter.situationDetail);
+
+              if (Navigation.navigate()) {
+                Navigation.goTo(CustomAppRouter.situationDetail);
+              } else {
+                ref.invalidate(selectedSituationAllDataProvider);
+                ref.invalidate(creatingSituationProvider);
+                ref
+                    .read(selectedSituationDataIndexProvider.notifier)
+                    .update((state) => 0);
+              }
             },
           );
           if (index == 0 || (situation?.createdAt.year ?? 0) < lastYear) {

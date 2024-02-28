@@ -1,9 +1,8 @@
-import 'package:amacom_app/src/config/theme/figma_colors.dart';
 import 'package:amacom_app/src/domain/entities/entities.dart';
 import 'package:amacom_app/src/presentation/state/subjects/subject_selection.dart';
 import 'package:amacom_app/src/presentation/state/subjects/subjects_list_provider.dart';
+import 'package:amacom_app/src/presentation/views/subjects/widgets/sub_subject_card.dart';
 import 'package:amacom_app/src/presentation/widgets/widgets.dart';
-import 'package:amacom_app/src/utils/constant/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -51,54 +50,9 @@ class SubSubjectsList extends ConsumerWidget {
                         onTap: () {
                           onSelected.call(e);
                         },
-                        child: Card(
-                          margin: const EdgeInsets.symmetric(
-                            vertical: 4,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(AppConstants.cardRadius),
-                            side: BorderSide(
-                              color: isSelected
-                                  ? FigmaColors.primary_200
-                                  : Colors.white,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(
-                              8,
-                            ),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        e.name,
-                                        maxLines: 3,
-                                        style:
-                                            theme.textTheme.bodyLarge?.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      if (e.description != null)
-                                        Text(
-                                          e.description ?? '',
-                                          maxLines: 3,
-                                          style: theme.textTheme.bodyLarge,
-                                        ),
-                                    ],
-                                  ),
-                                ),
-                                CustomCheckBox(
-                                  size: 18,
-                                  selected: isSelected,
-                                ),
-                              ],
-                            ),
-                          ),
+                        child: SubSubjectCard(
+                          data: e,
+                          isSelected: isSelected,
                         ),
                       );
                     },

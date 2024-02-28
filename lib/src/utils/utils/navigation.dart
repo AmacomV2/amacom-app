@@ -1,5 +1,5 @@
 import 'package:amacom_app/src/utils/utils/utils.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nb_utils/nb_utils.dart' hide ContextExtensions;
 
@@ -36,6 +36,11 @@ class Navigation {
     if (context?.canPop() ?? false) {
       context?.pop();
     }
+  }
+
+  ///
+  static bool navigate() {
+    return !(GlobalLocator.responsiveDesign.isScreenEnough());
   }
 
   /// Go to verification code screen

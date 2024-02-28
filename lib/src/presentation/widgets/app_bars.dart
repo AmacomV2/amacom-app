@@ -2,6 +2,7 @@ import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 /// AppBar used commonly on app screens
 class CustomAppBar extends StatelessWidget {
@@ -180,7 +181,9 @@ class CustomAppBar2 extends StatelessWidget {
               InkWell(
                 onTap: onBack ?? () => Navigation.goBack(),
                 child: Icon(
-                  Icons.arrow_back_rounded,
+                  context.canPop()
+                      ? Icons.arrow_back_rounded
+                      : Icons.close_rounded,
                   size: AppSizes.appBarIcons,
                 ),
               ),

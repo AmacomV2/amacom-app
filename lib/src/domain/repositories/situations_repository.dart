@@ -15,4 +15,14 @@ abstract class ISituationsRepository {
   Future<SituationEntity> create({
     required NewSituationDTO situation,
   });
+
+  /// Get current user situations from database
+  Future<SituationEntity> getData({
+    required String id,
+  });
+
+  /// Delete current user situations from database
+  Future<bool> delete({
+    required String id,
+  });
 }

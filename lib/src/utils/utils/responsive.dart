@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:math' as match;
 
-import 'package:amacom_app/src/utils/constant/sizes.dart';
+import 'package:amacom_app/src/utils/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 export 'package:amacom_app/src/utils/constant/sizes.dart';
@@ -12,6 +12,11 @@ const double _kAspectRatio = 0.56222;
 class ResponsiveDesign {
   /// Constructor
   ResponsiveDesign(BuildContext context) {
+    _context = context;
+    _init(context);
+  }
+
+  void _init(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var orient = MediaQuery.of(context).orientation;
     var aspectRatio = (MediaQuery.of(context).size.aspectRatio / _kAspectRatio)
@@ -34,11 +39,13 @@ class ResponsiveDesign {
       match.pow(_width * aspectRatio, 2) + match.pow(_height * aspectRatio, 2),
     );
   }
+
   late double _width;
   late double _height;
   late double _inch;
   late double _paddingBottom;
   late double _paddingTop;
+  late BuildContext _context;
 
   final double _screenHeight = 926;
   final double _screenWidth = 428;
@@ -81,6 +88,17 @@ class ResponsiveDesign {
     return width(pixel) > pixel ? pixel : width(pixel);
   }
 
+  ///
+  double webMultipleViewMainWidth() {
+    return maxWidthValue(500);
+  }
+
+  /// Height value
+  bool isScreenEnough() {
+    _init(_context);
+    return _width > 700;
+  }
+
   /// Height value
   double safePaddingTop(double pixel) {
     return maxHeightValue(pixel) + (paddingTop > 0 ? paddingTop - 5 : 0);
@@ -89,16 +107,23 @@ class ResponsiveDesign {
   /// Height value
   double safeBottomHeight(double pixel) {
     final h = maxHeightValue(pixel);
-    if (Platform.isIOS) {
-      return h + (paddingBottom > 0 ? paddingBottom - 5 : 0);
+    try {
+      if (Platform.isIOS) {
+        return h + (paddingBottom > 0 ? paddingBottom - 5 : 0);
+      }
+      return h;
+    } catch (e) {
+      return h;
     }
-    return h;
   }
 
   /// Height value
-  double buttonsHeight({double height = 70}) {
-    return maxHeightValue(70);
+  double buttonsHeight({double height = 60}) {
+    return maxHeightValue(height);
   }
+
+  /// Height value
+  double get webNabVarWidth => 200;
 
   /// Horizontal view fraction
   double viewHFractionWPadding(double size) {

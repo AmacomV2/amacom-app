@@ -1,4 +1,6 @@
 import 'package:amacom_app/src/config/settings.dart';
+import 'package:amacom_app/src/presentation/state/situations/new_situation_provider.dart';
+import 'package:amacom_app/src/presentation/state/situations/situation_provider.dart';
 import 'package:amacom_app/src/presentation/state/situations/situations_list_provider.dart';
 import 'package:amacom_app/src/presentation/views/situations/widgets/search_situations.dart';
 import 'package:amacom_app/src/presentation/widgets/app_bars.dart';
@@ -36,7 +38,18 @@ class SituationsHeader extends ConsumerWidget {
           ),
           action: CustomIconButton(
             icon: Icons.add_rounded,
-            onTap: () => Navigation.goTo(CustomAppRouter.newSituation),
+            onTap: () {
+              if (Navigation.navigate()) {
+                Navigation.goTo(CustomAppRouter.newSituation);
+              } else {
+                ref
+                    .read(selectedSituationProvider.notifier)
+                    .update((state) => null);
+                ref
+                    .read(creatingSituationProvider.notifier)
+                    .update((state) => true);
+              }
+            },
           ),
         ),
         SearchSituations(),

@@ -6,6 +6,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final newSituationIndexProvider = StateProvider.autoDispose<int>((ref) => 0);
 
 /// New situation page index provider
+final creatingSituationProvider =
+    StateProvider.autoDispose<bool>((ref) => false);
+
+/// New situation page index provider
 final affectationDegreeProvider = StateProvider<int?>((ref) => null);
 
 /// New situation description provider

@@ -63,8 +63,8 @@ class NewSituationButton extends ConsumerWidget {
           case 4:
             final situationDTO = NewSituationDTO(
               firstThought: ref.read(situationFirstThoughtProvider) ?? '',
-              description: ref.read(situationFirstThoughtProvider) ?? '',
-              behavior: ref.read(situationFirstThoughtProvider) ?? '',
+              description: ref.read(situationDescriptionProvider) ?? '',
+              behavior: ref.read(situationBehaviorProvider) ?? '',
               affectationDegree: ref.read(affectationDegreeProvider)!,
               subject: ref.read(selectedSubject)!,
               feelings:
@@ -134,6 +134,7 @@ class NewSituationButton extends ConsumerWidget {
     ref.invalidate(babySituationAlarmSignsProvider);
     ref.invalidate(motherSituationAlarmSignsProvider);
     ref.invalidate(affectationDegreeProvider);
+    ref.invalidate(newSituationIndexProvider);
   }
 
   bool _validateForm2(WidgetRef ref, AppLocalizations? appLocalizations) {

@@ -47,8 +47,12 @@ class ApiDataSource {
     } else {
       _headers.remove('Authorization');
     }
-    _headers['X-Platform'] = Platform.isIOS ? 'ios' : 'android';
-    _headers['User-Agent'] = await userAgent();
+    try {
+      _headers['X-Platform'] = Platform.isIOS ? 'ios' : 'android';
+      _headers['User-Agent'] = await userAgent();
+    } catch (e) {
+      _logger.d(e);
+    }
     _http.options.headers = _headers;
     _http.interceptors.add(RetryOnConnectionChangeInterceptor(dio: _http));
   }
@@ -84,9 +88,7 @@ class ApiDataSource {
     bool withAuthToken = true,
     dynamic Function(Object?)? fromJsonT,
   }) async {
-    if (await isNetworkAvailable()) {
-      /// Show toast with no internet connection message
-    } else {
+    if (!(await isNetworkAvailable())) {
       Fluttertoast.cancel();
       toast(AppMessages.noInternetConnection);
       return {

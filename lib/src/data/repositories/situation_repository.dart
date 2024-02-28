@@ -79,6 +79,52 @@ class SituationsRepository implements ISituationsRepository {
       return data.data;
     }
   }
+
+  @override
+  Future<SituationEntity> getData({required String id}) async {
+    final requestData = RequestData(
+      path: '/personSituation/$id',
+      method: Method.get,
+    );
+    final result = await api.request(
+      requestData: requestData,
+      withAuthToken: true,
+    );
+    BaseResponse data;
+    try {
+      data = BaseResponse.fromJson(result, SituationEntity.fromJson);
+    } catch (e) {
+      data = BaseResponse.fromJson(result, (_) {});
+    }
+    if (!data.ok) {
+      throw Exception(data.message);
+    } else {
+      return data.data;
+    }
+  }
+
+  @override
+  Future<bool> delete({required String id}) async {
+    final requestData = RequestData(
+      path: '/personSituation/$id',
+      method: Method.delete,
+    );
+    final result = await api.request(
+      requestData: requestData,
+      withAuthToken: true,
+    );
+    BaseResponse data;
+    try {
+      data = BaseResponse.fromJson(result, (json) => json == true);
+    } catch (e) {
+      data = BaseResponse.fromJson(result, (_) {});
+    }
+    if (!data.ok) {
+      throw Exception(data.message);
+    } else {
+      return data.data;
+    }
+  }
 }
 
 /// User repository riverpod instance

@@ -67,6 +67,7 @@ class RegistrationButton extends ConsumerWidget {
             await ref.read(userRepository).userRegister(
                   UserRegisterDTO(
                     email: ref.read(regEmailProvider) ?? '',
+                    username: ref.read(regUsernameProvider) ?? '',
                     address: ref.read(regAddressProvider) ?? '',
                     occupation: ref.read(regOccupationProvider) ?? '',
                     genderId: ref.read(regGenderProvider) ?? '',
@@ -80,10 +81,7 @@ class RegistrationButton extends ConsumerWidget {
                   ),
                 );
             Navigation.goTo(
-              CustomAppRouter.emailVerification,
-              extra: {
-                'email': ref.read(regEmailProvider),
-              },
+              CustomAppRouter.home,
               removeUntil: true,
             );
           } catch (e) {

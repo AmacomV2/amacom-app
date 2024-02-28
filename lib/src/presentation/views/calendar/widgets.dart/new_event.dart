@@ -9,6 +9,7 @@ import 'package:amacom_app/src/presentation/widgets/widgets.dart';
 import 'package:amacom_app/src/utils/constant/constants.dart';
 import 'package:amacom_app/src/utils/extensions/extensions.dart';
 import 'package:amacom_app/src/utils/utils/utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -28,7 +29,7 @@ class NewEvent extends ConsumerWidget {
     return Material(
       borderRadius: BorderRadius.circular(AppConstants.cardRadius),
       child: Container(
-        height: responsive.maxHeightValue(500),
+        height: responsive.maxHeightValue(kIsWeb ? 430 : 500),
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppConstants.cardRadius),
